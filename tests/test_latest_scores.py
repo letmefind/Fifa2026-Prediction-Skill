@@ -1,9 +1,11 @@
 from __future__ import annotations
 
+import os
+
 import pandas as pd
 
 from config import load_config
-from data.latest_scores import latest_data_status, load_latest_matches, merge_match_frames
+from data.latest_scores import latest_data_status, load_latest_matches, load_local_env, merge_match_frames
 
 
 def test_latest_results_template_loads() -> None:
@@ -43,3 +45,13 @@ def test_latest_data_status_shape() -> None:
     assert "latest_matches_loaded" in status
     assert "football_data_api_configured" in status
     assert "api_football_configured" in status
+
+
+def test_load_local_env_does_not_require_real_secret(tmp_path, monkeypatch) -> None:
+    monkeypatch.delenv("API_FOOTBALL_KEY", raising=False)
+    env_path = tmp_path / ".env"
+    env_path.write_text("API_FOOTBALL_KEY=placeholder\n", encoding="utf-8")
+
+    load_local_env(env_path)
+
+    assert os.environ["API_FOOTBALL_KEY"] == "placeholder"

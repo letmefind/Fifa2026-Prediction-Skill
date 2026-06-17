@@ -118,6 +118,15 @@ The repository ships with sample CSVs so the engine works immediately. Replace t
 Latest completed results are merged into the model automatically before prediction. Use `data/latest_results.csv` for manual updates, or configure API keys:
 
 ```bash
+cp .env.example .env
+# Edit .env and set API_FOOTBALL_KEY for https://v3.football.api-sports.io
+python -m cli.main refresh-latest-data
+python -m cli.main latest-data-status
+```
+
+You can also export keys in your shell:
+
+```bash
 export FOOTBALL_DATA_API_KEY=...
 export API_FOOTBALL_KEY=...
 python -m cli.main refresh-latest-data

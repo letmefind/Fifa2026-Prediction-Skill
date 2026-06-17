@@ -16,6 +16,18 @@ FOOTBALL_DATA_URL = "https://api.football-data.org/v4/matches"
 API_FOOTBALL_URL = "https://v3.football.api-sports.io/fixtures"
 
 
+def load_local_env(path: Path | None = None) -> None:
+    env_path = path or Path(__file__).resolve().parents[1] / ".env"
+    if not env_path.exists():
+        return
+    for raw_line in env_path.read_text(encoding="utf-8").splitlines():
+        line = raw_line.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        key, value = line.split("=", 1)
+        os.environ.setdefault(key.strip(), value.strip().strip('"').strip("'"))
+
+
 def _empty_matches() -> pd.DataFrame:
     return pd.DataFrame(columns=MATCH_COLUMNS)
 
@@ -116,6 +128,7 @@ def _api_football_matches() -> pd.DataFrame:
 
 
 def load_latest_matches(config: Config | None = None, include_api: bool = True) -> pd.DataFrame:
+    load_local_env()
     cfg = config or load_config()
     frames = [load_latest_results_csv(cfg.data.latest_results_csv)]
 
@@ -152,6 +165,7 @@ def merge_match_frames(base_matches: pd.DataFrame, latest_matches: pd.DataFrame)
 
 
 def latest_data_status(config: Config | None = None, latest_matches: pd.DataFrame | None = None) -> dict[str, object]:
+    load_local_env()
     cfg = config or load_config()
     latest = latest_matches if latest_matches is not None else load_latest_matches(cfg, include_api=False)
     latest_date = None
