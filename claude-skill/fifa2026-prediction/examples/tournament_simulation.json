@@ -1,0 +1,11 @@
+{
+  "user_request": "What are Brazil's World Cup chances?",
+  "command": ".venv/bin/python -m cli.main team-probabilities Brazil --runs 10000",
+  "response_shape": {
+    "team": "Brazil",
+    "round_of_32": 0.95,
+    "reach_semis": 0.48,
+    "reach_final": 0.32,
+    "win_world_cup": 0.18
+  }
+}

@@ -22,6 +22,7 @@ models/        ELO, strengths, goal model, LLM, betting EV
 simulation/    Group and knockout tournament simulation
 api/           FastAPI app and service layer
 cli/           Command-line interface
+claude-skill/  Claude skill package for AI prediction workflows
 config/        YAML parameters and typed settings
 tests/         Unit and sanity tests
 notebooks/     Optional analysis workspace
@@ -57,6 +58,12 @@ Endpoints:
 - `POST /simulate` with `{"runs": 10000}`
 - `GET /team/{name}`
 - `GET /tournament/probabilities?runs=10000`
+
+## Claude Skill
+
+The Claude skill package lives in `claude-skill/fifa2026-prediction/`.
+
+It teaches Claude how to install this engine, run CLI/API predictions, generate match reasoning prompts, simulate tournaments, and evaluate betting EV. Upload or install that nested folder as the skill package.
 
 ## Data
 

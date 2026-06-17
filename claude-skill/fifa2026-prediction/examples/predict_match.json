@@ -1,0 +1,14 @@
+{
+  "user_request": "Predict Brazil vs France in the World Cup.",
+  "command": ".venv/bin/python -m cli.main predict-match Brazil France",
+  "response_shape": {
+    "team_a": "Brazil",
+    "team_b": "France",
+    "win_prob_a": 0.356,
+    "draw_prob": 0.304,
+    "win_prob_b": 0.340,
+    "expected_goals_a": 1.17,
+    "expected_goals_b": 1.14,
+    "most_likely_scores": ["1-1", "0-0", "1-0", "0-1", "2-1"]
+  }
+}
