@@ -13,6 +13,7 @@ from data.adapters import (
     StatsBombAdapter,
     XG_COLUMNS,
 )
+from data.latest_scores import load_latest_matches, merge_match_frames
 
 
 def _adapter(config: Config | None = None) -> CSVAdapter:
@@ -27,8 +28,9 @@ def _validate_columns(frame: pd.DataFrame, columns: list[str], dataset: str) -> 
     return frame[columns].copy()
 
 
-def load_matches(config: Config | None = None) -> pd.DataFrame:
-    frame = _adapter(config).load_matches()
+def load_matches(config: Config | None = None, include_latest: bool = True) -> pd.DataFrame:
+    cfg = config or load_config()
+    frame = _adapter(cfg).load_matches()
     frame = _validate_columns(frame, MATCH_COLUMNS, "matches")
     if frame.empty:
         return frame
@@ -36,7 +38,10 @@ def load_matches(config: Config | None = None) -> pd.DataFrame:
     frame["home_score"] = frame["home_score"].astype(int)
     frame["away_score"] = frame["away_score"].astype(int)
     frame["neutral"] = frame["neutral"].astype(bool)
-    return frame.sort_values("date").reset_index(drop=True)
+    frame = frame.sort_values("date").reset_index(drop=True)
+    if include_latest:
+        frame = merge_match_frames(frame, load_latest_matches(cfg))
+    return frame
 
 
 def load_team_ratings(config: Config | None = None, include_spi: bool = False) -> pd.DataFrame:

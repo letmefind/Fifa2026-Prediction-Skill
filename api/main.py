@@ -7,7 +7,7 @@ from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 
-from api.service import get_service
+from api.service import get_service, refresh_service
 
 
 app = FastAPI(title="FIFA World Cup 2026 Prediction Engine", version="1.0.0")
@@ -39,6 +39,16 @@ def dashboard() -> str:
 @app.get("/teams")
 def teams() -> list[str]:
     return get_service().teams
+
+
+@app.get("/data/latest_status")
+def latest_status() -> dict[str, object]:
+    return get_service().latest_status()
+
+
+@app.post("/data/refresh_latest")
+def refresh_latest() -> dict[str, object]:
+    return refresh_service().latest_status()
 
 
 @app.post("/predict_match")

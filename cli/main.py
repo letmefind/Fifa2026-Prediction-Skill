@@ -9,7 +9,7 @@ from rich.console import Console
 from rich.panel import Panel
 from rich.table import Table
 
-from api.service import get_service
+from api.service import get_service, refresh_service
 from data import update_dataset
 from models.betting import calculate_ev
 from models.llm import explain_prediction, generate_llm_prompt
@@ -161,6 +161,16 @@ def update_data(
 ) -> None:
     outputs = update_dataset(source=source, output_dir=output_dir)
     console.print_json(json.dumps({key: str(path) for key, path in outputs.items()}))
+
+
+@app.command("latest-data-status")
+def latest_data_status() -> None:
+    console.print_json(json.dumps(get_service().latest_status(), default=str))
+
+
+@app.command("refresh-latest-data")
+def refresh_latest_data() -> None:
+    console.print_json(json.dumps(refresh_service().latest_status(), default=str))
 
 
 if __name__ == "__main__":

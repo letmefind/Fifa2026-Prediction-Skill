@@ -22,3 +22,5 @@ data:
   matches_csv: data/sample_matches.csv
   ratings_csv: data/sample_team_ratings.csv
   xg_csv: data/sample_xg.csv
+  latest_results_csv: data/latest_results.csv
+  latest_lookback_days: 90

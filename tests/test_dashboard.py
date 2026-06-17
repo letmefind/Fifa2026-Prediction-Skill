@@ -26,6 +26,14 @@ def test_teams_endpoint_returns_teams() -> None:
     assert "France" in teams
 
 
+def test_latest_data_status_endpoint() -> None:
+    response = client.get("/data/latest_status")
+    assert response.status_code == 200
+    body = response.json()
+    assert "latest_matches_loaded" in body
+    assert "total_matches_in_model" in body
+
+
 def test_predict_match_api_for_dashboard() -> None:
     response = client.post(
         "/predict_match",
@@ -35,4 +43,5 @@ def test_predict_match_api_for_dashboard() -> None:
     body = response.json()
     assert body["team_a"] == "Brazil"
     assert body["team_b"] == "France"
+    assert "data_status" in body
     assert abs(body["win_prob_a"] + body["draw_prob"] + body["win_prob_b"] - 1.0) < 1e-9

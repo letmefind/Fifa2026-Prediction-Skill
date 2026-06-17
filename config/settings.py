@@ -55,6 +55,8 @@ class DataConfig:
     matches_csv: Path
     ratings_csv: Path
     xg_csv: Path
+    latest_results_csv: Path
+    latest_lookback_days: int
 
 
 @dataclass(frozen=True)
@@ -103,5 +105,7 @@ def load_config(path: str | Path | None = None) -> Config:
             matches_csv=_path(data["matches_csv"]),
             ratings_csv=_path(data["ratings_csv"]),
             xg_csv=_path(data["xg_csv"]),
+            latest_results_csv=_path(data["latest_results_csv"]),
+            latest_lookback_days=int(data["latest_lookback_days"]),
         ),
     )

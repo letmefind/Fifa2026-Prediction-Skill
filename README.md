@@ -113,6 +113,18 @@ The repository ships with sample CSVs so the engine works immediately. Replace t
 - `data/sample_matches.csv`
 - `data/sample_team_ratings.csv`
 - `data/sample_xg.csv`
+- `data/latest_results.csv`
+
+Latest completed results are merged into the model automatically before prediction. Use `data/latest_results.csv` for manual updates, or configure API keys:
+
+```bash
+export FOOTBALL_DATA_API_KEY=...
+export API_FOOTBALL_KEY=...
+python -m cli.main refresh-latest-data
+python -m cli.main latest-data-status
+```
+
+The dashboard also has a **Fresh Data Status** card and a **Refresh Latest Data** button.
 
 To refresh adapter output:
 

@@ -152,6 +152,48 @@ function renderEv(result) {
   `;
 }
 
+function renderLatestStatus(status) {
+  const latestDate = status.latest_match_date || "None loaded";
+  const apiText = [
+    status.football_data_api_configured ? "Football-Data" : null,
+    status.api_football_configured ? "API-Football" : null,
+  ]
+    .filter(Boolean)
+    .join(", ");
+  return `
+    <div class="status-grid">
+      <div class="status-item">
+        <span>Latest matches merged</span>
+        <strong>${status.latest_matches_loaded}</strong>
+      </div>
+      <div class="status-item">
+        <span>Total matches in model</span>
+        <strong>${status.total_matches_in_model}</strong>
+      </div>
+      <div class="status-item">
+        <span>Latest match date</span>
+        <strong>${latestDate}</strong>
+      </div>
+      <div class="status-item">
+        <span>API feeds configured</span>
+        <strong>${apiText || "Local CSV only"}</strong>
+      </div>
+    </div>
+    <p class="muted">Latest results improve future-match predictions by updating ELO and attack/defense strengths before the model runs.</p>
+  `;
+}
+
+async function loadLatestStatus() {
+  const element = document.querySelector("#latestStatus");
+  try {
+    const status = await requestJson("/data/latest_status");
+    element.className = "result-block";
+    element.innerHTML = renderLatestStatus(status);
+  } catch (error) {
+    renderError(element, error);
+  }
+}
+
 async function loadTeams() {
   state.teams = await requestJson("/teams");
   const options = state.teams.map((team) => `<option value="${team}">${team}</option>`).join("");
@@ -165,6 +207,18 @@ document.querySelector("#swapTeams").addEventListener("click", () => {
   const teamA = document.querySelector("#teamA");
   const teamB = document.querySelector("#teamB");
   [teamA.value, teamB.value] = [teamB.value, teamA.value];
+});
+
+document.querySelector("#refreshLatest").addEventListener("click", async () => {
+  const element = document.querySelector("#latestStatus");
+  setLoading(element, "Refreshing latest score/result data and rebuilding the model...");
+  try {
+    const status = await requestJson("/data/refresh_latest", { method: "POST" });
+    element.className = "result-block";
+    element.innerHTML = renderLatestStatus(status);
+  } catch (error) {
+    renderError(element, error);
+  }
 });
 
 document.querySelector("#matchForm").addEventListener("submit", async (event) => {
@@ -222,3 +276,4 @@ document.querySelector("#evForm").addEventListener("submit", (event) => {
 });
 
 loadTeams().catch((error) => renderError(document.querySelector("#matchResult"), error));
+loadLatestStatus();

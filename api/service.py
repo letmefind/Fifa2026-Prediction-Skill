@@ -5,7 +5,7 @@ from functools import lru_cache
 import pandas as pd
 
 from config import Config, load_config
-from data import load_matches, load_team_ratings
+from data import latest_data_status, load_latest_matches, load_matches, load_team_ratings, merge_match_frames
 from models import AttackDefenseStrengthModel, DixonColesPoissonModel, EloModel
 from simulation import TournamentSimulator
 
@@ -13,7 +13,9 @@ from simulation import TournamentSimulator
 class PredictionService:
     def __init__(self, config: Config | None = None) -> None:
         self.config = config or load_config()
-        self.matches = load_matches(self.config)
+        self.base_matches = load_matches(self.config, include_latest=False)
+        self.latest_matches = load_latest_matches(self.config)
+        self.matches = merge_match_frames(self.base_matches, self.latest_matches)
         self.initial_ratings = load_team_ratings(self.config)
         self.elo = EloModel().fit(self.matches, self.initial_ratings)
         self.strengths = AttackDefenseStrengthModel().fit(self.matches)
@@ -36,6 +38,7 @@ class PredictionService:
         prediction = self.goal_model.predict_match(team_a, team_b, neutral=neutral).as_dict()
         prediction["team_a"] = team_a
         prediction["team_b"] = team_b
+        prediction["data_status"] = self.latest_status()
         return prediction
 
     def team_profile(self, name: str) -> dict[str, object]:
@@ -66,7 +69,18 @@ class PredictionService:
         result = self.simulate_tournament(n)
         return pd.DataFrame(result["probabilities"])
 
+    def latest_status(self) -> dict[str, object]:
+        status = latest_data_status(self.config, self.latest_matches)
+        status["base_matches_loaded"] = int(len(self.base_matches))
+        status["total_matches_in_model"] = int(len(self.matches))
+        return status
+
 
 @lru_cache(maxsize=1)
 def get_service() -> PredictionService:
     return PredictionService()
+
+
+def refresh_service() -> PredictionService:
+    get_service.cache_clear()
+    return get_service()
