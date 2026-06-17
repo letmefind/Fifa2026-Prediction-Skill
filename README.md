@@ -63,7 +63,7 @@ Endpoints:
 
 The Claude skill package lives in `claude-skill/fifa2026-prediction/`.
 
-It teaches Claude how to install this engine, run CLI/API predictions, generate match reasoning prompts, simulate tournaments, and evaluate betting EV. Upload or install that nested folder as the skill package.
+It teaches Claude how to install this engine, run CLI/API predictions, generate match reasoning prompts, simulate tournaments, evaluate betting EV, and follow a full research-heavy tournament workflow with current squad, injury, xG, tactical, travel, and market data. Upload or install that nested folder as the skill package.
 
 ## Data
 

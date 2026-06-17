@@ -1,6 +1,6 @@
 ---
 name: fifa2026-prediction
-description: Predict FIFA World Cup 2026 matches, simulate tournaments, explain football model outputs, and evaluate betting expected value using the Fifa2026-Prediction-Skill Python engine. Use when the user asks for World Cup predictions, match probabilities, score distributions, tournament odds, team probabilities, betting edges, or Claude/GPT-ready football reasoning.
+description: Predict FIFA World Cup 2026 matches, simulate full tournaments, research squad/team reality, explain football model outputs, and evaluate betting expected value using the Fifa2026-Prediction-Skill Python engine. Use when the user asks for World Cup predictions, match probabilities, score distributions, tournament odds, team probabilities, betting edges, full 104-match forecasts, qualified-team research, or Claude/GPT-ready football reasoning.
 ---
 
 # FIFA 2026 Prediction
@@ -77,6 +77,8 @@ For a single team:
 
 Use at least `10000` runs for normal answers. Use `50000` or more when the user asks for more stable probabilities and runtime is acceptable.
 
+If the user asks for an elite analyst, Gemini-style, "entire World Cup", "all 104 matches", squad research, current 2025-2026 data, market validation, awards, or country-by-country reality-based prediction, follow [FULL_TOURNAMENT_WORKFLOW.md](FULL_TOURNAMENT_WORKFLOW.md).
+
 ## Team Profile
 
 For ELO, attack strength, defense strength, and recent matches:
@@ -148,4 +150,4 @@ For tournament probabilities, answer with JSON when the user asks for machine-re
 
 ## Data Caution
 
-The bundled CSVs are sample data for immediate use. For serious betting analysis, refresh inputs with current ratings, injuries, squads, lineups, market odds, and verified match data before making recommendations.
+The bundled CSVs are sample data for immediate use. For serious betting analysis, refresh inputs with current ratings, injuries, squads, lineups, market odds, and verified match data before making recommendations. If current web/data tools are unavailable, clearly label the answer as model-only and ask for updated data files or odds.
