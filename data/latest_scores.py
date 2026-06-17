@@ -92,39 +92,89 @@ def _football_data_matches(config: Config) -> pd.DataFrame:
     return _standardize(pd.DataFrame(rows, columns=MATCH_COLUMNS))
 
 
-def _api_football_matches() -> pd.DataFrame:
+def _known_teams(config: Config) -> set[str]:
+    if not config.data.ratings_csv.exists():
+        return set()
+    frame = pd.read_csv(config.data.ratings_csv)
+    if "team" not in frame.columns:
+        return set()
+    return {str(team).lower().strip() for team in frame["team"].dropna()}
+
+
+def _filter_known_team_matches(frame: pd.DataFrame, config: Config) -> pd.DataFrame:
+    known = _known_teams(config)
+    if frame.empty or not known:
+        return frame
+    filtered = frame[
+        frame["home_team"].astype(str).str.lower().str.strip().isin(known)
+        & frame["away_team"].astype(str).str.lower().str.strip().isin(known)
+    ]
+    return filtered.reset_index(drop=True)
+
+
+def _api_football_cache_path(config: Config) -> Path:
+    return config.data.cache_dir / "api_football_latest.csv"
+
+
+def _read_api_football_cache(config: Config) -> pd.DataFrame:
+    cache_path = _api_football_cache_path(config)
+    if not cache_path.exists():
+        return _empty_matches()
+    return _standardize(pd.read_csv(cache_path))
+
+
+def _write_api_football_cache(config: Config, frame: pd.DataFrame) -> None:
+    if frame.empty:
+        return
+    config.data.cache_dir.mkdir(parents=True, exist_ok=True)
+    frame.to_csv(_api_football_cache_path(config), index=False)
+
+
+def _api_football_matches(config: Config) -> pd.DataFrame:
     token = os.getenv("API_FOOTBALL_KEY")
     if not token:
         return _empty_matches()
 
-    response = requests.get(
-        API_FOOTBALL_URL,
-        headers={"x-apisports-key": token},
-        params={"last": 100},
-        timeout=20,
-    )
-    response.raise_for_status()
     rows: list[dict[str, Any]] = []
-    for item in response.json().get("response", []):
-        status = item.get("fixture", {}).get("status", {}).get("short")
-        goals = item.get("goals", {})
-        if status not in {"FT", "AET", "PEN"} or goals.get("home") is None or goals.get("away") is None:
-            continue
-        league = item.get("league", {})
-        rows.append(
-            {
-                "date": item.get("fixture", {}).get("date"),
-                "home_team": item.get("teams", {}).get("home", {}).get("name"),
-                "away_team": item.get("teams", {}).get("away", {}).get("name"),
-                "home_score": goals.get("home"),
-                "away_score": goals.get("away"),
-                "home_xg": None,
-                "away_xg": None,
-                "neutral": True,
-                "competition": league.get("name", "API-Football"),
-            }
+    today = date.today()
+    days = max(1, min(config.data.api_football_lookback_days, config.data.latest_lookback_days))
+    for offset in range(days):
+        match_date = today - timedelta(days=offset)
+        response = requests.get(
+            API_FOOTBALL_URL,
+            headers={"x-apisports-key": token},
+            params={"date": match_date.isoformat()},
+            timeout=20,
         )
-    return _standardize(pd.DataFrame(rows, columns=MATCH_COLUMNS))
+        response.raise_for_status()
+        payload = response.json()
+        errors = payload.get("errors") or {}
+        if errors:
+            if "rateLimit" in errors and not rows:
+                return _read_api_football_cache(config)
+            continue
+        for item in payload.get("response", []):
+            status = item.get("fixture", {}).get("status", {}).get("short")
+            goals = item.get("goals", {})
+            if status not in {"FT", "AET", "PEN"} or goals.get("home") is None or goals.get("away") is None:
+                continue
+            league = item.get("league", {})
+            rows.append(
+                {
+                    "date": item.get("fixture", {}).get("date"),
+                    "home_team": item.get("teams", {}).get("home", {}).get("name"),
+                    "away_team": item.get("teams", {}).get("away", {}).get("name"),
+                    "home_score": goals.get("home"),
+                    "away_score": goals.get("away"),
+                    "home_xg": None,
+                    "away_xg": None,
+                    "neutral": True,
+                    "competition": league.get("name", "API-Football"),
+                }
+            )
+    frame = _filter_known_team_matches(_standardize(pd.DataFrame(rows, columns=MATCH_COLUMNS)), config)
+    _write_api_football_cache(config, frame)
+    return frame
 
 
 def load_latest_matches(config: Config | None = None, include_api: bool = True) -> pd.DataFrame:
@@ -135,7 +185,7 @@ def load_latest_matches(config: Config | None = None, include_api: bool = True) 
     if include_api:
         for loader in (_football_data_matches, _api_football_matches):
             try:
-                frame = loader(cfg) if loader is _football_data_matches else loader()
+                frame = loader(cfg)
                 if not frame.empty:
                     frames.append(frame)
             except Exception:

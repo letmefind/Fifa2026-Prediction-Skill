@@ -57,6 +57,7 @@ class DataConfig:
     xg_csv: Path
     latest_results_csv: Path
     latest_lookback_days: int
+    api_football_lookback_days: int
 
 
 @dataclass(frozen=True)
@@ -107,5 +108,6 @@ def load_config(path: str | Path | None = None) -> Config:
             xg_csv=_path(data["xg_csv"]),
             latest_results_csv=_path(data["latest_results_csv"]),
             latest_lookback_days=int(data["latest_lookback_days"]),
+            api_football_lookback_days=int(data["api_football_lookback_days"]),
         ),
     )

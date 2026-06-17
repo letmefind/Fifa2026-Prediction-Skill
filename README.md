@@ -135,6 +135,8 @@ python -m cli.main latest-data-status
 
 The dashboard also has a **Fresh Data Status** card and a **Refresh Latest Data** button.
 
+API-Football free plans are rate-limited and may only allow a small recent date window. The app queries recent dates, filters to known national teams, and caches successful results in `.cache/fifa2026/api_football_latest.csv`.
+
 To refresh adapter output:
 
 ```bash

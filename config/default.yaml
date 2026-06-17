@@ -24,3 +24,4 @@ data:
   xg_csv: data/sample_xg.csv
   latest_results_csv: data/latest_results.csv
   latest_lookback_days: 90
+  api_football_lookback_days: 3
