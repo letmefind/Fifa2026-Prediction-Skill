@@ -332,6 +332,10 @@ button:hover {
   margin-top: 18px;
 }
 
+.odds-grid {
+  grid-template-columns: repeat(4, minmax(180px, 1fr));
+}
+
 .guide-grid div {
   border: 1px solid var(--line);
   border-radius: 20px;

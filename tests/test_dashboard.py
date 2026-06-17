@@ -14,6 +14,8 @@ def test_dashboard_loads() -> None:
     assert "Prediction Engine Dashboard" in response.text
     assert "How To Find Model Probability" in response.text
     assert "35.6% = 0.356" in response.text
+    assert "What Are Decimal Odds?" in response.text
+    assert "Odds 2.20 implies 45.5%" in response.text
 
 
 def test_teams_endpoint_returns_teams() -> None:
