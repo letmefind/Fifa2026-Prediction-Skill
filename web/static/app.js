@@ -61,14 +61,17 @@ function renderMatch(result) {
       <div class="prob-card">
         <span>${result.team_a} win</span>
         <strong>${percent(result.win_prob_a)}</strong>
+        <button class="mini-button use-probability" data-probability="${result.win_prob_a}" type="button">Use for EV</button>
       </div>
       <div class="prob-card">
         <span>Draw</span>
         <strong>${percent(result.draw_prob)}</strong>
+        <button class="mini-button use-probability" data-probability="${result.draw_prob}" type="button">Use for EV</button>
       </div>
       <div class="prob-card">
         <span>${result.team_b} win</span>
         <strong>${percent(result.win_prob_b)}</strong>
+        <button class="mini-button use-probability" data-probability="${result.win_prob_b}" type="button">Use for EV</button>
       </div>
     </div>
     <div class="score-cloud">
@@ -182,6 +185,15 @@ document.querySelector("#matchForm").addEventListener("submit", async (event) =>
   } catch (error) {
     renderError(element, error);
   }
+});
+
+document.querySelector("#matchResult").addEventListener("click", (event) => {
+  const button = event.target.closest(".use-probability");
+  if (!button) return;
+  document.querySelector("#modelProb").value = Number(button.dataset.probability).toFixed(3);
+  document.querySelector("#evResult").className = "result-block muted";
+  document.querySelector("#evResult").textContent = "Model probability copied. Add market odds, then calculate EV.";
+  document.querySelector("#modelProb").scrollIntoView({ behavior: "smooth", block: "center" });
 });
 
 document.querySelector("#simulateForm").addEventListener("submit", async (event) => {

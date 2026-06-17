@@ -76,10 +76,12 @@
             <label>
               Model Probability
               <input id="modelProb" type="number" min="0" max="1" step="0.001" value="0.55" />
+              <span class="field-help">Use decimal form: 35.6% becomes 0.356.</span>
             </label>
             <label>
               Decimal Odds
               <input id="marketOdds" type="number" min="1.01" step="0.01" value="2.20" />
+              <span class="field-help">Polymarket price 0.42 becomes odds 2.38.</span>
             </label>
             <button type="submit">Calculate EV</button>
           </form>
@@ -96,6 +98,29 @@
             <li><strong>Betting EV</strong> is not a guarantee. Always check injuries, lineups, and market liquidity.</li>
           </ul>
         </article>
+      </section>
+
+      <section class="card guide-card">
+        <p class="eyebrow">Betting Help</p>
+        <h2>How To Find Model Probability</h2>
+        <div class="guide-grid">
+          <div>
+            <strong>1. Predict the match</strong>
+            <p>Choose two teams and click <span class="inline-chip">Predict Match</span>. The three result cards are the model probabilities.</p>
+          </div>
+          <div>
+            <strong>2. Pick your market</strong>
+            <p>For Brazil win, use Brazil win probability. For draw, use draw probability. For France win, use France win probability.</p>
+          </div>
+          <div>
+            <strong>3. Convert to decimal</strong>
+            <p>Use decimal form in EV: <span class="inline-chip">35.6% = 0.356</span>. The match cards include <span class="inline-chip">Use for EV</span> buttons.</p>
+          </div>
+          <div>
+            <strong>4. Add market odds</strong>
+            <p>For Polymarket, approximate decimal odds as <span class="inline-chip">1 / Yes price</span>. A 0.42 price becomes 2.38 odds.</p>
+          </div>
+        </div>
       </section>
     </main>
     <script src="/static/app.js"></script>

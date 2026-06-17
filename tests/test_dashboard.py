@@ -12,6 +12,8 @@ def test_dashboard_loads() -> None:
     response = client.get("/")
     assert response.status_code == 200
     assert "Prediction Engine Dashboard" in response.text
+    assert "How To Find Model Probability" in response.text
+    assert "35.6% = 0.356" in response.text
 
 
 def test_teams_endpoint_returns_teams() -> None:
