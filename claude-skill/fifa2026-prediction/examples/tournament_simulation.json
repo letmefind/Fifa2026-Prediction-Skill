@@ -1,6 +1,6 @@
 {
   "user_request": "What are Brazil's World Cup chances?",
-  "command": ".venv/bin/python -m cli.main team-probabilities Brazil --runs 10000",
+  "command": ".venv/bin/python -m cli.main team-probabilities Brazil --runs 5000",
   "response_shape": {
     "team": "Brazil",
     "round_of_32": 0.95,

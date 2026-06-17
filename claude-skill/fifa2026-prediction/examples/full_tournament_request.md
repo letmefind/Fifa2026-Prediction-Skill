@@ -18,8 +18,9 @@ tournament winner, runner-up, semifinalists, and confidence score.
 Skill behavior:
 
 1. Read `FULL_TOURNAMENT_WORKFLOW.md`.
-2. Verify current data access. If unavailable, disclose the limitation and ask for current data files or proceed with a model-only forecast.
-3. Run `.venv/bin/python -m cli.main simulate-tournament --runs 100000`.
-4. Run match-level predictions for the assumed or official fixture list.
-5. Compare model probabilities to available market odds.
-6. Produce the full report with numerical uncertainty and clear assumptions.
+2. Ask the user how many simulation runs to use. If no number is provided, use `5000`.
+3. Verify current data access and check latest scores/results at calculation time. If unavailable, disclose the limitation and ask for current data files, latest scores, or permission to proceed with a model-only forecast.
+4. Run `.venv/bin/python -m cli.main simulate-tournament --runs 5000`, replacing `5000` with the user-selected run count.
+5. Run match-level predictions for the assumed or official fixture list.
+6. Compare model probabilities to available market odds.
+7. Produce the full report with numerical uncertainty and clear assumptions.

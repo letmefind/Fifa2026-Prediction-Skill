@@ -15,6 +15,21 @@ Do not present sample-data outputs as final real-world predictions. For highest 
 
 If current web access, odds access, or player databases are unavailable, say exactly what is missing and produce a clearly labeled model-only forecast.
 
+## Phase 0: User Choices and Latest Scores
+
+Before running any tournament simulation, ask the user how many simulation runs to use. If the user does not specify a number, use `5000`.
+
+Before running match or tournament predictions, check the latest scores/results at calculation time:
+
+- latest completed international matches for both teams
+- live score and match minute if the match is already in progress
+- red cards, major injuries, lineup changes, or suspensions
+- whether those results are already present in the local dataset
+
+If current data tools are available, use them before calculating. If they are unavailable, ask the user to provide the latest score/result or clearly label the output as model-only.
+
+For a live match, use the engine as the pre-match baseline, then adjust the explanation for the current score, minute, cards, injuries, and remaining expected goals. Do not present a live-adjusted probability as if it came directly from the pre-match model.
+
 ## Phase 1: Build Current Inputs
 
 For each qualified or projected team, collect:
@@ -49,12 +64,12 @@ Reward squad depth, elite chance creation, strong goalkeeping, tactical flexibil
 Run these commands:
 
 ```bash
-.venv/bin/python -m cli.main simulate-tournament --runs 100000
-.venv/bin/python -m cli.main team-probabilities Brazil --runs 100000
+.venv/bin/python -m cli.main simulate-tournament --runs 5000
+.venv/bin/python -m cli.main team-probabilities Brazil --runs 5000
 .venv/bin/python -m cli.main predict-match Brazil France --llm-prompt
 ```
 
-If 100,000 runs are too slow, run 50,000 and disclose the lower run count.
+Replace `5000` with the user-requested run count when provided. Use higher run counts such as `50000` or `100000` only when the user explicitly wants more stable probabilities and accepts longer runtime.
 
 Use model output as the quantitative baseline. Adjust only when the current-data research gives a clear reason, such as major injury news, squad rotation, travel disadvantage, or market movement.
 

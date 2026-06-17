@@ -29,6 +29,15 @@ python3 -m venv .venv
 
 Use `.venv/bin/python` for all commands below.
 
+## Before Every Prediction
+
+1. Ask the user how many tournament simulation runs to use when the task includes tournament odds, champion probabilities, group outcomes, or full World Cup simulation.
+2. If the user does not specify a run count, use `5000` runs by default.
+3. Check the latest score/results at calculation time when web, sports data, or user-provided live data is available.
+4. If a relevant latest completed match is missing from the local dataset, state that and incorporate it as current context before explaining the prediction.
+5. If the match is already live, ask for or check the current score and match minute. Treat the normal model output as the pre-match baseline, then adjust reasoning for current score, red cards, injuries, remaining time, and momentum. Clearly label it as an in-play adjustment.
+6. If latest-score access is unavailable, say so and ask the user to provide the latest score or confirm that a model-only prediction is acceptable.
+
 ## Match Prediction
 
 For a user asking who will win, likely score, expected goals, or probabilities:
@@ -66,16 +75,16 @@ Use the generated prompt as the structured quantitative base. Do not invent prob
 For champion odds, reaching final, semifinal, or round-of-32 chances:
 
 ```bash
-.venv/bin/python -m cli.main simulate-tournament --runs 10000
+.venv/bin/python -m cli.main simulate-tournament --runs 5000
 ```
 
 For a single team:
 
 ```bash
-.venv/bin/python -m cli.main team-probabilities Brazil --runs 10000
+.venv/bin/python -m cli.main team-probabilities Brazil --runs 5000
 ```
 
-Use at least `10000` runs for normal answers. Use `50000` or more when the user asks for more stable probabilities and runtime is acceptable.
+Ask the user for the run count first. If no run count is provided, use `5000`. Use `50000` or more only when the user asks for more stable probabilities and runtime is acceptable.
 
 If the user asks for an elite analyst, Gemini-style, "entire World Cup", "all 104 matches", squad research, current 2025-2026 data, market validation, awards, or country-by-country reality-based prediction, follow [FULL_TOURNAMENT_WORKFLOW.md](FULL_TOURNAMENT_WORKFLOW.md).
 
