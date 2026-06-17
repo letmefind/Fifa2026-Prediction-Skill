@@ -1,0 +1,24 @@
+model:
+  elo:
+    base_rating: 1500
+    k_factor: 24
+    home_advantage: 65
+  strengths:
+    min_matches: 3
+    xg_weight: 0.45
+    goals_weight: 0.55
+    shrinkage_matches: 12
+  poisson:
+    base_goals_per_team: 1.35
+    max_goals: 8
+    home_advantage_multiplier: 1.08
+    dixon_coles_rho: -0.08
+simulation:
+  default_runs: 10000
+  random_seed: 2026
+  knockout_draw_probability: 0.27
+data:
+  cache_dir: .cache/fifa2026
+  matches_csv: data/sample_matches.csv
+  ratings_csv: data/sample_team_ratings.csv
+  xg_csv: data/sample_xg.csv

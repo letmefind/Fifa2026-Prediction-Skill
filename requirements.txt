@@ -1,0 +1,11 @@
+fastapi
+numpy
+pandas
+pydantic
+pytest
+PyYAML
+requests
+rich
+scipy
+typer
+uvicorn
