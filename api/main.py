@@ -1,12 +1,19 @@
 from __future__ import annotations
 
+from pathlib import Path
+
 from fastapi import FastAPI, Query
+from fastapi.responses import HTMLResponse
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 
 from api.service import get_service
 
 
 app = FastAPI(title="FIFA World Cup 2026 Prediction Engine", version="1.0.0")
+ROOT = Path(__file__).resolve().parents[1]
+WEB_DIR = ROOT / "web"
+app.mount("/static", StaticFiles(directory=WEB_DIR / "static"), name="static")
 
 
 class MatchRequest(BaseModel):
@@ -22,6 +29,16 @@ class SimulateRequest(BaseModel):
 @app.get("/health")
 def health() -> dict[str, str]:
     return {"status": "ok"}
+
+
+@app.get("/", response_class=HTMLResponse)
+def dashboard() -> str:
+    return (WEB_DIR / "index.html").read_text(encoding="utf-8")
+
+
+@app.get("/teams")
+def teams() -> list[str]:
+    return get_service().teams
 
 
 @app.post("/predict_match")

@@ -10,6 +10,7 @@ Production-ready Python prediction engine for FIFA World Cup 2026 match forecast
 - Poisson score model with Dixon-Coles low-score correlation adjustment.
 - 48-team tournament Monte Carlo simulation: 12 groups, best third-place ranking, round of 32 through final.
 - FastAPI REST interface and Typer CLI.
+- Browser dashboard for match predictions, simulations, and EV checks.
 - LLM integration helpers for Claude/GPT prompts and plain-English explanations.
 - Betting expected value and edge labelling.
 - YAML configuration and pytest coverage.
@@ -22,6 +23,7 @@ models/        ELO, strengths, goal model, LLM, betting EV
 simulation/    Group and knockout tournament simulation
 api/           FastAPI app and service layer
 cli/           Command-line interface
+web/           Browser dashboard static assets
 claude-skill/  Claude skill package for AI prediction workflows
 config/        YAML parameters and typed settings
 tests/         Unit and sanity tests
@@ -40,11 +42,14 @@ pip install -r requirements.txt
 
 ```bash
 python -m cli.main predict-match Brazil France
+python -m cli.main predict-match Brazil France --json-output
 python -m cli.main predict-match Brazil France --llm-prompt
 python -m cli.main simulate-tournament --runs 50000
 python -m cli.main team-probabilities Brazil --runs 10000
 python -m cli.main betting-edge 0.55 2.20
 ```
+
+By default, CLI commands print readable tables. Use `--json-output` where available for machine-readable output.
 
 ## API Usage
 
@@ -52,8 +57,22 @@ python -m cli.main betting-edge 0.55 2.20
 uvicorn api.main:app --reload
 ```
 
+Open the dashboard:
+
+```text
+http://127.0.0.1:8000/
+```
+
+## Dashboard Preview
+
+![Dashboard full view](docs/screenshots/dashboard-full.png)
+
+![Match prediction result](docs/screenshots/dashboard-match-result.png)
+
 Endpoints:
 
+- `GET /` browser dashboard
+- `GET /teams`
 - `POST /predict_match` with `{"team_a": "Brazil", "team_b": "France", "neutral": true}`
 - `POST /simulate` with `{"runs": 10000}`
 - `GET /team/{name}`

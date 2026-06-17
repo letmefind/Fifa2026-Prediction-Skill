@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>FIFA 2026 Prediction Engine</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <section class="hero">
+        <div>
+          <p class="eyebrow">FIFA World Cup 2026</p>
+          <h1>Prediction Engine Dashboard</h1>
+          <p class="hero-copy">
+            Match probabilities, expected goals, scorelines, tournament simulations, and betting EV in one clean interface.
+          </p>
+        </div>
+        <div class="hero-card">
+          <span class="metric-label">Model Stack</span>
+          <strong>ELO + xG Strength + Dixon-Coles</strong>
+          <span>48 teams, 12 groups, knockout simulation</span>
+        </div>
+      </section>
+
+      <section class="grid two">
+        <article class="card">
+          <div class="card-header">
+            <div>
+              <p class="eyebrow">Match Forecast</p>
+              <h2>Predict a Match</h2>
+            </div>
+            <button id="swapTeams" class="ghost-button" type="button">Swap</button>
+          </div>
+          <form id="matchForm" class="form-grid">
+            <label>
+              Team A
+              <select id="teamA" required></select>
+            </label>
+            <label>
+              Team B
+              <select id="teamB" required></select>
+            </label>
+            <label class="check-row">
+              <input id="neutral" type="checkbox" checked />
+              Neutral venue
+            </label>
+            <button type="submit">Predict Match</button>
+          </form>
+          <div id="matchResult" class="result-block muted">Choose two teams and run a prediction.</div>
+        </article>
+
+        <article class="card">
+          <div class="card-header">
+            <div>
+              <p class="eyebrow">Monte Carlo</p>
+              <h2>Tournament Odds</h2>
+            </div>
+          </div>
+          <form id="simulateForm" class="form-grid compact">
+            <label>
+              Runs
+              <input id="runs" type="number" min="1" max="250000" value="1000" />
+            </label>
+            <button type="submit">Run Simulation</button>
+          </form>
+          <div id="simulationResult" class="result-block muted">Run a simulation to see title contenders.</div>
+        </article>
+      </section>
+
+      <section class="grid two">
+        <article class="card">
+          <p class="eyebrow">Betting Value</p>
+          <h2>Expected Value Calculator</h2>
+          <form id="evForm" class="form-grid compact">
+            <label>
+              Model Probability
+              <input id="modelProb" type="number" min="0" max="1" step="0.001" value="0.55" />
+            </label>
+            <label>
+              Decimal Odds
+              <input id="marketOdds" type="number" min="1.01" step="0.01" value="2.20" />
+            </label>
+            <button type="submit">Calculate EV</button>
+          </form>
+          <div id="evResult" class="result-block muted">Enter a model probability and market odds.</div>
+        </article>
+
+        <article class="card">
+          <p class="eyebrow">How To Read</p>
+          <h2>Model Notes</h2>
+          <ul class="notes">
+            <li><strong>Expected goals</strong> estimate scoring volume, not an exact final score.</li>
+            <li><strong>Draw probability</strong> is improved with Dixon-Coles low-score adjustment.</li>
+            <li><strong>Tournament odds</strong> stabilize as simulation runs increase.</li>
+            <li><strong>Betting EV</strong> is not a guarantee. Always check injuries, lineups, and market liquidity.</li>
+          </ul>
+        </article>
+      </section>
+    </main>
+    <script src="/static/app.js"></script>
+  </body>
+</html>
