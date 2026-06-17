@@ -117,6 +117,10 @@ Classify:
 
 Always account for bookmaker margin, exchange liquidity, stale odds, and model uncertainty.
 
+For Polymarket, convert a `Yes` share price directly into approximate probability. A `Yes` price of `$0.42` means roughly `42%`; approximate decimal odds are `1 / 0.42 = 2.38`. Compare that implied probability to the model probability before identifying value.
+
+Use the repository guide at `docs/BETTING_GUIDE.md` for the complete workflow.
+
 ## Phase 8: Risk Analysis
 
 Identify:

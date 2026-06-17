@@ -103,6 +103,8 @@ Interpretation:
 
 Always state that outputs are model estimates, not guaranteed betting profit.
 
+For Polymarket, Betfair Exchange, sportsbook odds conversion, edge thresholds, and bankroll/risk workflow, follow [BETTING_GUIDE.md](../../docs/BETTING_GUIDE.md). If the guide is not available in the skill package, use the same method: convert market price to implied probability, compare against model probability, calculate EV, then check fees, liquidity, spread, lineups, injuries, and resolution rules.
+
 ## API Mode
 
 If a persistent service is better than CLI calls:

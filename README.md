@@ -84,6 +84,26 @@ The Claude skill package lives in `claude-skill/fifa2026-prediction/`.
 
 It teaches Claude how to install this engine, run CLI/API predictions, generate match reasoning prompts, simulate tournaments, evaluate betting EV, and follow a full research-heavy tournament workflow with current squad, injury, xG, tactical, travel, and market data. Upload or install that nested folder as the skill package.
 
+## Betting and Polymarket Usage
+
+See [`docs/BETTING_GUIDE.md`](docs/BETTING_GUIDE.md) for a practical guide to using model probabilities with Polymarket, Betfair Exchange, Pinnacle, Bet365, or similar markets.
+
+Quick Polymarket example:
+
+```text
+Polymarket Yes price = 0.42
+Market-implied probability = 42%
+Approximate decimal odds = 1 / 0.42 = 2.38
+```
+
+If the model says the true probability is `50%`, run:
+
+```bash
+python -m cli.main betting-edge 0.50 2.38
+```
+
+Positive EV means the market price may be undervalued, before fees, spreads, liquidity, and model uncertainty.
+
 ## Data
 
 The repository ships with sample CSVs so the engine works immediately. Replace these files with current data for serious analysis:
