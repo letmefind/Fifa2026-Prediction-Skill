@@ -2,6 +2,8 @@
 
 Production-ready Python prediction engine for FIFA World Cup 2026 match forecasts, tournament simulation, LLM reasoning prompts, and betting expected value analysis.
 
+Multilingual quick help is available in 10 languages, including Persian: [`docs/README_10_LANGUAGES.md`](docs/README_10_LANGUAGES.md).
+
 ## Features
 
 - CSV-first data ingestion with real-ready FiveThirtyEight SPI and StatsBomb adapters.
