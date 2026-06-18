@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Static demo of the FIFA World Cup 2026 Prediction Engine. Full predictions require the Python app — not available on GitHub Pages." />
+    <title>FIFA 2026 Prediction Engine — Demo</title>
+    <link rel="stylesheet" href="demo.css" />
+  </head>
+  <body>
+    <header class="demo-banner" role="alert">
+      <div class="demo-banner-inner">
+        <strong>⚠️ Demo only — predictions are not live</strong>
+        <p>
+          This page is a <strong>visual preview</strong> hosted on
+          <a href="https://pages.github.com/">GitHub Pages</a>. It cannot run the Python prediction engine.
+          Buttons show <strong>sample numbers</strong>, not real forecasts. For live scores, groups, odds, and simulations,
+          <a href="https://github.com/letmefind/Fifa2026-Prediction-Skill">install the full app</a> or use the
+          <a href="https://github.com/letmefind/Fifa2026-Prediction-Skill/tree/main/claude-skill/fifa2026-prediction">Claude Skill</a>.
+        </p>
+      </div>
+    </header>
+
+    <main class="shell">
+      <section class="hero">
+        <div>
+          <p class="eyebrow">FIFA World Cup 2026</p>
+          <h1>Prediction Engine</h1>
+          <p class="hero-copy">
+            Match probabilities, group tables, predictions by date, tournament simulation, and betting EV —
+            powered by ELO, xG strengths, and Dixon-Coles Poisson models.
+          </p>
+          <div class="cta-row">
+            <a href="https://github.com/letmefind/Fifa2026-Prediction-Skill">Get the full app on GitHub</a>
+            <a class="secondary" href="README_10_LANGUAGES.md">Help in 10 languages</a>
+          </div>
+        </div>
+        <div class="hero-card">
+          <span class="eyebrow">This page</span>
+          <strong>Static UI demo</strong>
+          <span class="muted">Full stack needs Python + FastAPI</span>
+        </div>
+      </section>
+
+      <section class="card">
+        <p class="eyebrow">Why this demo is not functional</p>
+        <h2>GitHub Pages is static hosting</h2>
+        <ul class="reason-list">
+          <li><strong>No Python server</strong> — the engine runs in Python (ELO, Poisson, Monte Carlo).</li>
+          <li><strong>No API</strong> — live predictions use FastAPI routes like <code>/predict_match</code> and <code>/predictions/date</code>.</li>
+          <li><strong>No live data</strong> — refreshing scores needs API-Football / CSV ingestion on a server.</li>
+          <li><strong>Sample output only</strong> — buttons below display fixed example data so you can see the layout.</li>
+        </ul>
+        <p class="muted" style="margin-top:16px;">
+          Run locally: <code>uvicorn api.main:app --reload</code> →
+          <code>http://127.0.0.1:8000/</code>
+        </p>
+      </section>
+
+      <section class="card">
+        <div class="card-header">
+          <div>
+            <p class="eyebrow">Latest Scores</p>
+            <h2>Fresh Data Status</h2>
+          </div>
+          <button id="refreshLatest" class="ghost-button demo-disabled" type="button">Refresh Latest Data</button>
+        </div>
+        <div id="latestStatus" class="result-block muted">Demo mode — connect the full app for live data.</div>
+      </section>
+
+      <section class="grid two">
+        <article class="card" style="margin-bottom:0">
+          <div class="card-header">
+            <div>
+              <p class="eyebrow">Match Forecast</p>
+              <h2>Predict a Match</h2>
+            </div>
+          </div>
+          <form id="matchForm" class="form-grid">
+            <label>Team A <select id="teamA"></select></label>
+            <label>Team B <select id="teamB"></select></label>
+            <button type="submit">Show sample prediction</button>
+          </form>
+          <div id="matchResult" class="result-block muted">Pick teams to view sample probabilities (not live).</div>
+        </article>
+
+        <article class="card" style="margin-bottom:0">
+          <p class="eyebrow">Monte Carlo</p>
+          <h2>Tournament Odds</h2>
+          <form id="simulateForm" class="form-grid compact">
+            <label>Runs <input type="number" value="5000" disabled /></label>
+            <button type="submit">Show sample table</button>
+          </form>
+          <div id="simulationResult" class="result-block muted">Sample World Cup odds table only.</div>
+        </article>
+      </section>
+
+      <section class="card">
+        <p class="eyebrow">Match Day</p>
+        <h2>Predictions By Date</h2>
+        <form id="dateForm" class="form-grid compact">
+          <label>
+            Date
+            <input id="matchDate" type="text" value="18 jun" readonly />
+          </label>
+          <button type="submit">Show sample day</button>
+        </form>
+        <div id="dateResult" class="result-block muted">Example: all matches on 18 June with sample odds.</div>
+      </section>
+
+      <section class="card">
+        <p class="eyebrow">Group Stage</p>
+        <h2>Predictions By Group</h2>
+        <form id="groupForm" class="form-grid compact">
+          <label>
+            Group
+            <select id="groupSelect">
+              <option value="G">Group G</option>
+              <option value="A">Group A</option>
+              <option value="B">Group B</option>
+            </select>
+          </label>
+          <button type="submit">Show sample group</button>
+        </form>
+        <div id="groupResult" class="result-block muted">Sample group view — full app uses official FIFA fixtures.</div>
+      </section>
+
+      <section class="card">
+        <p class="eyebrow">Get the real app</p>
+        <h2>Full prediction engine</h2>
+        <p class="muted">
+          Clone the repository, install dependencies, add optional API keys, and run the dashboard or CLI for
+          live predictions with official FIFA 2026 groups and latest scores.
+        </p>
+        <div class="cta-row">
+          <a href="https://github.com/letmefind/Fifa2026-Prediction-Skill">GitHub repository</a>
+          <a class="secondary" href="https://github.com/letmefind/Fifa2026-Prediction-Skill/blob/main/claude-skill/README.md">Claude Skill install</a>
+          <a class="secondary" href="BETTING_GUIDE.md">Betting guide</a>
+        </div>
+      </section>
+    </main>
+    <script src="demo.js"></script>
+  </body>
+</html>

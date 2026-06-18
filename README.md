@@ -2,6 +2,8 @@
 
 **A production-ready prediction stack for the 2026 World Cup** — match forecasts, group-stage tables, tournament simulations, betting EV, and a web dashboard. Built for analysts, bettors, and AI workflows.
 
+🌐 **[Live demo (static preview)](https://letmefind.github.io/Fifa2026-Prediction-Skill/)** — UI only; predictions are sample data. [Why it's not live →](docs/GITHUB_PAGES.md)
+
 Use it as a **Python app**, a **REST API + dashboard**, or a **Claude AI Skill** that runs the same engine from natural language.
 
 ---
