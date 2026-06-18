@@ -34,11 +34,45 @@ class PredictionService:
     def ratings_map(self) -> dict[str, float]:
         return {team: self.rating_for(team) for team in self.teams}
 
+    @staticmethod
+    def _norm_team(team: str) -> str:
+        return team.lower().strip()
+
+    def known_latest_result(self, team_a: str, team_b: str) -> dict[str, object]:
+        if self.latest_matches.empty:
+            return {"found": False}
+
+        a = self._norm_team(team_a)
+        b = self._norm_team(team_b)
+        latest = self.latest_matches.copy()
+        home = latest["home_team"].astype(str).str.lower().str.strip()
+        away = latest["away_team"].astype(str).str.lower().str.strip()
+        matches = latest[((home == a) & (away == b)) | ((home == b) & (away == a))]
+        if matches.empty:
+            return {"found": False}
+
+        row = matches.sort_values("date").iloc[-1]
+        return {
+            "found": True,
+            "date": pd.to_datetime(row["date"]).date().isoformat(),
+            "home_team": str(row["home_team"]),
+            "away_team": str(row["away_team"]),
+            "home_score": int(row["home_score"]),
+            "away_score": int(row["away_score"]),
+            "competition": str(row["competition"]),
+            "source": "latest_results",
+            "message": "This match already appears in latest results. The probabilities below are for a future rematch forecast.",
+        }
+
     def predict_match(self, team_a: str, team_b: str, neutral: bool = True) -> dict[str, object]:
         prediction = self.goal_model.predict_match(team_a, team_b, neutral=neutral).as_dict()
         prediction["team_a"] = team_a
         prediction["team_b"] = team_b
         prediction["data_status"] = self.latest_status()
+        prediction["known_result"] = self.known_latest_result(team_a, team_b)
+        prediction["prediction_type"] = (
+            "rematch_forecast" if prediction["known_result"]["found"] else "future_forecast"
+        )
         return prediction
 
     def team_profile(self, name: str) -> dict[str, object]:

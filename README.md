@@ -137,6 +137,10 @@ The dashboard also has a **Fresh Data Status** card and a **Refresh Latest Data*
 
 API-Football free plans are rate-limited and may only allow a small recent date window. The app queries recent dates, filters to known national teams, and caches successful results in `.cache/fifa2026/api_football_latest.csv`.
 
+If a requested match already appears in latest results, the API/CLI/dashboard shows the known score first and labels the prediction as a future rematch forecast.
+
+The dashboard also links to the 10-language quick help document.
+
 To refresh adapter output:
 
 ```bash

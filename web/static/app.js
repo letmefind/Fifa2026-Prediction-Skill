@@ -56,7 +56,20 @@ function renderBars(items, key, formatter = percent) {
 
 function renderMatch(result) {
   const scores = topScores(result.score_distribution);
+  const knownResult = result.known_result;
+  const alreadyPlayed =
+    knownResult && knownResult.found
+      ? `
+        <div class="result-alert">
+          <strong>Already played:</strong>
+          ${knownResult.home_team} ${knownResult.home_score}-${knownResult.away_score} ${knownResult.away_team}
+          <span>${knownResult.date} | ${knownResult.competition}</span>
+          <p>The probabilities below are for a future rematch forecast, not the historical result.</p>
+        </div>
+      `
+      : "";
   return `
+    ${alreadyPlayed}
     <div class="prob-grid">
       <div class="prob-card">
         <span>${result.team_a} win</span>

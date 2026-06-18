@@ -37,6 +37,20 @@ def _top_scores(result: dict[str, object], limit: int = 5) -> list[tuple[str, fl
 def _render_match_summary(result: dict[str, object]) -> None:
     team_a = str(result["team_a"])
     team_b = str(result["team_b"])
+    known_result = result.get("known_result")
+    if isinstance(known_result, dict) and known_result.get("found"):
+        console.print(
+            Panel(
+                (
+                    f"{known_result['home_team']} {known_result['home_score']}-"
+                    f"{known_result['away_score']} {known_result['away_team']}\n"
+                    f"Date: {known_result['date']} | Competition: {known_result['competition']}\n"
+                    "The probabilities below are for a future rematch forecast, not the historical result."
+                ),
+                title="Already Played",
+                border_style="yellow",
+            )
+        )
     table = Table(title=f"{team_a} vs {team_b}", box=box.ROUNDED)
     table.add_column("Outcome")
     table.add_column("Probability", justify="right")

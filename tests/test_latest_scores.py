@@ -4,6 +4,7 @@ import os
 
 import pandas as pd
 
+from api.service import PredictionService
 from config import load_config
 from data.latest_scores import latest_data_status, load_latest_matches, load_local_env, merge_match_frames
 
@@ -55,3 +56,30 @@ def test_load_local_env_does_not_require_real_secret(tmp_path, monkeypatch) -> N
     load_local_env(env_path)
 
     assert os.environ["API_FOOTBALL_KEY"] == "placeholder"
+
+
+def test_known_latest_result_detects_already_played_match() -> None:
+    service = PredictionService.__new__(PredictionService)
+    service.latest_matches = pd.DataFrame(
+        [
+            {
+                "date": "2026-06-16",
+                "home_team": "Iran",
+                "away_team": "New Zealand",
+                "home_score": 2,
+                "away_score": 2,
+                "home_xg": None,
+                "away_xg": None,
+                "neutral": True,
+                "competition": "World Cup",
+            }
+        ]
+    )
+
+    result = service.known_latest_result("New Zealand", "Iran")
+
+    assert result["found"] is True
+    assert result["home_team"] == "Iran"
+    assert result["away_team"] == "New Zealand"
+    assert result["home_score"] == 2
+    assert result["away_score"] == 2

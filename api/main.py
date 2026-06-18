@@ -14,6 +14,7 @@ app = FastAPI(title="FIFA World Cup 2026 Prediction Engine", version="1.0.0")
 ROOT = Path(__file__).resolve().parents[1]
 WEB_DIR = ROOT / "web"
 app.mount("/static", StaticFiles(directory=WEB_DIR / "static"), name="static")
+app.mount("/project-docs", StaticFiles(directory=ROOT / "docs"), name="project-docs")
 
 
 class MatchRequest(BaseModel):

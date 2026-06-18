@@ -12,6 +12,8 @@ def test_dashboard_loads() -> None:
     response = client.get("/")
     assert response.status_code == 200
     assert "Prediction Engine Dashboard" in response.text
+    assert "10-Language Quick Guide" in response.text
+    assert "فارسی" in response.text
     assert "How To Find Model Probability" in response.text
     assert "35.6% = 0.356" in response.text
     assert "What Are Decimal Odds?" in response.text
@@ -34,6 +36,13 @@ def test_latest_data_status_endpoint() -> None:
     assert "total_matches_in_model" in body
 
 
+def test_multilingual_doc_is_served() -> None:
+    response = client.get("/project-docs/README_10_LANGUAGES.md")
+    assert response.status_code == 200
+    assert "## 1. فارسی" in response.text
+    assert "## 10. 中文" in response.text
+
+
 def test_predict_match_api_for_dashboard() -> None:
     response = client.post(
         "/predict_match",
@@ -44,4 +53,6 @@ def test_predict_match_api_for_dashboard() -> None:
     assert body["team_a"] == "Brazil"
     assert body["team_b"] == "France"
     assert "data_status" in body
+    assert "known_result" in body
+    assert "prediction_type" in body
     assert abs(body["win_prob_a"] + body["draw_prob"] + body["win_prob_b"] - 1.0) < 1e-9
