@@ -23,6 +23,8 @@ data:
   ratings_csv: data/sample_team_ratings.csv
   xg_csv: data/sample_xg.csv
   group_fixtures_csv: data/group_fixtures.csv
+  group_fixtures_source: provisional_sample
+  group_fixtures_official: false
   latest_results_csv: data/latest_results.csv
   latest_lookback_days: 90
   api_football_lookback_days: 3

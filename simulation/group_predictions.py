@@ -157,6 +157,14 @@ def predict_group_stage(
 ) -> dict[str, object]:
     cfg = config or load_config()
     frame = fixtures if fixtures is not None else load_group_fixtures(cfg)
+    fixture_status = {
+        "source": cfg.data.group_fixtures_source,
+        "official": cfg.data.group_fixtures_official,
+        "fixtures_path": str(cfg.data.group_fixtures_csv),
+        "warning": None
+        if cfg.data.group_fixtures_official
+        else "Group fixtures are provisional sample data, not confirmed official FIFA 2026 groups. Replace data/group_fixtures.csv with official fixtures for accurate group-stage predictions.",
+    }
     groups: dict[str, dict[str, object]] = {}
     third_place: list[dict[str, object]] = []
     qualifiers: list[str] = []
@@ -231,6 +239,7 @@ def predict_group_stage(
     bracket = project_knockout_bracket(goal_model, qualifiers, ratings)
 
     return {
+        "fixture_status": fixture_status,
         "groups": groups,
         "third_place_ranking": best_thirds,
         "qualified_round_of_32": qualifiers,

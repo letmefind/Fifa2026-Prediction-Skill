@@ -64,6 +64,8 @@ def test_group_predictions_endpoint() -> None:
     body = response.json()
     assert "groups" in body
     assert "A" in body["groups"]
+    assert body["fixture_status"]["official"] is False
+    assert "provisional" in body["fixture_status"]["warning"]
     assert len(body["groups"]["A"]["matches"]) == 6
     assert "knockout_projection" in body
 

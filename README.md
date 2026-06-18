@@ -162,7 +162,7 @@ API-Football free plans are rate-limited and may only allow a small recent date 
 
 If a requested match already appears in latest results, the API/CLI/dashboard shows the known score first and labels the prediction as a future rematch forecast.
 
-Group-stage predictions use `data/group_fixtures.csv`. Played fixtures show exact latest scores, future fixtures show model score predictions, projected group tables, best third-place ranking, Round of 32 qualifiers, and a projected knockout path. Replace this CSV when FIFA publishes or updates the official groups/fixtures.
+Group-stage predictions use `data/group_fixtures.csv`. The bundled file is explicitly marked as **provisional sample data**, not official FIFA groups. Played fixtures show exact latest scores, future fixtures show model score predictions, projected group tables, best third-place ranking, Round of 32 qualifiers, and a projected knockout path. Replace this CSV and set `group_fixtures_official: true` in `config/default.yaml` when FIFA publishes or updates the official groups/fixtures.
 
 To refresh adapter output:
 

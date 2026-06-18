@@ -223,7 +223,16 @@ function renderGroups(result, selectedGroup) {
       ? Object.values(result.groups)
       : [result.groups[selectedGroup]];
   const thirdRows = result.third_place_ranking.slice(0, 12);
+  const warning = result.fixture_status && result.fixture_status.warning
+    ? `
+      <div class="result-alert">
+        <strong>Fixture warning:</strong>
+        <p>${result.fixture_status.warning}</p>
+      </div>
+    `
+    : "";
   return `
+    ${warning}
     ${groups.map(renderOneGroup).join("")}
     <div class="group-card">
       <h3>Best Third-Place Ranking</h3>

@@ -56,6 +56,8 @@ class DataConfig:
     ratings_csv: Path
     xg_csv: Path
     group_fixtures_csv: Path
+    group_fixtures_source: str
+    group_fixtures_official: bool
     latest_results_csv: Path
     latest_lookback_days: int
     api_football_lookback_days: int
@@ -108,6 +110,8 @@ def load_config(path: str | Path | None = None) -> Config:
             ratings_csv=_path(data["ratings_csv"]),
             xg_csv=_path(data["xg_csv"]),
             group_fixtures_csv=_path(data["group_fixtures_csv"]),
+            group_fixtures_source=str(data["group_fixtures_source"]),
+            group_fixtures_official=bool(data["group_fixtures_official"]),
             latest_results_csv=_path(data["latest_results_csv"]),
             latest_lookback_days=int(data["latest_lookback_days"]),
             api_football_lookback_days=int(data["api_football_lookback_days"]),

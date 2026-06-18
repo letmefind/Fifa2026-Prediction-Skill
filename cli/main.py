@@ -157,6 +157,9 @@ def group_predictions(
 ) -> None:
     service = refresh_service() if refresh else get_service()
     result = service.group_stage_predictions()
+    fixture_status = result.get("fixture_status", {})
+    if isinstance(fixture_status, dict) and fixture_status.get("warning"):
+        console.print(Panel(str(fixture_status["warning"]), title="Fixture Warning", border_style="yellow"))
     if group:
         _render_group(result["groups"][group.upper()])
         return
