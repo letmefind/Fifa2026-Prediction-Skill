@@ -225,16 +225,50 @@ function renderDatePredictions(result) {
   }
   return `
     <p class="muted"><strong>${result.date}</strong> · ${result.match_count} match${result.match_count === 1 ? "" : "es"}</p>
-    ${renderGroupMatches(result.matches)}
-    <div class="score-cloud">
-      ${result.matches
-        .filter((match) => match.status === "predicted")
-        .map(
-          (match) =>
-            `<span class="pill">Group ${match.group}: ${match.team_a} ${percent(match.win_prob_a)} | Draw ${percent(match.draw_prob)} | ${match.team_b} ${percent(match.win_prob_b)}</span>`,
-        )
-        .join("")}
-    </div>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Group</th>
+          <th>Match</th>
+          <th>Status</th>
+          <th>Score</th>
+          <th>Team A win</th>
+          <th>Draw</th>
+          <th>Team B win</th>
+          <th>Odds A</th>
+          <th>Odds Draw</th>
+          <th>Odds B</th>
+          <th>xG</th>
+          <th>Top scores</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${result.matches
+          .map((match) => {
+            const topScores = (match.top_scores || [])
+              .map((item) => `${item.score} ${percent(item.probability)}`)
+              .join(", ");
+            return `
+              <tr>
+                <td>${match.group}</td>
+                <td><strong>${match.team_a}</strong> vs <strong>${match.team_b}</strong></td>
+                <td><span class="pill ${match.status === "played" ? "played-pill" : ""}">${match.status}</span></td>
+                <td>${match.score}</td>
+                <td>${percent(match.win_prob_a)}</td>
+                <td>${percent(match.draw_prob)}</td>
+                <td>${percent(match.win_prob_b)}</td>
+                <td>${Number(match.decimal_odds_a).toFixed(2)}</td>
+                <td>${Number(match.decimal_odds_draw).toFixed(2)}</td>
+                <td>${Number(match.decimal_odds_b).toFixed(2)}</td>
+                <td>${number(match.expected_goals_a)}-${number(match.expected_goals_b)}</td>
+                <td>${topScores || "-"}</td>
+              </tr>
+            `;
+          })
+          .join("")}
+      </tbody>
+    </table>
+    <p class="muted">Model probabilities and decimal odds (1 / probability) for each outcome. Played matches still show the model forecast alongside the real score.</p>
   `;
 }
 

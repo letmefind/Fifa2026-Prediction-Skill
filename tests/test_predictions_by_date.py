@@ -27,6 +27,12 @@ def test_predictions_by_date_returns_june_18_fixtures() -> None:
     pairs = {(match["team_a"], match["team_b"]) for match in result["matches"]}
     assert ("Czechia", "South Africa") in pairs
     assert ("Canada", "Qatar") in pairs
+    first = result["matches"][0]
+    assert "decimal_odds_a" in first
+    assert "decimal_odds_draw" in first
+    assert "decimal_odds_b" in first
+    assert "top_scores" in first
+    assert len(first["top_scores"]) == 3
 
 
 def test_predictions_by_date_shape() -> None:

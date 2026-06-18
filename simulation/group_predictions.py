@@ -138,6 +138,36 @@ def _known_result(latest_matches: pd.DataFrame, team_a: str, team_b: str) -> dic
     }
 
 
+def _model_odds_block(prediction: dict[str, object]) -> dict[str, object]:
+    def decimal_odds(probability: object) -> float:
+        value = max(float(probability), 0.001)
+        return round(1.0 / value, 2)
+
+    distribution = prediction.get("score_distribution", {})
+    top_scores: list[dict[str, object]] = []
+    if isinstance(distribution, dict):
+        top_scores = [
+            {"score": str(score), "probability": float(probability)}
+            for score, probability in sorted(
+                distribution.items(),
+                key=lambda item: float(item[1]),
+                reverse=True,
+            )[:3]
+        ]
+
+    return {
+        "win_prob_a": float(prediction["win_prob_a"]),
+        "draw_prob": float(prediction["draw_prob"]),
+        "win_prob_b": float(prediction["win_prob_b"]),
+        "expected_goals_a": float(prediction["expected_goals_a"]),
+        "expected_goals_b": float(prediction["expected_goals_b"]),
+        "decimal_odds_a": decimal_odds(prediction["win_prob_a"]),
+        "decimal_odds_draw": decimal_odds(prediction["draw_prob"]),
+        "decimal_odds_b": decimal_odds(prediction["win_prob_b"]),
+        "top_scores": top_scores,
+    }
+
+
 def _build_match_prediction(
     group_name: str,
     row: object,
@@ -164,7 +194,7 @@ def _build_match_prediction(
 
     prediction = goal_model.predict_match(team_a, team_b, neutral=bool(row.neutral)).as_dict()
     goals_a, goals_b, score, score_probability = _top_score(prediction)
-    return {
+    match = {
         "group": group_name,
         "date": match_date,
         "team_a": team_a,
@@ -173,12 +203,9 @@ def _build_match_prediction(
         "score": score,
         "score_probability": score_probability,
         "winner": team_a if goals_a > goals_b else team_b if goals_b > goals_a else "Draw",
-        "win_prob_a": prediction["win_prob_a"],
-        "draw_prob": prediction["draw_prob"],
-        "win_prob_b": prediction["win_prob_b"],
-        "expected_goals_a": prediction["expected_goals_a"],
-        "expected_goals_b": prediction["expected_goals_b"],
     }
+    match.update(_model_odds_block(prediction))
+    return match
 
 
 def predict_matches_by_date(
@@ -194,7 +221,10 @@ def predict_matches_by_date(
     day_fixtures = frame[frame["date"].dt.date.astype(str) == target_date].copy()
     matches: list[dict[str, object]] = []
     for row in day_fixtures.itertuples(index=False):
-        matches.append(_build_match_prediction(str(row.group), row, goal_model, latest_matches))
+        match = _build_match_prediction(str(row.group), row, goal_model, latest_matches)
+        prediction = goal_model.predict_match(str(row.team_a), str(row.team_b), neutral=bool(row.neutral)).as_dict()
+        match.update(_model_odds_block(prediction))
+        matches.append(match)
 
     return {
         "date": target_date,

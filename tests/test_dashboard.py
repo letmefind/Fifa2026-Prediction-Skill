@@ -35,6 +35,10 @@ def test_predictions_by_date_endpoint() -> None:
     assert body["date"] == "2026-06-18"
     assert body["match_count"] == 4
     assert len(body["matches"]) == 4
+    match = body["matches"][0]
+    assert "win_prob_a" in match
+    assert "decimal_odds_a" in match
+    assert "top_scores" in match
 
 
 def test_refresh_latest_rebuilds_model() -> None:

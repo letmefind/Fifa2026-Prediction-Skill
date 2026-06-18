@@ -161,20 +161,31 @@ def _render_date_matches(result: dict[str, object]) -> None:
     matches_table.add_column("Match")
     matches_table.add_column("Status")
     matches_table.add_column("Score")
-    matches_table.add_column("Winner")
     matches_table.add_column("Win A", justify="right")
     matches_table.add_column("Draw", justify="right")
     matches_table.add_column("Win B", justify="right")
+    matches_table.add_column("Odds A", justify="right")
+    matches_table.add_column("Odds D", justify="right")
+    matches_table.add_column("Odds B", justify="right")
+    matches_table.add_column("xG", justify="right")
     for match in result["matches"]:
+        xg = (
+            f"{float(match['expected_goals_a']):.2f}-{float(match['expected_goals_b']):.2f}"
+            if match.get("expected_goals_a") is not None
+            else "-"
+        )
         matches_table.add_row(
             str(match["group"]),
             f"{match['team_a']} vs {match['team_b']}",
             str(match["status"]),
             str(match["score"]),
-            str(match["winner"]),
-            _pct(float(match["win_prob_a"])) if match.get("win_prob_a") is not None else "-",
-            _pct(float(match["draw_prob"])) if match.get("draw_prob") is not None else "-",
-            _pct(float(match["win_prob_b"])) if match.get("win_prob_b") is not None else "-",
+            _pct(float(match["win_prob_a"])),
+            _pct(float(match["draw_prob"])),
+            _pct(float(match["win_prob_b"])),
+            f"{float(match['decimal_odds_a']):.2f}",
+            f"{float(match['decimal_odds_draw']):.2f}",
+            f"{float(match['decimal_odds_b']):.2f}",
+            xg,
         )
     console.print(matches_table)
 
