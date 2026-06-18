@@ -71,18 +71,20 @@ http://127.0.0.1:8000/
 
 ## Multilingual Help
 
-Quick help is available in 10 languages:
+Quick help is available in 10 languages. Use the tab-style links below to jump directly to each language:
 
-- Persian / فارسی
-- Arabic / العربية
-- Spanish / Español
-- French / Français
-- German / Deutsch
-- Portuguese / Português
-- Italian / Italiano
-- Turkish / Türkçe
-- Hindi / हिन्दी
-- Chinese / 中文
+<p>
+  <a href="docs/README_10_LANGUAGES.md#1-فارسی"><kbd>Persian / فارسی</kbd></a>
+  <a href="docs/README_10_LANGUAGES.md#2-العربية"><kbd>Arabic / العربية</kbd></a>
+  <a href="docs/README_10_LANGUAGES.md#3-español"><kbd>Spanish / Español</kbd></a>
+  <a href="docs/README_10_LANGUAGES.md#4-français"><kbd>French / Français</kbd></a>
+  <a href="docs/README_10_LANGUAGES.md#5-deutsch"><kbd>German / Deutsch</kbd></a>
+  <a href="docs/README_10_LANGUAGES.md#6-português"><kbd>Portuguese / Português</kbd></a>
+  <a href="docs/README_10_LANGUAGES.md#7-italiano"><kbd>Italian / Italiano</kbd></a>
+  <a href="docs/README_10_LANGUAGES.md#8-türkçe"><kbd>Turkish / Türkçe</kbd></a>
+  <a href="docs/README_10_LANGUAGES.md#9-हिन्दी"><kbd>Hindi / हिन्दी</kbd></a>
+  <a href="docs/README_10_LANGUAGES.md#10-中文"><kbd>Chinese / 中文</kbd></a>
+</p>
 
 Open the multilingual README:
 
