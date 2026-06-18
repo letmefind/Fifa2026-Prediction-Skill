@@ -1,0 +1,727 @@
+{
+  "generated": "2026-06-18",
+  "simulation_runs": 50000,
+  "latest_status": {
+    "latest_results_csv": "/Users/arash/Documents/FIFA2026-Prediction-Skill/data/latest_results.csv",
+    "latest_results_csv_exists": true,
+    "latest_matches_loaded": 22,
+    "latest_match_date": "2026-06-17",
+    "football_data_api_configured": false,
+    "api_football_configured": true,
+    "lookback_days": 90,
+    "checked_at_utc": "2026-06-18T09:03:58+00:00",
+    "csv_matches": 22,
+    "football_data_matches": 0,
+    "api_football_matches": 0,
+    "api_fetch_attempted": true,
+    "api_errors": [],
+    "base_matches_loaded": 66,
+    "total_matches_in_model": 88,
+    "model_rebuilt": true
+  },
+  "tournament_probabilities": [
+    {
+      "team": "Argentina",
+      "round_of_32": 0.95516,
+      "reach_semis": 0.32918,
+      "reach_final": 0.2184,
+      "win_world_cup": 0.16532
+    },
+    {
+      "team": "Germany",
+      "round_of_32": 0.96198,
+      "reach_semis": 0.35566,
+      "reach_final": 0.2017,
+      "win_world_cup": 0.14864
+    },
+    {
+      "team": "England",
+      "round_of_32": 0.93012,
+      "reach_semis": 0.2005,
+      "reach_final": 0.1169,
+      "win_world_cup": 0.08106
+    },
+    {
+      "team": "Spain",
+      "round_of_32": 0.896,
+      "reach_semis": 0.19824,
+      "reach_final": 0.11552,
+      "win_world_cup": 0.08028
+    },
+    {
+      "team": "Colombia",
+      "round_of_32": 0.8625,
+      "reach_semis": 0.24278,
+      "reach_final": 0.1233,
+      "win_world_cup": 0.06518
+    },
+    {
+      "team": "France",
+      "round_of_32": 0.88394,
+      "reach_semis": 0.1426,
+      "reach_final": 0.07478,
+      "win_world_cup": 0.0484
+    },
+    {
+      "team": "USA",
+      "round_of_32": 0.87252,
+      "reach_semis": 0.20558,
+      "reach_final": 0.12156,
+      "win_world_cup": 0.04642
+    },
+    {
+      "team": "Brazil",
+      "round_of_32": 0.87084,
+      "reach_semis": 0.1778,
+      "reach_final": 0.07392,
+      "win_world_cup": 0.04526
+    },
+    {
+      "team": "Sweden",
+      "round_of_32": 0.83146,
+      "reach_semis": 0.18844,
+      "reach_final": 0.1091,
+      "win_world_cup": 0.03984
+    },
+    {
+      "team": "Portugal",
+      "round_of_32": 0.79818,
+      "reach_semis": 0.13334,
+      "reach_final": 0.04792,
+      "win_world_cup": 0.02668
+    },
+    {
+      "team": "Norway",
+      "round_of_32": 0.79536,
+      "reach_semis": 0.13452,
+      "reach_final": 0.07092,
+      "win_world_cup": 0.02408
+    },
+    {
+      "team": "Uruguay",
+      "round_of_32": 0.73194,
+      "reach_semis": 0.12822,
+      "reach_final": 0.06186,
+      "win_world_cup": 0.02272
+    },
+    {
+      "team": "Netherlands",
+      "round_of_32": 0.80934,
+      "reach_semis": 0.12386,
+      "reach_final": 0.04106,
+      "win_world_cup": 0.02232
+    },
+    {
+      "team": "Austria",
+      "round_of_32": 0.77394,
+      "reach_semis": 0.11636,
+      "reach_final": 0.05934,
+      "win_world_cup": 0.01958
+    },
+    {
+      "team": "Morocco",
+      "round_of_32": 0.76246,
+      "reach_semis": 0.1191,
+      "reach_final": 0.06034,
+      "win_world_cup": 0.01924
+    },
+    {
+      "team": "Australia",
+      "round_of_32": 0.78936,
+      "reach_semis": 0.09946,
+      "reach_final": 0.0486,
+      "win_world_cup": 0.01534
+    },
+    {
+      "team": "Belgium",
+      "round_of_32": 0.75264,
+      "reach_semis": 0.10288,
+      "reach_final": 0.04768,
+      "win_world_cup": 0.01472
+    },
+    {
+      "team": "Mexico",
+      "round_of_32": 0.79166,
+      "reach_semis": 0.10152,
+      "reach_final": 0.04952,
+      "win_world_cup": 0.01434
+    },
+    {
+      "team": "C\u00f4te d'Ivoire",
+      "round_of_32": 0.76192,
+      "reach_semis": 0.09174,
+      "reach_final": 0.04356,
+      "win_world_cup": 0.01358
+    },
+    {
+      "team": "Japan",
+      "round_of_32": 0.70112,
+      "reach_semis": 0.08564,
+      "reach_final": 0.03928,
+      "win_world_cup": 0.0118
+    },
+    {
+      "team": "South Korea",
+      "round_of_32": 0.77154,
+      "reach_semis": 0.0827,
+      "reach_final": 0.03724,
+      "win_world_cup": 0.01072
+    },
+    {
+      "team": "Croatia",
+      "round_of_32": 0.68,
+      "reach_semis": 0.07836,
+      "reach_final": 0.03466,
+      "win_world_cup": 0.00936
+    },
+    {
+      "team": "Switzerland",
+      "round_of_32": 0.76296,
+      "reach_semis": 0.0782,
+      "reach_final": 0.03476,
+      "win_world_cup": 0.00918
+    },
+    {
+      "team": "Iran",
+      "round_of_32": 0.7087,
+      "reach_semis": 0.06166,
+      "reach_final": 0.0262,
+      "win_world_cup": 0.00698
+    },
+    {
+      "team": "Egypt",
+      "round_of_32": 0.67554,
+      "reach_semis": 0.0493,
+      "reach_final": 0.02044,
+      "win_world_cup": 0.00564
+    },
+    {
+      "team": "Senegal",
+      "round_of_32": 0.62482,
+      "reach_semis": 0.04604,
+      "reach_final": 0.0188,
+      "win_world_cup": 0.00446
+    },
+    {
+      "team": "Ecuador",
+      "round_of_32": 0.6451,
+      "reach_semis": 0.04324,
+      "reach_final": 0.01632,
+      "win_world_cup": 0.00438
+    },
+    {
+      "team": "Canada",
+      "round_of_32": 0.65894,
+      "reach_semis": 0.03796,
+      "reach_final": 0.01448,
+      "win_world_cup": 0.00362
+    },
+    {
+      "team": "Ghana",
+      "round_of_32": 0.60196,
+      "reach_semis": 0.02816,
+      "reach_final": 0.00862,
+      "win_world_cup": 0.00254
+    },
+    {
+      "team": "Scotland",
+      "round_of_32": 0.57638,
+      "reach_semis": 0.0282,
+      "reach_final": 0.01062,
+      "win_world_cup": 0.00252
+    },
+    {
+      "team": "Qatar",
+      "round_of_32": 0.65634,
+      "reach_semis": 0.02598,
+      "reach_final": 0.0077,
+      "win_world_cup": 0.00244
+    },
+    {
+      "team": "Czechia",
+      "round_of_32": 0.61676,
+      "reach_semis": 0.02782,
+      "reach_final": 0.00908,
+      "win_world_cup": 0.00236
+    },
+    {
+      "team": "Saudi Arabia",
+      "round_of_32": 0.52878,
+      "reach_semis": 0.0173,
+      "reach_final": 0.00496,
+      "win_world_cup": 0.00158
+    },
+    {
+      "team": "Congo DR",
+      "round_of_32": 0.52068,
+      "reach_semis": 0.01314,
+      "reach_final": 0.00356,
+      "win_world_cup": 0.00146
+    },
+    {
+      "team": "Paraguay",
+      "round_of_32": 0.53836,
+      "reach_semis": 0.01776,
+      "reach_final": 0.0057,
+      "win_world_cup": 0.00122
+    },
+    {
+      "team": "Cape Verde",
+      "round_of_32": 0.4947,
+      "reach_semis": 0.00768,
+      "reach_final": 0.00252,
+      "win_world_cup": 0.0011
+    },
+    {
+      "team": "Bosnia and Herzegovina",
+      "round_of_32": 0.6177,
+      "reach_semis": 0.01356,
+      "reach_final": 0.00328,
+      "win_world_cup": 0.00098
+    },
+    {
+      "team": "Uzbekistan",
+      "round_of_32": 0.4886,
+      "reach_semis": 0.00692,
+      "reach_final": 0.00212,
+      "win_world_cup": 0.0009
+    },
+    {
+      "team": "New Zealand",
+      "round_of_32": 0.56322,
+      "reach_semis": 0.01096,
+      "reach_final": 0.00282,
+      "win_world_cup": 0.00088
+    },
+    {
+      "team": "Algeria",
+      "round_of_32": 0.45178,
+      "reach_semis": 0.00962,
+      "reach_final": 0.00234,
+      "win_world_cup": 0.00068
+    },
+    {
+      "team": "Panama",
+      "round_of_32": 0.43806,
+      "reach_semis": 0.0074,
+      "reach_final": 0.00142,
+      "win_world_cup": 0.0005
+    },
+    {
+      "team": "Turkey",
+      "round_of_32": 0.46612,
+      "reach_semis": 0.00986,
+      "reach_final": 0.0024,
+      "win_world_cup": 0.0004
+    },
+    {
+      "team": "Haiti",
+      "round_of_32": 0.4603,
+      "reach_semis": 0.00456,
+      "reach_final": 0.00118,
+      "win_world_cup": 0.00038
+    },
+    {
+      "team": "South Africa",
+      "round_of_32": 0.511,
+      "reach_semis": 0.00568,
+      "reach_final": 0.00122,
+      "win_world_cup": 0.00038
+    },
+    {
+      "team": "Jordan",
+      "round_of_32": 0.42358,
+      "reach_semis": 0.00336,
+      "reach_final": 0.00084,
+      "win_world_cup": 0.00024
+    },
+    {
+      "team": "Tunisia",
+      "round_of_32": 0.3565,
+      "reach_semis": 0.0043,
+      "reach_final": 0.00094,
+      "win_world_cup": 0.00018
+    },
+    {
+      "team": "Iraq",
+      "round_of_32": 0.375,
+      "reach_semis": 0.00228,
+      "reach_final": 0.00038,
+      "win_world_cup": 0.0001
+    },
+    {
+      "team": "Cura\u00e7ao",
+      "round_of_32": 0.25414,
+      "reach_semis": 0.00058,
+      "reach_final": 0.00014,
+      "win_world_cup": 2e-05
+    }
+  ],
+  "match_day": {
+    "date": "2026-06-18",
+    "match_count": 4,
+    "matches": [
+      {
+        "group": "A",
+        "date": "2026-06-18",
+        "team_a": "Czechia",
+        "team_b": "South Africa",
+        "status": "predicted",
+        "score": "2-1",
+        "score_probability": 0.08873617894299933,
+        "winner": "Czechia",
+        "win_prob_a": 0.4119361392127506,
+        "draw_prob": 0.2759756311908026,
+        "win_prob_b": 0.31208822959644666,
+        "expected_goals_a": 1.4578430952010633,
+        "expected_goals_b": 1.240791137693054,
+        "decimal_odds_a": 2.43,
+        "decimal_odds_draw": 3.62,
+        "decimal_odds_b": 3.2,
+        "top_scores": [
+          {
+            "score": "1-1",
+            "probability": 0.13147515473223387
+          },
+          {
+            "score": "2-1",
+            "probability": 0.08873617894299933
+          },
+          {
+            "score": "1-0",
+            "probability": 0.08837290161481075
+          }
+        ]
+      },
+      {
+        "group": "B",
+        "date": "2026-06-18",
+        "team_a": "Canada",
+        "team_b": "Qatar",
+        "status": "predicted",
+        "score": "1-0",
+        "score_probability": 0.0954070947583262,
+        "winner": "Canada",
+        "win_prob_a": 0.35573466579281665,
+        "draw_prob": 0.29354450155403955,
+        "win_prob_b": 0.3507208326531437,
+        "expected_goals_a": 1.2334541636446388,
+        "expected_goals_b": 1.2230137465253115,
+        "decimal_odds_a": 2.81,
+        "decimal_odds_draw": 3.41,
+        "decimal_odds_b": 2.85,
+        "top_scores": [
+          {
+            "score": "1-1",
+            "probability": 0.13968595048952553
+          },
+          {
+            "score": "0-0",
+            "probability": 0.09608535805649215
+          },
+          {
+            "score": "1-0",
+            "probability": 0.0954070947583262
+          }
+        ]
+      },
+      {
+        "group": "B",
+        "date": "2026-06-18",
+        "team_a": "Switzerland",
+        "team_b": "Bosnia and Herzegovina",
+        "status": "predicted",
+        "score": "1-0",
+        "score_probability": 0.09160405553256667,
+        "winner": "Switzerland",
+        "win_prob_a": 0.43140846307896796,
+        "draw_prob": 0.2746590930290564,
+        "win_prob_b": 0.29393244389197576,
+        "expected_goals_a": 1.4956602340705794,
+        "expected_goals_b": 1.1965945201784491,
+        "decimal_odds_a": 2.32,
+        "decimal_odds_draw": 3.64,
+        "decimal_odds_b": 3.4,
+        "top_scores": [
+          {
+            "score": "1-1",
+            "probability": 0.1309140240499139
+          },
+          {
+            "score": "1-0",
+            "probability": 0.09160405553256667
+          },
+          {
+            "score": "2-1",
+            "probability": 0.09064949067297023
+          }
+        ]
+      },
+      {
+        "group": "K",
+        "date": "2026-06-18",
+        "team_a": "Uzbekistan",
+        "team_b": "Colombia",
+        "status": "predicted",
+        "score": "0-1",
+        "score_probability": 0.10781183000723732,
+        "winner": "Colombia",
+        "win_prob_a": 0.18770484166290285,
+        "draw_prob": 0.24870587863207555,
+        "win_prob_b": 0.5635892797050217,
+        "expected_goals_a": 0.9427166307524665,
+        "expected_goals_b": 1.786730373464394,
+        "decimal_odds_a": 5.33,
+        "decimal_odds_draw": 4.02,
+        "decimal_odds_b": 1.77,
+        "top_scores": [
+          {
+            "score": "1-1",
+            "probability": 0.11872046618123365
+          },
+          {
+            "score": "0-1",
+            "probability": 0.10781183000723732
+          },
+          {
+            "score": "0-2",
+            "probability": 0.10417168612331333
+          }
+        ]
+      }
+    ],
+    "message": null
+  },
+  "round_of_32": [
+    {
+      "team_a": "Spain",
+      "team_b": "Congo DR",
+      "predicted_score": "1-0",
+      "score_probability": 0.10939313445210765,
+      "expected_goals_a": 1.835953534147596,
+      "expected_goals_b": 0.9090418309323928,
+      "win_prob_a": 0.5833610577220787,
+      "draw_prob": 0.2426267031597639,
+      "win_prob_b": 0.17401223911815733,
+      "winner": "Spain",
+      "method": "regulation",
+      "stage": "Round of 32"
+    },
+    {
+      "team_a": "Argentina",
+      "team_b": "Saudi Arabia",
+      "predicted_score": "2-0",
+      "score_probability": 0.12317794882368605,
+      "expected_goals_a": 1.9228766171923137,
+      "expected_goals_b": 0.7859246083221304,
+      "win_prob_a": 0.6337592696999907,
+      "draw_prob": 0.22850192087732923,
+      "win_prob_b": 0.13773880942267985,
+      "winner": "Argentina",
+      "method": "regulation",
+      "stage": "Round of 32"
+    },
+    {
+      "team_a": "France",
+      "team_b": "Qatar",
+      "predicted_score": "1-0",
+      "score_probability": 0.12389277462939641,
+      "expected_goals_a": 1.5818959231663838,
+      "expected_goals_b": 0.8911482682094084,
+      "win_prob_a": 0.5263107117848529,
+      "draw_prob": 0.27130639946701024,
+      "win_prob_b": 0.20238288874813692,
+      "winner": "France",
+      "method": "regulation",
+      "stage": "Round of 32"
+    },
+    {
+      "team_a": "England",
+      "team_b": "Ghana",
+      "predicted_score": "2-1",
+      "score_probability": 0.0995682428694927,
+      "expected_goals_a": 1.96753996683098,
+      "expected_goals_b": 1.0031496677132163,
+      "win_prob_a": 0.5898477352141684,
+      "draw_prob": 0.23104044096262488,
+      "win_prob_b": 0.17911182382320673,
+      "winner": "England",
+      "method": "regulation",
+      "stage": "Round of 32"
+    },
+    {
+      "team_a": "Germany",
+      "team_b": "Czechia",
+      "predicted_score": "2-1",
+      "score_probability": 0.09558885151404979,
+      "expected_goals_a": 2.4371759294272812,
+      "expected_goals_b": 1.0056076185085123,
+      "win_prob_a": 0.6819035681864186,
+      "draw_prob": 0.18636536759577144,
+      "win_prob_b": 0.13173106421781,
+      "winner": "Germany",
+      "method": "regulation",
+      "stage": "Round of 32"
+    },
+    {
+      "team_a": "Brazil",
+      "team_b": "Egypt",
+      "predicted_score": "1-0",
+      "score_probability": 0.11447975953410376,
+      "expected_goals_a": 1.5542026534908748,
+      "expected_goals_b": 0.9731085758410026,
+      "win_prob_a": 0.498756528473716,
+      "draw_prob": 0.27413527265639975,
+      "win_prob_b": 0.22710819886988423,
+      "winner": "Brazil",
+      "method": "regulation",
+      "stage": "Round of 32"
+    },
+    {
+      "team_a": "Portugal",
+      "team_b": "Scotland",
+      "predicted_score": "1-0",
+      "score_probability": 0.10350009825446871,
+      "expected_goals_a": 1.6627761996892905,
+      "expected_goals_b": 1.028126817862607,
+      "win_prob_a": 0.5128267678055807,
+      "draw_prob": 0.26236882665557104,
+      "win_prob_b": 0.22480440553884848,
+      "winner": "Portugal",
+      "method": "regulation",
+      "stage": "Round of 32"
+    },
+    {
+      "team_a": "Netherlands",
+      "team_b": "Canada",
+      "predicted_score": "1-0",
+      "score_probability": 0.10109631856067122,
+      "expected_goals_a": 1.619674533975551,
+      "expected_goals_b": 1.065215268404704,
+      "win_prob_a": 0.4932245655995322,
+      "draw_prob": 0.26642445678536336,
+      "win_prob_b": 0.2403509776151045,
+      "winner": "Netherlands",
+      "method": "regulation",
+      "stage": "Round of 32"
+    },
+    {
+      "team_a": "Colombia",
+      "team_b": "Iran",
+      "predicted_score": "1-0",
+      "score_probability": 0.09740315131501194,
+      "expected_goals_a": 1.71138285832636,
+      "expected_goals_b": 1.0657752100730278,
+      "win_prob_a": 0.5157400981672944,
+      "draw_prob": 0.2573863187768854,
+      "win_prob_b": 0.22687358305581998,
+      "winner": "Colombia",
+      "method": "regulation",
+      "stage": "Round of 32"
+    },
+    {
+      "team_a": "Uruguay",
+      "team_b": "Australia",
+      "predicted_score": "1-0",
+      "score_probability": 0.11109557814469735,
+      "expected_goals_a": 1.193313522765643,
+      "expected_goals_b": 1.0895891915930715,
+      "win_prob_a": 0.372849159455902,
+      "draw_prob": 0.3056786736887612,
+      "win_prob_b": 0.32147216685533675,
+      "winner": "Uruguay",
+      "method": "regulation",
+      "stage": "Round of 32"
+    },
+    {
+      "team_a": "Belgium",
+      "team_b": "South Korea",
+      "predicted_score": "1-0",
+      "score_probability": 0.08611079295539048,
+      "expected_goals_a": 1.3345583215389245,
+      "expected_goals_b": 1.2966655731378132,
+      "win_prob_a": 0.36784730980365077,
+      "draw_prob": 0.2819652245846445,
+      "win_prob_b": 0.35018746561170455,
+      "winner": "Belgium",
+      "method": "regulation",
+      "stage": "Round of 32"
+    },
+    {
+      "team_a": "Croatia",
+      "team_b": "C\u00f4te d'Ivoire",
+      "predicted_score": "1-2",
+      "score_probability": 0.0867996142401877,
+      "expected_goals_a": 1.3871766453614562,
+      "expected_goals_b": 1.4938347529782259,
+      "win_prob_a": 0.3426817023300895,
+      "draw_prob": 0.2669022460348145,
+      "win_prob_b": 0.390416051635096,
+      "winner": "C\u00f4te d'Ivoire",
+      "method": "regulation",
+      "stage": "Round of 32"
+    },
+    {
+      "team_a": "Morocco",
+      "team_b": "Norway",
+      "predicted_score": "1-2",
+      "score_probability": 0.0860344615462232,
+      "expected_goals_a": 1.3713942501522605,
+      "expected_goals_b": 1.4567614812330814,
+      "win_prob_a": 0.3457347488275081,
+      "draw_prob": 0.27000226681028816,
+      "win_prob_b": 0.38426298436220385,
+      "winner": "Norway",
+      "method": "regulation",
+      "stage": "Round of 32"
+    },
+    {
+      "team_a": "USA",
+      "team_b": "Austria",
+      "predicted_score": "2-1",
+      "score_probability": 0.08991594476600775,
+      "expected_goals_a": 1.5376837848406582,
+      "expected_goals_b": 1.304355454251721,
+      "win_prob_a": 0.4187099309072085,
+      "draw_prob": 0.2674578287501609,
+      "win_prob_b": 0.31383224034263046,
+      "winner": "USA",
+      "method": "regulation",
+      "stage": "Round of 32"
+    },
+    {
+      "team_a": "Sweden",
+      "team_b": "Switzerland",
+      "predicted_score": "2-1",
+      "score_probability": 0.09394369028773933,
+      "expected_goals_a": 1.715887461661245,
+      "expected_goals_b": 1.292720105103472,
+      "win_prob_a": 0.4650998428090103,
+      "draw_prob": 0.25434075262362005,
+      "win_prob_b": 0.2805594045673697,
+      "winner": "Sweden",
+      "method": "regulation",
+      "stage": "Round of 32"
+    },
+    {
+      "team_a": "Mexico",
+      "team_b": "Japan",
+      "predicted_score": "2-1",
+      "score_probability": 0.08393925090323331,
+      "expected_goals_a": 1.38246767764944,
+      "expected_goals_b": 1.3496868956423063,
+      "win_prob_a": 0.36960776523334393,
+      "draw_prob": 0.2758111287137791,
+      "win_prob_b": 0.3545811060528768,
+      "winner": "Mexico",
+      "method": "regulation",
+      "stage": "Round of 32"
+    }
+  ],
+  "knockout_champion_projection": "Argentina",
+  "images": {
+    "tournament": "docs/screenshots/2026-06-18/tournament-simulation-50000-runs.png",
+    "match_day": "docs/screenshots/2026-06-18/match-day-2026-06-18.png",
+    "round_of_32": "docs/screenshots/2026-06-18/round-of-32-predictions-2026-06-18.png"
+  }
+}
