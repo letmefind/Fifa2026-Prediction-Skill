@@ -102,6 +102,38 @@
         </article>
       </section>
 
+      <section class="card">
+        <div class="card-header">
+          <div>
+            <p class="eyebrow">Group Stage</p>
+            <h2>Predictions By Group</h2>
+          </div>
+        </div>
+        <form id="groupForm" class="form-grid compact">
+          <label>
+            Group
+            <select id="groupSelect">
+              <option value="ALL">All groups</option>
+              <option value="A">Group A</option>
+              <option value="B">Group B</option>
+              <option value="C">Group C</option>
+              <option value="D">Group D</option>
+              <option value="E">Group E</option>
+              <option value="F">Group F</option>
+              <option value="G">Group G</option>
+              <option value="H">Group H</option>
+              <option value="I">Group I</option>
+              <option value="J">Group J</option>
+              <option value="K">Group K</option>
+              <option value="L">Group L</option>
+            </select>
+            <span class="field-help">Played games show exact latest scores; future games show model score predictions.</span>
+          </label>
+          <button type="submit">Predict Groups</button>
+        </form>
+        <div id="groupResult" class="result-block muted">Choose a group to see match scores, table, qualifiers, and projected stages.</div>
+      </section>
+
       <section class="grid two">
         <article class="card">
           <p class="eyebrow">Betting Value</p>

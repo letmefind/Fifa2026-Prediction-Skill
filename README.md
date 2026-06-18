@@ -59,6 +59,7 @@ pip install -r requirements.txt
 python -m cli.main predict-match Brazil France
 python -m cli.main predict-match Brazil France --json-output
 python -m cli.main predict-match Brazil France --llm-prompt
+python -m cli.main group-predictions --group D
 python -m cli.main simulate-tournament --runs 50000
 python -m cli.main team-probabilities Brazil --runs 10000
 python -m cli.main betting-edge 0.55 2.20
@@ -96,6 +97,8 @@ Endpoints:
 - `GET /teams`
 - `POST /predict_match` with `{"team_a": "Brazil", "team_b": "France", "neutral": true}`
 - `POST /simulate` with `{"runs": 10000}`
+- `GET /groups/predictions`
+- `GET /groups/{group}` such as `/groups/D`
 - `GET /team/{name}`
 - `GET /tournament/probabilities?runs=10000`
 
@@ -132,6 +135,7 @@ The repository ships with sample CSVs so the engine works immediately. Replace t
 - `data/sample_matches.csv`
 - `data/sample_team_ratings.csv`
 - `data/sample_xg.csv`
+- `data/group_fixtures.csv`
 - `data/latest_results.csv`
 
 Latest completed results are merged into the model automatically before prediction. Use `data/latest_results.csv` for manual updates, or configure API keys:
@@ -157,6 +161,8 @@ The dashboard also has a **Fresh Data Status** card and a **Refresh Latest Data*
 API-Football free plans are rate-limited and may only allow a small recent date window. The app queries recent dates, filters to known national teams, and caches successful results in `.cache/fifa2026/api_football_latest.csv`.
 
 If a requested match already appears in latest results, the API/CLI/dashboard shows the known score first and labels the prediction as a future rematch forecast.
+
+Group-stage predictions use `data/group_fixtures.csv`. Played fixtures show exact latest scores, future fixtures show model score predictions, projected group tables, best third-place ranking, Round of 32 qualifiers, and a projected knockout path. Replace this CSV when FIFA publishes or updates the official groups/fixtures.
 
 To refresh adapter output:
 

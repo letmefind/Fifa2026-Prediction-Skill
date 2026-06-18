@@ -114,6 +114,57 @@ def simulate_tournament(
     console.print(table)
 
 
+def _render_group(group: dict[str, object]) -> None:
+    console.print(Panel(f"Group {group['group']} predictions", border_style="blue"))
+    matches_table = Table(title="Matches", box=box.ROUNDED)
+    matches_table.add_column("Date")
+    matches_table.add_column("Match")
+    matches_table.add_column("Status")
+    matches_table.add_column("Score")
+    matches_table.add_column("Winner")
+    for match in group["matches"]:
+        matches_table.add_row(
+            str(match["date"]),
+            f"{match['team_a']} vs {match['team_b']}",
+            str(match["status"]),
+            str(match["score"]),
+            str(match["winner"]),
+        )
+    console.print(matches_table)
+
+    table = Table(title="Projected Group Table", box=box.ROUNDED)
+    for column in ["Rank", "Team", "Pts", "W", "D", "L", "GF", "GA", "GD"]:
+        table.add_column(column, justify="right" if column != "Team" else "left")
+    for row in group["table"]:
+        table.add_row(
+            str(row["rank"]),
+            str(row["team"]),
+            str(row["points"]),
+            str(row["wins"]),
+            str(row["draws"]),
+            str(row["losses"]),
+            str(row["goals_for"]),
+            str(row["goals_against"]),
+            str(row["goal_difference"]),
+        )
+    console.print(table)
+
+
+@app.command("group-predictions")
+def group_predictions(
+    group: Optional[str] = typer.Option(None, "--group", "-g", help="Group letter, e.g. A or B."),
+    refresh: bool = typer.Option(True, help="Refresh latest data before predicting."),
+) -> None:
+    service = refresh_service() if refresh else get_service()
+    result = service.group_stage_predictions()
+    if group:
+        _render_group(result["groups"][group.upper()])
+        return
+    for group_data in result["groups"].values():
+        _render_group(group_data)
+    console.print(f"Projected champion: [bold]{result['knockout_projection']['champion']}[/bold]")
+
+
 @app.command("team-probabilities")
 def team_probabilities(
     team: str,

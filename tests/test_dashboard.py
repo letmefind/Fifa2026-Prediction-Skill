@@ -56,3 +56,27 @@ def test_predict_match_api_for_dashboard() -> None:
     assert "known_result" in body
     assert "prediction_type" in body
     assert abs(body["win_prob_a"] + body["draw_prob"] + body["win_prob_b"] - 1.0) < 1e-9
+
+
+def test_group_predictions_endpoint() -> None:
+    response = client.get("/groups/predictions?refresh=false")
+    assert response.status_code == 200
+    body = response.json()
+    assert "groups" in body
+    assert "A" in body["groups"]
+    assert len(body["groups"]["A"]["matches"]) == 6
+    assert "knockout_projection" in body
+
+
+def test_group_d_includes_played_iran_new_zealand() -> None:
+    response = client.get("/groups/D?refresh=false")
+    assert response.status_code == 200
+    group = response.json()
+    played = [
+        match
+        for match in group["matches"]
+        if match["team_a"] == "Iran" and match["team_b"] == "New Zealand"
+    ]
+    assert played
+    assert played[0]["status"] == "played"
+    assert played[0]["score"] == "2-2"

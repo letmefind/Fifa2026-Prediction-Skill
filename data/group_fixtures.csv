@@ -1,0 +1,73 @@
+group,date,team_a,team_b,neutral
+A,2026-06-17,Argentina,Algeria,true
+A,2026-06-18,Canada,Qatar,true
+A,2026-06-22,Argentina,Canada,true
+A,2026-06-22,Algeria,Qatar,true
+A,2026-06-26,Argentina,Qatar,true
+A,2026-06-26,Algeria,Canada,true
+B,2026-06-16,France,Senegal,true
+B,2026-06-18,Mexico,Saudi Arabia,true
+B,2026-06-22,France,Mexico,true
+B,2026-06-22,Senegal,Saudi Arabia,true
+B,2026-06-26,France,Saudi Arabia,true
+B,2026-06-26,Senegal,Mexico,true
+C,2026-06-17,England,Croatia,true
+C,2026-06-18,USA,Ghana,true
+C,2026-06-23,England,USA,true
+C,2026-06-23,Croatia,Ghana,true
+C,2026-06-27,England,Ghana,true
+C,2026-06-27,Croatia,USA,true
+D,2026-06-16,Iran,New Zealand,true
+D,2026-06-18,Spain,Tunisia,true
+D,2026-06-23,Spain,Iran,true
+D,2026-06-23,Tunisia,New Zealand,true
+D,2026-06-27,Spain,New Zealand,true
+D,2026-06-27,Tunisia,Iran,true
+E,2026-06-19,Brazil,Switzerland,true
+E,2026-06-19,Egypt,Panama,true
+E,2026-06-24,Brazil,Egypt,true
+E,2026-06-24,Switzerland,Panama,true
+E,2026-06-28,Brazil,Panama,true
+E,2026-06-28,Switzerland,Egypt,true
+F,2026-06-19,Portugal,Japan,true
+F,2026-06-19,Nigeria,Jamaica,true
+F,2026-06-24,Portugal,Nigeria,true
+F,2026-06-24,Japan,Jamaica,true
+F,2026-06-28,Portugal,Jamaica,true
+F,2026-06-28,Japan,Nigeria,true
+G,2026-06-20,Netherlands,Denmark,true
+G,2026-06-20,Chile,South Africa,true
+G,2026-06-25,Netherlands,Chile,true
+G,2026-06-25,Denmark,South Africa,true
+G,2026-06-29,Netherlands,South Africa,true
+G,2026-06-29,Denmark,Chile,true
+H,2026-06-20,Germany,Austria,true
+H,2026-06-20,Peru,Uzbekistan,true
+H,2026-06-25,Germany,Peru,true
+H,2026-06-25,Austria,Uzbekistan,true
+H,2026-06-29,Germany,Uzbekistan,true
+H,2026-06-29,Austria,Peru,true
+I,2026-06-21,Belgium,Ecuador,true
+I,2026-06-21,Costa Rica,Venezuela,true
+I,2026-06-26,Belgium,Costa Rica,true
+I,2026-06-26,Ecuador,Venezuela,true
+I,2026-06-30,Belgium,Venezuela,true
+I,2026-06-30,Ecuador,Costa Rica,true
+J,2026-06-21,Uruguay,Serbia,true
+J,2026-06-21,Australia,Paraguay,true
+J,2026-06-26,Uruguay,Australia,true
+J,2026-06-26,Serbia,Paraguay,true
+J,2026-06-30,Uruguay,Paraguay,true
+J,2026-06-30,Serbia,Australia,true
+K,2026-06-22,Italy,Poland,true
+K,2026-06-22,Morocco,Ukraine,true
+K,2026-06-27,Italy,Morocco,true
+K,2026-06-27,Poland,Ukraine,true
+K,2026-07-01,Italy,Ukraine,true
+K,2026-07-01,Poland,Morocco,true
+L,2026-06-22,Colombia,Turkey,true
+L,2026-06-22,South Korea,Bolivia,true
+L,2026-06-27,Colombia,South Korea,true
+L,2026-06-27,Turkey,Bolivia,true
+L,2026-07-01,Colombia,Bolivia,true
+L,2026-07-01,Turkey,South Korea,true

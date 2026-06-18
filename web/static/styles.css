@@ -314,6 +314,23 @@ button:hover {
   font-weight: 800;
 }
 
+.played-pill {
+  border-color: rgba(49, 208, 170, 0.45);
+  background: rgba(49, 208, 170, 0.14);
+}
+
+.group-card {
+  margin-top: 18px;
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  padding: 18px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.group-card h3 {
+  margin: 0 0 10px;
+}
+
 .data-table {
   width: 100%;
   border-collapse: collapse;

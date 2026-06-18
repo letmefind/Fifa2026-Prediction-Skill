@@ -136,6 +136,107 @@ function renderSimulation(result) {
   `;
 }
 
+function renderGroupMatches(matches) {
+  return `
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Match</th>
+          <th>Status</th>
+          <th>Score</th>
+          <th>Winner</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${matches
+          .map(
+            (match) => `
+              <tr>
+                <td>${match.date}</td>
+                <td><strong>${match.team_a}</strong> vs <strong>${match.team_b}</strong></td>
+                <td><span class="pill ${match.status === "played" ? "played-pill" : ""}">${match.status}</span></td>
+                <td>${match.score}</td>
+                <td>${match.winner}</td>
+              </tr>
+            `,
+          )
+          .join("")}
+      </tbody>
+    </table>
+  `;
+}
+
+function renderGroupTable(table) {
+  return `
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Rank</th>
+          <th>Team</th>
+          <th>Pts</th>
+          <th>W</th>
+          <th>D</th>
+          <th>L</th>
+          <th>GF</th>
+          <th>GA</th>
+          <th>GD</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${table
+          .map(
+            (row) => `
+              <tr>
+                <td>${row.rank}</td>
+                <td><strong>${row.team}</strong></td>
+                <td>${row.points}</td>
+                <td>${row.wins}</td>
+                <td>${row.draws}</td>
+                <td>${row.losses}</td>
+                <td>${row.goals_for}</td>
+                <td>${row.goals_against}</td>
+                <td>${row.goal_difference}</td>
+              </tr>
+            `,
+          )
+          .join("")}
+      </tbody>
+    </table>
+  `;
+}
+
+function renderOneGroup(group) {
+  return `
+    <div class="group-card">
+      <h3>Group ${group.group}</h3>
+      <p class="muted">Winner: <strong>${group.winner}</strong> | Runner-up: <strong>${group.runner_up}</strong> | Third: <strong>${group.third_place}</strong></p>
+      ${renderGroupMatches(group.matches)}
+      ${renderGroupTable(group.table)}
+    </div>
+  `;
+}
+
+function renderGroups(result, selectedGroup) {
+  const groups =
+    selectedGroup === "ALL"
+      ? Object.values(result.groups)
+      : [result.groups[selectedGroup]];
+  const thirdRows = result.third_place_ranking.slice(0, 12);
+  return `
+    ${groups.map(renderOneGroup).join("")}
+    <div class="group-card">
+      <h3>Best Third-Place Ranking</h3>
+      <p class="muted">Top 8 third-place teams are projected to reach the Round of 32.</p>
+      ${renderGroupTable(thirdRows.map((row, index) => ({ ...row, rank: index + 1 })))}
+    </div>
+    <div class="score-cloud">
+      <span class="pill">Round of 32 qualifiers: ${result.qualified_round_of_32.length}</span>
+      <span class="pill">Projected champion: ${result.knockout_projection.champion}</span>
+    </div>
+  `;
+}
+
 function calculateEv(modelProb, marketOdds) {
   const impliedProb = 1 / marketOdds;
   const expectedValue = modelProb * (marketOdds - 1) - (1 - modelProb);
@@ -274,6 +375,20 @@ document.querySelector("#simulateForm").addEventListener("submit", async (event)
     });
     element.className = "result-block";
     element.innerHTML = renderSimulation(result);
+  } catch (error) {
+    renderError(element, error);
+  }
+});
+
+document.querySelector("#groupForm").addEventListener("submit", async (event) => {
+  event.preventDefault();
+  const element = document.querySelector("#groupResult");
+  const selectedGroup = document.querySelector("#groupSelect").value;
+  setLoading(element, "Refreshing latest results and predicting group stage...");
+  try {
+    const result = await requestJson("/groups/predictions?refresh=true");
+    element.className = "result-block";
+    element.innerHTML = renderGroups(result, selectedGroup);
   } catch (error) {
     renderError(element, error);
   }

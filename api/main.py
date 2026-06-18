@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from fastapi import FastAPI, Query
+from fastapi import FastAPI, HTTPException, Query
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
@@ -60,6 +60,21 @@ def predict_match(request: MatchRequest) -> dict[str, object]:
 @app.post("/simulate")
 def simulate(request: SimulateRequest) -> dict[str, object]:
     return get_service().simulate_tournament(n=request.runs)
+
+
+@app.get("/groups/predictions")
+def group_predictions(refresh: bool = Query(default=True)) -> dict[str, object]:
+    service = refresh_service() if refresh else get_service()
+    return service.group_stage_predictions()
+
+
+@app.get("/groups/{group}")
+def group_prediction(group: str, refresh: bool = Query(default=True)) -> dict[str, object]:
+    service = refresh_service() if refresh else get_service()
+    try:
+        return service.group_prediction(group)
+    except ValueError as exc:
+        raise HTTPException(status_code=404, detail=str(exc)) from exc
 
 
 @app.get("/team/{name}")

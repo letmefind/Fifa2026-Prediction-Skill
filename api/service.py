@@ -7,7 +7,7 @@ import pandas as pd
 from config import Config, load_config
 from data import latest_data_status, load_latest_matches, load_matches, load_team_ratings, merge_match_frames
 from models import AttackDefenseStrengthModel, DixonColesPoissonModel, EloModel
-from simulation import TournamentSimulator
+from simulation import TournamentSimulator, load_group_fixtures, predict_group_stage
 
 
 class PredictionService:
@@ -102,6 +102,24 @@ class PredictionService:
     def tournament_probabilities(self, n: int | None = None) -> pd.DataFrame:
         result = self.simulate_tournament(n)
         return pd.DataFrame(result["probabilities"])
+
+    def group_stage_predictions(self) -> dict[str, object]:
+        fixtures = load_group_fixtures(self.config)
+        return predict_group_stage(
+            goal_model=self.goal_model,
+            latest_matches=self.latest_matches,
+            ratings=self.ratings_map(),
+            fixtures=fixtures,
+            config=self.config,
+        )
+
+    def group_prediction(self, group: str) -> dict[str, object]:
+        predictions = self.group_stage_predictions()
+        group_key = group.upper().replace("GROUP ", "").strip()
+        groups = predictions["groups"]
+        if group_key not in groups:
+            raise ValueError(f"Unknown group: {group}")
+        return groups[group_key]
 
     def latest_status(self) -> dict[str, object]:
         status = latest_data_status(self.config, self.latest_matches)
