@@ -2,6 +2,21 @@
 
 Production-ready Python prediction engine for FIFA World Cup 2026 match forecasts, tournament simulation, LLM reasoning prompts, and betting expected value analysis.
 
+## Choose Language
+
+<p>
+  <a href="docs/README_10_LANGUAGES.md#1-فارسی"><kbd>Persian / فارسی</kbd></a>
+  <a href="docs/README_10_LANGUAGES.md#2-العربية"><kbd>Arabic / العربية</kbd></a>
+  <a href="docs/README_10_LANGUAGES.md#3-español"><kbd>Spanish / Español</kbd></a>
+  <a href="docs/README_10_LANGUAGES.md#4-français"><kbd>French / Français</kbd></a>
+  <a href="docs/README_10_LANGUAGES.md#5-deutsch"><kbd>German / Deutsch</kbd></a>
+  <a href="docs/README_10_LANGUAGES.md#6-português"><kbd>Portuguese / Português</kbd></a>
+  <a href="docs/README_10_LANGUAGES.md#7-italiano"><kbd>Italian / Italiano</kbd></a>
+  <a href="docs/README_10_LANGUAGES.md#8-türkçe"><kbd>Turkish / Türkçe</kbd></a>
+  <a href="docs/README_10_LANGUAGES.md#9-हिन्दी"><kbd>Hindi / हिन्दी</kbd></a>
+  <a href="docs/README_10_LANGUAGES.md#10-中文"><kbd>Chinese / 中文</kbd></a>
+</p>
+
 ## Features
 
 - CSV-first data ingestion with real-ready FiveThirtyEight SPI and StatsBomb adapters.
@@ -69,30 +84,7 @@ http://127.0.0.1:8000/
 
 ![Match prediction result](docs/screenshots/dashboard-match-result.png)
 
-## Multilingual Help
-
-Quick help is available in 10 languages. Use the tab-style links below to jump directly to each language:
-
-<p>
-  <a href="docs/README_10_LANGUAGES.md#1-فارسی"><kbd>Persian / فارسی</kbd></a>
-  <a href="docs/README_10_LANGUAGES.md#2-العربية"><kbd>Arabic / العربية</kbd></a>
-  <a href="docs/README_10_LANGUAGES.md#3-español"><kbd>Spanish / Español</kbd></a>
-  <a href="docs/README_10_LANGUAGES.md#4-français"><kbd>French / Français</kbd></a>
-  <a href="docs/README_10_LANGUAGES.md#5-deutsch"><kbd>German / Deutsch</kbd></a>
-  <a href="docs/README_10_LANGUAGES.md#6-português"><kbd>Portuguese / Português</kbd></a>
-  <a href="docs/README_10_LANGUAGES.md#7-italiano"><kbd>Italian / Italiano</kbd></a>
-  <a href="docs/README_10_LANGUAGES.md#8-türkçe"><kbd>Turkish / Türkçe</kbd></a>
-  <a href="docs/README_10_LANGUAGES.md#9-हिन्दी"><kbd>Hindi / हिन्दी</kbd></a>
-  <a href="docs/README_10_LANGUAGES.md#10-中文"><kbd>Chinese / 中文</kbd></a>
-</p>
-
-Open the multilingual README:
-
-```text
-docs/README_10_LANGUAGES.md
-```
-
-When the dashboard is running, open it in the browser:
+Dashboard multilingual help:
 
 ```text
 http://127.0.0.1:8000/project-docs/README_10_LANGUAGES.md
