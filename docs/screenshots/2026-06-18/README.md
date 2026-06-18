@@ -7,8 +7,14 @@ Generated with **50,000 Monte Carlo tournament simulations** using latest scores
 | Report | File |
 |--------|------|
 | Full tournament odds (all 48 teams) | [tournament-simulation-50000-runs.png](tournament-simulation-50000-runs.png) |
-| Today's matches (18 Jun) | [match-day-2026-06-18.png](match-day-2026-06-18.png) |
+| All group-stage matches (72) + predicted scores | [all-matches-predictions-2026-06-18.png](all-matches-predictions-2026-06-18.png) |
 | Round of 32 projections (16 matches) | [round-of-32-predictions-2026-06-18.png](round-of-32-predictions-2026-06-18.png) |
+
+## All group-stage matches
+
+72 matches · 22 played (actual score) · 50 predicted · odds shown for upcoming games
+
+See [report-2026-06-18.json](report-2026-06-18.json) for full data.
 
 ## Top title contenders (50k runs)
 
@@ -19,7 +25,5 @@ Generated with **50,000 Monte Carlo tournament simulations** using latest scores
 | England | 8.1% | 11.7% | 20.1% | 93.0% |
 | Spain | 8.0% | 11.6% | 19.8% | 89.6% |
 | Colombia | 6.5% | 12.3% | 24.3% | 86.2% |
-
-Full JSON data: [report-2026-06-18.json](report-2026-06-18.json)
 
 Regenerate: `python scripts/generate_daily_report.py`

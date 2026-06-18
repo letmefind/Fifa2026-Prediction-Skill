@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
-"""Generate tournament simulation + match-day PNG reports and JSON data."""
+"""Generate tournament simulation + match prediction PNG reports and JSON data."""
 
 from __future__ import annotations
 
+import argparse
 import json
 import sys
 from datetime import date
@@ -88,61 +89,74 @@ def render_tournament_table(probabilities: list[dict], runs: int, out_path: Path
     save_figure(fig, out_path)
 
 
-def render_match_day(matches_data: dict, out_path: Path) -> None:
-    matches = matches_data["matches"]
+def collect_all_matches(groups: dict[str, object]) -> list[dict[str, object]]:
+    matches: list[dict[str, object]] = []
+    for group_data in groups["groups"].values():
+        for match in group_data["matches"]:
+            row = dict(match)
+            row["predicted_score"] = str(match["score"])
+            matches.append(row)
+    matches.sort(key=lambda m: (str(m.get("date", "")), str(m.get("group", "")), str(m["team_a"])))
+    return matches
+
+
+def render_all_matches(matches: list[dict], out_path: Path) -> None:
     n = len(matches)
-    fig_h = max(8, 2.2 + n * 1.35)
+    row_h = 0.38 / max(n, 1)
+    fig_h = max(12, 1.8 + n * 0.38)
     fig, ax = plt.subplots(figsize=(16, fig_h), facecolor=BG)
     ax.set_facecolor(BG)
     ax.axis("off")
 
-    d = matches_data["date"]
-    fig.text(0.5, 0.97, f"Match Day Predictions — {d}", ha="center", fontsize=18, fontweight="bold", color=TEXT)
+    played = sum(1 for m in matches if m.get("status") == "played")
+    predicted = n - played
+    fig.text(0.5, 0.985, "All Group-Stage Matches — Predictions & Odds", ha="center", va="top", fontsize=18, fontweight="bold", color=TEXT)
     fig.text(
-        0.5, 0.94,
-        f"{n} matches · Model win/draw/loss % and decimal odds · {date.today().isoformat()}",
+        0.5, 0.972,
+        f"{n} matches · {played} played (actual score) · {predicted} predicted · {date.today().isoformat()}",
         ha="center", fontsize=10, color=MUTED,
     )
 
-    headers = ["Grp", "Match", "Score", "Win A", "Draw", "Win B", "Odds A", "Odds D", "Odds B", "xG"]
-    col_x = [0.03, 0.08, 0.38, 0.52, 0.58, 0.64, 0.70, 0.76, 0.82, 0.90]
-    y0 = 0.88
+    headers = ["Date", "Grp", "Match", "Pred. Score", "Status", "Win A", "Draw", "Win B", "Odds A", "Odds D", "Odds B"]
+    col_x = [0.02, 0.11, 0.15, 0.42, 0.50, 0.58, 0.64, 0.70, 0.76, 0.82, 0.88]
+    y0 = 0.955
     for header, x in zip(headers, col_x):
-        ax.text(x, y0, header, fontsize=8, fontweight="bold", color=ACCENT, transform=ax.transAxes)
+        ax.text(x, y0, header, fontsize=7.5, fontweight="bold", color=ACCENT, transform=ax.transAxes)
 
+    usable_h = 0.92
     for i, m in enumerate(matches):
-        y = y0 - 0.04 - i * (0.82 / max(n, 1))
+        y = y0 - 0.018 - i * (usable_h / max(n, 1))
         bg = PANEL if i % 2 == 0 else BG
         rect = mpatches.FancyBboxPatch(
-            (0.02, y - 0.025), 0.96, 0.82 / max(n, 1) - 0.01,
-            boxstyle="round,pad=0.002", linewidth=0,
+            (0.01, y - row_h * 0.45), 0.98, usable_h / max(n, 1) - 0.002,
+            boxstyle="round,pad=0.001", linewidth=0,
             facecolor=bg, transform=ax.transAxes, zorder=0,
         )
         ax.add_patch(rect)
         status = str(m.get("status", ""))
-        score = str(m.get("score", "—"))
-        xg = (
-            f"{float(m['expected_goals_a']):.2f}-{float(m['expected_goals_b']):.2f}"
-            if m.get("expected_goals_a") is not None else "—"
-        )
+        pred_score = str(m.get("predicted_score", m.get("score", "—")))
         match_label = f"{m['team_a']} vs {m['team_b']}"
-        if status == "played":
-            match_label += " ✓"
         vals = [
+            str(m.get("date", ""))[:10],
             str(m["group"]),
             match_label,
-            score,
-            _pct(float(m["win_prob_a"])),
-            _pct(float(m["draw_prob"])),
-            _pct(float(m["win_prob_b"])),
-            f"{float(m['decimal_odds_a']):.2f}",
-            f"{float(m['decimal_odds_draw']):.2f}",
-            f"{float(m['decimal_odds_b']):.2f}",
-            xg,
+            pred_score,
+            status,
+            _pct(float(m["win_prob_a"])) if "win_prob_a" in m else "—",
+            _pct(float(m["draw_prob"])) if "draw_prob" in m else "—",
+            _pct(float(m["win_prob_b"])) if "win_prob_b" in m else "—",
+            f"{float(m['decimal_odds_a']):.2f}" if "decimal_odds_a" in m else "—",
+            f"{float(m['decimal_odds_draw']):.2f}" if "decimal_odds_draw" in m else "—",
+            f"{float(m['decimal_odds_b']):.2f}" if "decimal_odds_b" in m else "—",
         ]
         for val, x in zip(vals, col_x):
-            color = ACCENT if x == col_x[2] and status == "played" else TEXT
-            ax.text(x, y, val, fontsize=8, color=color, transform=ax.transAxes, va="center")
+            if x == col_x[3]:
+                color = ACCENT if status == "played" else TEXT
+            elif x == col_x[4] and status == "played":
+                color = ACCENT
+            else:
+                color = MUTED if x in (col_x[0], col_x[1], col_x[4]) else TEXT
+            ax.text(x, y, val, fontsize=6.8, color=color, transform=ax.transAxes, va="center")
 
     save_figure(fig, out_path)
 
@@ -199,59 +213,85 @@ def render_round_of_32(r32_matches: list[dict], champion: str, out_path: Path) -
 
 
 def main() -> None:
+    parser = argparse.ArgumentParser(description="Generate FIFA 2026 prediction report images.")
+    parser.add_argument(
+        "--matches-only",
+        action="store_true",
+        help="Refresh data and regenerate match images only (reuse existing report JSON).",
+    )
+    parser.add_argument(
+        "--report-dir",
+        type=Path,
+        default=None,
+        help="Output directory (default: docs/screenshots/YYYY-MM-DD).",
+    )
+    args = parser.parse_args()
+
+    stamp = date.today().isoformat()
+    out_dir = args.report_dir or (ROOT / "docs" / "screenshots" / stamp)
+    out_dir = out_dir.resolve()
+    out_dir.mkdir(parents=True, exist_ok=True)
+    json_path = out_dir / f"report-{stamp}.json"
+
+    existing: dict | None = None
+    if args.matches_only and json_path.exists():
+        existing = json.loads(json_path.read_text(encoding="utf-8"))
+
     print("Refreshing latest data and rebuilding model...")
     service = refresh_service()
 
-    today = date.today()
-    date_str = today.strftime("%d %b").lower().lstrip("0")
-    alt_date = today.strftime("%d %b").replace(" 0", " ").lower()
-
-    print(f"Running {RUNS:,} tournament simulations (this may take a minute)...")
-    sim = service.simulate_tournament(n=RUNS)
-
-    print(f"Fetching match-day predictions for {today.isoformat()}...")
-    try:
-        day = service.predictions_by_date(alt_date)
-    except ValueError:
-        day = service.predictions_by_date(date_str)
-
-    print("Building group-stage knockout projection...")
+    print("Building group-stage predictions...")
     groups = service.group_stage_predictions()
+    all_matches = collect_all_matches(groups)
     knockout = groups["knockout_projection"]
     r32 = knockout["round_of_32"]
     champion = str(knockout["champion"])
 
-    stamp = today.isoformat()
-    out_dir = ROOT / "docs" / "screenshots" / stamp
-    out_dir.mkdir(parents=True, exist_ok=True)
-
-    tournament_png = out_dir / f"tournament-simulation-{RUNS}-runs.png"
-    matchday_png = out_dir / f"match-day-{stamp}.png"
+    all_matches_png = out_dir / f"all-matches-predictions-{stamp}.png"
     r32_png = out_dir / f"round-of-32-predictions-{stamp}.png"
-    json_path = out_dir / f"report-{stamp}.json"
+
+    if existing:
+        print("Reusing tournament simulation from existing report...")
+        sim = {
+            "runs": existing["simulation_runs"],
+            "probabilities": existing["tournament_probabilities"],
+        }
+        runs = int(existing["simulation_runs"])
+    else:
+        runs = RUNS
+        print(f"Running {runs:,} tournament simulations (this may take a minute)...")
+        sim = service.simulate_tournament(n=runs)
+
+    tournament_png = out_dir / f"tournament-simulation-{runs}-runs.png"
 
     print("Rendering images...")
-    render_tournament_table(sim["probabilities"], RUNS, tournament_png)
-    render_match_day(day, matchday_png)
+    render_tournament_table(sim["probabilities"], runs, tournament_png)
+    render_all_matches(all_matches, all_matches_png)
     render_round_of_32(r32, champion, r32_png)
 
     report = {
         "generated": stamp,
-        "simulation_runs": RUNS,
+        "simulation_runs": runs,
         "latest_status": service.latest_status(),
         "tournament_probabilities": sim["probabilities"],
-        "match_day": day,
+        "all_matches": {
+            "match_count": len(all_matches),
+            "played_count": sum(1 for m in all_matches if m.get("status") == "played"),
+            "predicted_count": sum(1 for m in all_matches if m.get("status") != "played"),
+            "matches": all_matches,
+        },
         "round_of_32": r32,
         "knockout_champion_projection": champion,
         "images": {
             "tournament": str(tournament_png.relative_to(ROOT)),
-            "match_day": str(matchday_png.relative_to(ROOT)),
+            "all_matches": str(all_matches_png.relative_to(ROOT)),
             "round_of_32": str(r32_png.relative_to(ROOT)),
         },
     }
     json_path.write_text(json.dumps(report, indent=2, default=str), encoding="utf-8")
 
-    print(f"\nSaved:\n  {tournament_png}\n  {matchday_png}\n  {r32_png}\n  {json_path}")
+    print(f"\nSaved:\n  {tournament_png}\n  {all_matches_png}\n  {r32_png}\n  {json_path}")
+    print(f"\nAll matches: {len(all_matches)} ({report['all_matches']['played_count']} played, {report['all_matches']['predicted_count']} predicted)")
     print("\nTop 10 World Cup title odds:")
     for row in sim["probabilities"][:10]:
         print(f"  {row['team']:20s} {_pct(float(row['win_world_cup']))}")

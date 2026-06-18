@@ -9,7 +9,7 @@
     "football_data_api_configured": false,
     "api_football_configured": true,
     "lookback_days": 90,
-    "checked_at_utc": "2026-06-18T09:03:58+00:00",
+    "checked_at_utc": "2026-06-18T09:16:39+00:00",
     "csv_matches": 22,
     "football_data_matches": 0,
     "api_football_matches": 0,
@@ -357,10 +357,506 @@
       "win_world_cup": 2e-05
     }
   ],
-  "match_day": {
-    "date": "2026-06-18",
-    "match_count": 4,
+  "all_matches": {
+    "match_count": 72,
+    "played_count": 22,
+    "predicted_count": 50,
     "matches": [
+      {
+        "group": "A",
+        "date": "2026-06-11",
+        "team_a": "Mexico",
+        "team_b": "South Africa",
+        "status": "played",
+        "score": "2-0",
+        "winner": "Mexico",
+        "known_result": {
+          "found": true,
+          "date": "2026-06-11",
+          "home_team": "Mexico",
+          "away_team": "South Africa",
+          "home_score": 2,
+          "away_score": 0,
+          "competition": "World Cup 2026",
+          "goals_a": 2,
+          "goals_b": 0
+        },
+        "predicted_score": "2-0"
+      },
+      {
+        "group": "A",
+        "date": "2026-06-12",
+        "team_a": "South Korea",
+        "team_b": "Czechia",
+        "status": "played",
+        "score": "2-1",
+        "winner": "South Korea",
+        "known_result": {
+          "found": true,
+          "date": "2026-06-12",
+          "home_team": "South Korea",
+          "away_team": "Czechia",
+          "home_score": 2,
+          "away_score": 1,
+          "competition": "World Cup 2026",
+          "goals_a": 2,
+          "goals_b": 1
+        },
+        "predicted_score": "2-1"
+      },
+      {
+        "group": "B",
+        "date": "2026-06-12",
+        "team_a": "Canada",
+        "team_b": "Bosnia and Herzegovina",
+        "status": "played",
+        "score": "1-1",
+        "winner": "Draw",
+        "known_result": {
+          "found": true,
+          "date": "2026-06-12",
+          "home_team": "Canada",
+          "away_team": "Bosnia and Herzegovina",
+          "home_score": 1,
+          "away_score": 1,
+          "competition": "World Cup 2026",
+          "goals_a": 1,
+          "goals_b": 1
+        },
+        "predicted_score": "1-1"
+      },
+      {
+        "group": "B",
+        "date": "2026-06-13",
+        "team_a": "Qatar",
+        "team_b": "Switzerland",
+        "status": "played",
+        "score": "1-1",
+        "winner": "Draw",
+        "known_result": {
+          "found": true,
+          "date": "2026-06-13",
+          "home_team": "Qatar",
+          "away_team": "Switzerland",
+          "home_score": 1,
+          "away_score": 1,
+          "competition": "World Cup 2026",
+          "goals_a": 1,
+          "goals_b": 1
+        },
+        "predicted_score": "1-1"
+      },
+      {
+        "group": "C",
+        "date": "2026-06-13",
+        "team_a": "Brazil",
+        "team_b": "Morocco",
+        "status": "played",
+        "score": "1-1",
+        "winner": "Draw",
+        "known_result": {
+          "found": true,
+          "date": "2026-06-13",
+          "home_team": "Brazil",
+          "away_team": "Morocco",
+          "home_score": 1,
+          "away_score": 1,
+          "competition": "World Cup 2026",
+          "goals_a": 1,
+          "goals_b": 1
+        },
+        "predicted_score": "1-1"
+      },
+      {
+        "group": "D",
+        "date": "2026-06-13",
+        "team_a": "USA",
+        "team_b": "Paraguay",
+        "status": "played",
+        "score": "4-1",
+        "winner": "USA",
+        "known_result": {
+          "found": true,
+          "date": "2026-06-13",
+          "home_team": "USA",
+          "away_team": "Paraguay",
+          "home_score": 4,
+          "away_score": 1,
+          "competition": "World Cup 2026",
+          "goals_a": 4,
+          "goals_b": 1
+        },
+        "predicted_score": "4-1"
+      },
+      {
+        "group": "C",
+        "date": "2026-06-14",
+        "team_a": "Haiti",
+        "team_b": "Scotland",
+        "status": "played",
+        "score": "0-1",
+        "winner": "Scotland",
+        "known_result": {
+          "found": true,
+          "date": "2026-06-14",
+          "home_team": "Haiti",
+          "away_team": "Scotland",
+          "home_score": 0,
+          "away_score": 1,
+          "competition": "World Cup 2026",
+          "goals_a": 0,
+          "goals_b": 1
+        },
+        "predicted_score": "0-1"
+      },
+      {
+        "group": "D",
+        "date": "2026-06-14",
+        "team_a": "Australia",
+        "team_b": "Turkey",
+        "status": "played",
+        "score": "2-0",
+        "winner": "Australia",
+        "known_result": {
+          "found": true,
+          "date": "2026-06-14",
+          "home_team": "Australia",
+          "away_team": "Turkey",
+          "home_score": 2,
+          "away_score": 0,
+          "competition": "World Cup 2026",
+          "goals_a": 2,
+          "goals_b": 0
+        },
+        "predicted_score": "2-0"
+      },
+      {
+        "group": "E",
+        "date": "2026-06-14",
+        "team_a": "C\u00f4te d'Ivoire",
+        "team_b": "Ecuador",
+        "status": "played",
+        "score": "1-0",
+        "winner": "C\u00f4te d'Ivoire",
+        "known_result": {
+          "found": true,
+          "date": "2026-06-14",
+          "home_team": "C\u00f4te d'Ivoire",
+          "away_team": "Ecuador",
+          "home_score": 1,
+          "away_score": 0,
+          "competition": "World Cup 2026",
+          "goals_a": 1,
+          "goals_b": 0
+        },
+        "predicted_score": "1-0"
+      },
+      {
+        "group": "E",
+        "date": "2026-06-14",
+        "team_a": "Germany",
+        "team_b": "Cura\u00e7ao",
+        "status": "played",
+        "score": "7-1",
+        "winner": "Germany",
+        "known_result": {
+          "found": true,
+          "date": "2026-06-14",
+          "home_team": "Germany",
+          "away_team": "Cura\u00e7ao",
+          "home_score": 7,
+          "away_score": 1,
+          "competition": "World Cup 2026",
+          "goals_a": 7,
+          "goals_b": 1
+        },
+        "predicted_score": "7-1"
+      },
+      {
+        "group": "F",
+        "date": "2026-06-14",
+        "team_a": "Netherlands",
+        "team_b": "Japan",
+        "status": "played",
+        "score": "2-2",
+        "winner": "Draw",
+        "known_result": {
+          "found": true,
+          "date": "2026-06-14",
+          "home_team": "Netherlands",
+          "away_team": "Japan",
+          "home_score": 2,
+          "away_score": 2,
+          "competition": "World Cup 2026",
+          "goals_a": 2,
+          "goals_b": 2
+        },
+        "predicted_score": "2-2"
+      },
+      {
+        "group": "F",
+        "date": "2026-06-15",
+        "team_a": "Sweden",
+        "team_b": "Tunisia",
+        "status": "played",
+        "score": "5-1",
+        "winner": "Sweden",
+        "known_result": {
+          "found": true,
+          "date": "2026-06-15",
+          "home_team": "Sweden",
+          "away_team": "Tunisia",
+          "home_score": 5,
+          "away_score": 1,
+          "competition": "World Cup 2026",
+          "goals_a": 5,
+          "goals_b": 1
+        },
+        "predicted_score": "5-1"
+      },
+      {
+        "group": "G",
+        "date": "2026-06-15",
+        "team_a": "Belgium",
+        "team_b": "Egypt",
+        "status": "played",
+        "score": "1-1",
+        "winner": "Draw",
+        "known_result": {
+          "found": true,
+          "date": "2026-06-15",
+          "home_team": "Belgium",
+          "away_team": "Egypt",
+          "home_score": 1,
+          "away_score": 1,
+          "competition": "World Cup 2026",
+          "goals_a": 1,
+          "goals_b": 1
+        },
+        "predicted_score": "1-1"
+      },
+      {
+        "group": "H",
+        "date": "2026-06-15",
+        "team_a": "Saudi Arabia",
+        "team_b": "Uruguay",
+        "status": "played",
+        "score": "1-1",
+        "winner": "Draw",
+        "known_result": {
+          "found": true,
+          "date": "2026-06-15",
+          "home_team": "Saudi Arabia",
+          "away_team": "Uruguay",
+          "home_score": 1,
+          "away_score": 1,
+          "competition": "World Cup 2026",
+          "goals_a": 1,
+          "goals_b": 1
+        },
+        "predicted_score": "1-1"
+      },
+      {
+        "group": "H",
+        "date": "2026-06-15",
+        "team_a": "Spain",
+        "team_b": "Cape Verde",
+        "status": "played",
+        "score": "0-0",
+        "winner": "Draw",
+        "known_result": {
+          "found": true,
+          "date": "2026-06-15",
+          "home_team": "Spain",
+          "away_team": "Cape Verde",
+          "home_score": 0,
+          "away_score": 0,
+          "competition": "World Cup 2026",
+          "goals_a": 0,
+          "goals_b": 0
+        },
+        "predicted_score": "0-0"
+      },
+      {
+        "group": "G",
+        "date": "2026-06-16",
+        "team_a": "Iran",
+        "team_b": "New Zealand",
+        "status": "played",
+        "score": "2-2",
+        "winner": "Draw",
+        "known_result": {
+          "found": true,
+          "date": "2026-06-16",
+          "home_team": "Iran",
+          "away_team": "New Zealand",
+          "home_score": 2,
+          "away_score": 2,
+          "competition": "World Cup 2026",
+          "goals_a": 2,
+          "goals_b": 2
+        },
+        "predicted_score": "2-2"
+      },
+      {
+        "group": "I",
+        "date": "2026-06-16",
+        "team_a": "France",
+        "team_b": "Senegal",
+        "status": "played",
+        "score": "3-1",
+        "winner": "France",
+        "known_result": {
+          "found": true,
+          "date": "2026-06-16",
+          "home_team": "France",
+          "away_team": "Senegal",
+          "home_score": 3,
+          "away_score": 1,
+          "competition": "World Cup 2026",
+          "goals_a": 3,
+          "goals_b": 1
+        },
+        "predicted_score": "3-1"
+      },
+      {
+        "group": "I",
+        "date": "2026-06-16",
+        "team_a": "Iraq",
+        "team_b": "Norway",
+        "status": "played",
+        "score": "1-4",
+        "winner": "Norway",
+        "known_result": {
+          "found": true,
+          "date": "2026-06-16",
+          "home_team": "Iraq",
+          "away_team": "Norway",
+          "home_score": 1,
+          "away_score": 4,
+          "competition": "World Cup 2026",
+          "goals_a": 1,
+          "goals_b": 4
+        },
+        "predicted_score": "1-4"
+      },
+      {
+        "group": "J",
+        "date": "2026-06-17",
+        "team_a": "Argentina",
+        "team_b": "Algeria",
+        "status": "played",
+        "score": "3-0",
+        "winner": "Argentina",
+        "known_result": {
+          "found": true,
+          "date": "2026-06-17",
+          "home_team": "Argentina",
+          "away_team": "Algeria",
+          "home_score": 3,
+          "away_score": 0,
+          "competition": "World Cup 2026",
+          "goals_a": 3,
+          "goals_b": 0
+        },
+        "predicted_score": "3-0"
+      },
+      {
+        "group": "J",
+        "date": "2026-06-17",
+        "team_a": "Austria",
+        "team_b": "Jordan",
+        "status": "played",
+        "score": "3-1",
+        "winner": "Austria",
+        "known_result": {
+          "found": true,
+          "date": "2026-06-17",
+          "home_team": "Austria",
+          "away_team": "Jordan",
+          "home_score": 3,
+          "away_score": 1,
+          "competition": "World Cup 2026",
+          "goals_a": 3,
+          "goals_b": 1
+        },
+        "predicted_score": "3-1"
+      },
+      {
+        "group": "K",
+        "date": "2026-06-17",
+        "team_a": "Portugal",
+        "team_b": "Congo DR",
+        "status": "played",
+        "score": "1-1",
+        "winner": "Draw",
+        "known_result": {
+          "found": true,
+          "date": "2026-06-17",
+          "home_team": "Portugal",
+          "away_team": "Congo DR",
+          "home_score": 1,
+          "away_score": 1,
+          "competition": "World Cup 2026",
+          "goals_a": 1,
+          "goals_b": 1
+        },
+        "predicted_score": "1-1"
+      },
+      {
+        "group": "L",
+        "date": "2026-06-17",
+        "team_a": "England",
+        "team_b": "Croatia",
+        "status": "played",
+        "score": "4-2",
+        "winner": "England",
+        "known_result": {
+          "found": true,
+          "date": "2026-06-17",
+          "home_team": "England",
+          "away_team": "Croatia",
+          "home_score": 4,
+          "away_score": 2,
+          "competition": "World Cup 2026",
+          "goals_a": 4,
+          "goals_b": 2
+        },
+        "predicted_score": "4-2"
+      },
+      {
+        "group": "L",
+        "date": "2026-06-17",
+        "team_a": "Ghana",
+        "team_b": "Panama",
+        "status": "predicted",
+        "score": "2-1",
+        "score_probability": 0.09170677587084959,
+        "winner": "Ghana",
+        "win_prob_a": 0.43682565521121053,
+        "draw_prob": 0.2655913014735388,
+        "win_prob_b": 0.2975830433152506,
+        "expected_goals_a": 1.5790878685478487,
+        "expected_goals_b": 1.2685114523097916,
+        "decimal_odds_a": 2.29,
+        "decimal_odds_draw": 3.77,
+        "decimal_odds_b": 3.36,
+        "top_scores": [
+          {
+            "score": "1-1",
+            "probability": 0.12544370698205562
+          },
+          {
+            "score": "2-1",
+            "probability": 0.09170677587084959
+          },
+          {
+            "score": "1-0",
+            "probability": 0.08227313323778376
+          }
+        ],
+        "predicted_score": "2-1"
+      },
       {
         "group": "A",
         "date": "2026-06-18",
@@ -391,7 +887,8 @@
             "score": "1-0",
             "probability": 0.08837290161481075
           }
-        ]
+        ],
+        "predicted_score": "2-1"
       },
       {
         "group": "B",
@@ -423,7 +920,8 @@
             "score": "1-0",
             "probability": 0.0954070947583262
           }
-        ]
+        ],
+        "predicted_score": "1-0"
       },
       {
         "group": "B",
@@ -455,7 +953,8 @@
             "score": "2-1",
             "probability": 0.09064949067297023
           }
-        ]
+        ],
+        "predicted_score": "1-0"
       },
       {
         "group": "K",
@@ -487,10 +986,1495 @@
             "score": "0-2",
             "probability": 0.10417168612331333
           }
-        ]
+        ],
+        "predicted_score": "0-1"
+      },
+      {
+        "group": "A",
+        "date": "2026-06-19",
+        "team_a": "Mexico",
+        "team_b": "South Korea",
+        "status": "predicted",
+        "score": "1-0",
+        "score_probability": 0.08556211576165113,
+        "winner": "Mexico",
+        "win_prob_a": 0.37370514523535897,
+        "draw_prob": 0.2804319769379419,
+        "win_prob_b": 0.3458628778266992,
+        "expected_goals_a": 1.3571763250877267,
+        "expected_goals_b": 1.2971995691000293,
+        "decimal_odds_a": 2.68,
+        "decimal_odds_draw": 3.57,
+        "decimal_odds_b": 2.89,
+        "top_scores": [
+          {
+            "score": "1-1",
+            "probability": 0.13375052025212125
+          },
+          {
+            "score": "1-0",
+            "probability": 0.08556211576165113
+          },
+          {
+            "score": "2-1",
+            "probability": 0.0840384442381229
+          }
+        ],
+        "predicted_score": "1-0"
+      },
+      {
+        "group": "C",
+        "date": "2026-06-19",
+        "team_a": "Scotland",
+        "team_b": "Morocco",
+        "status": "predicted",
+        "score": "1-2",
+        "score_probability": 0.0937599920021242,
+        "winner": "Morocco",
+        "win_prob_a": 0.26664637316541234,
+        "draw_prob": 0.268314112766429,
+        "win_prob_b": 0.46503951406815863,
+        "expected_goals_a": 1.1486081081909238,
+        "expected_goals_b": 1.5848965589030304,
+        "decimal_odds_a": 3.75,
+        "decimal_odds_draw": 3.73,
+        "decimal_odds_b": 2.15,
+        "top_scores": [
+          {
+            "score": "1-1",
+            "probability": 0.1277822086160383
+          },
+          {
+            "score": "1-2",
+            "probability": 0.0937599920021242
+          },
+          {
+            "score": "0-1",
+            "probability": 0.09354355301914864
+          }
+        ],
+        "predicted_score": "1-2"
+      },
+      {
+        "group": "D",
+        "date": "2026-06-19",
+        "team_a": "USA",
+        "team_b": "Australia",
+        "status": "predicted",
+        "score": "1-0",
+        "score_probability": 0.09243955265925007,
+        "winner": "USA",
+        "win_prob_a": 0.4250456123161884,
+        "draw_prob": 0.2767724654365723,
+        "win_prob_b": 0.2981819222472392,
+        "expected_goals_a": 1.4704430659466754,
+        "expected_goals_b": 1.1957956362621596,
+        "decimal_odds_a": 2.35,
+        "decimal_odds_draw": 3.61,
+        "decimal_odds_b": 3.35,
+        "top_scores": [
+          {
+            "score": "1-1",
+            "probability": 0.1320105278328487
+          },
+          {
+            "score": "1-0",
+            "probability": 0.09243955265925007
+          },
+          {
+            "score": "2-1",
+            "probability": 0.08986757652026527
+          }
+        ],
+        "predicted_score": "1-0"
+      },
+      {
+        "group": "C",
+        "date": "2026-06-20",
+        "team_a": "Brazil",
+        "team_b": "Haiti",
+        "status": "predicted",
+        "score": "1-0",
+        "score_probability": 0.12474446505896652,
+        "winner": "Brazil",
+        "win_prob_a": 0.5528799708998329,
+        "draw_prob": 0.2624077490093493,
+        "win_prob_b": 0.1847122800908178,
+        "expected_goals_a": 1.655042258110698,
+        "expected_goals_b": 0.859125080857421,
+        "decimal_odds_a": 1.81,
+        "decimal_odds_draw": 3.81,
+        "decimal_odds_b": 5.41,
+        "top_scores": [
+          {
+            "score": "1-0",
+            "probability": 0.12474446505896652
+          },
+          {
+            "score": "1-1",
+            "probability": 0.12428703525796679
+          },
+          {
+            "score": "2-0",
+            "probability": 0.11084721003149152
+          }
+        ],
+        "predicted_score": "1-0"
+      },
+      {
+        "group": "D",
+        "date": "2026-06-20",
+        "team_a": "Turkey",
+        "team_b": "Paraguay",
+        "status": "predicted",
+        "score": "1-2",
+        "score_probability": 0.08681905643581875,
+        "winner": "Paraguay",
+        "win_prob_a": 0.32962141354808316,
+        "draw_prob": 0.27635874930715815,
+        "win_prob_b": 0.39401983714475874,
+        "expected_goals_a": 1.2852574793041398,
+        "expected_goals_b": 1.4253613667972986,
+        "decimal_odds_a": 3.03,
+        "decimal_odds_draw": 3.62,
+        "decimal_odds_b": 2.54,
+        "top_scores": [
+          {
+            "score": "1-1",
+            "probability": 0.13156604792982096
+          },
+          {
+            "score": "1-2",
+            "probability": 0.08681905643581875
+          },
+          {
+            "score": "0-1",
+            "probability": 0.08503725407135986
+          }
+        ],
+        "predicted_score": "1-2"
+      },
+      {
+        "group": "E",
+        "date": "2026-06-20",
+        "team_a": "Germany",
+        "team_b": "C\u00f4te d'Ivoire",
+        "status": "predicted",
+        "score": "2-1",
+        "score_probability": 0.09937260522689444,
+        "winner": "Germany",
+        "win_prob_a": 0.5840632446715437,
+        "draw_prob": 0.22816077558712494,
+        "win_prob_b": 0.1877759797413314,
+        "expected_goals_a": 2.0120051654435214,
+        "expected_goals_b": 1.0684343881185219,
+        "decimal_odds_a": 1.71,
+        "decimal_odds_draw": 4.38,
+        "decimal_odds_b": 5.33,
+        "top_scores": [
+          {
+            "score": "1-1",
+            "probability": 0.10668204583996495
+          },
+          {
+            "score": "2-1",
+            "probability": 0.09937260522689444
+          },
+          {
+            "score": "2-0",
+            "probability": 0.09300768145612232
+          }
+        ],
+        "predicted_score": "2-1"
+      },
+      {
+        "group": "F",
+        "date": "2026-06-20",
+        "team_a": "Netherlands",
+        "team_b": "Sweden",
+        "status": "predicted",
+        "score": "1-2",
+        "score_probability": 0.08503103324684877,
+        "winner": "Sweden",
+        "win_prob_a": 0.36279953591211644,
+        "draw_prob": 0.255826364538363,
+        "win_prob_b": 0.3813740995495206,
+        "expected_goals_a": 1.5281669205367305,
+        "expected_goals_b": 1.5710365624457143,
+        "decimal_odds_a": 2.76,
+        "decimal_odds_draw": 3.91,
+        "decimal_odds_b": 2.62,
+        "top_scores": [
+          {
+            "score": "1-1",
+            "probability": 0.11690818419099637
+          },
+          {
+            "score": "1-2",
+            "probability": 0.08503103324684877
+          },
+          {
+            "score": "2-1",
+            "probability": 0.0827107499169888
+          }
+        ],
+        "predicted_score": "1-2"
+      },
+      {
+        "group": "E",
+        "date": "2026-06-21",
+        "team_a": "Ecuador",
+        "team_b": "Cura\u00e7ao",
+        "status": "predicted",
+        "score": "2-1",
+        "score_probability": 0.09860760816381825,
+        "winner": "Ecuador",
+        "win_prob_a": 0.54245878385342,
+        "draw_prob": 0.24361337309051143,
+        "win_prob_b": 0.2139278430560685,
+        "expected_goals_a": 1.854385655249583,
+        "expected_goals_b": 1.0958540458496302,
+        "decimal_odds_a": 1.84,
+        "decimal_odds_draw": 4.1,
+        "decimal_odds_b": 4.67,
+        "top_scores": [
+          {
+            "score": "1-1",
+            "probability": 0.1148587582258776
+          },
+          {
+            "score": "2-1",
+            "probability": 0.09860760816381825
+          },
+          {
+            "score": "2-0",
+            "probability": 0.08998242835100041
+          }
+        ],
+        "predicted_score": "2-1"
+      },
+      {
+        "group": "F",
+        "date": "2026-06-21",
+        "team_a": "Tunisia",
+        "team_b": "Japan",
+        "status": "predicted",
+        "score": "1-2",
+        "score_probability": 0.09735151688429587,
+        "winner": "Japan",
+        "win_prob_a": 0.23195230753301305,
+        "draw_prob": 0.23742095898094379,
+        "win_prob_b": 0.5306267334860432,
+        "expected_goals_a": 1.221926547934424,
+        "expected_goals_b": 1.9297057759172815,
+        "decimal_odds_a": 4.31,
+        "decimal_odds_draw": 4.21,
+        "decimal_odds_b": 1.88,
+        "top_scores": [
+          {
+            "score": "1-1",
+            "probability": 0.10896960515658055
+          },
+          {
+            "score": "1-2",
+            "probability": 0.09735151688429587
+          },
+          {
+            "score": "0-2",
+            "probability": 0.0796705146056949
+          }
+        ],
+        "predicted_score": "1-2"
+      },
+      {
+        "group": "G",
+        "date": "2026-06-21",
+        "team_a": "Belgium",
+        "team_b": "Iran",
+        "status": "predicted",
+        "score": "2-1",
+        "score_probability": 0.08663202437016203,
+        "winner": "Belgium",
+        "win_prob_a": 0.3923553857969231,
+        "draw_prob": 0.2763667636648321,
+        "win_prob_b": 0.3312778505382449,
+        "expected_goals_a": 1.4223458814724026,
+        "expected_goals_b": 1.2894522522115304,
+        "decimal_odds_a": 2.55,
+        "decimal_odds_draw": 3.62,
+        "decimal_odds_b": 3.02,
+        "top_scores": [
+          {
+            "score": "1-1",
+            "probability": 0.13156094806267468
+          },
+          {
+            "score": "2-1",
+            "probability": 0.08663202437016203
+          },
+          {
+            "score": "1-0",
+            "probability": 0.0847256274311879
+          }
+        ],
+        "predicted_score": "2-1"
+      },
+      {
+        "group": "H",
+        "date": "2026-06-21",
+        "team_a": "Spain",
+        "team_b": "Saudi Arabia",
+        "status": "predicted",
+        "score": "1-0",
+        "score_probability": 0.10933909861924081,
+        "winner": "Spain",
+        "win_prob_a": 0.5813230367901485,
+        "draw_prob": 0.24333195210796876,
+        "win_prob_b": 0.17534501110188283,
+        "expected_goals_a": 1.830180863342679,
+        "expected_goals_b": 0.9119090881215468,
+        "decimal_odds_a": 1.72,
+        "decimal_odds_draw": 4.11,
+        "decimal_odds_b": 5.7,
+        "top_scores": [
+          {
+            "score": "1-1",
+            "probability": 0.11615794175483421
+          },
+          {
+            "score": "1-0",
+            "probability": 0.10933909861924081
+          },
+          {
+            "score": "2-0",
+            "probability": 0.10792886821792406
+          }
+        ],
+        "predicted_score": "1-0"
+      },
+      {
+        "group": "H",
+        "date": "2026-06-21",
+        "team_a": "Uruguay",
+        "team_b": "Cape Verde",
+        "status": "predicted",
+        "score": "1-0",
+        "score_probability": 0.13574563771531103,
+        "winner": "Uruguay",
+        "win_prob_a": 0.45222989632433025,
+        "draw_prob": 0.3045699403551623,
+        "win_prob_b": 0.24320016332050728,
+        "expected_goals_a": 1.3029201762729166,
+        "expected_goals_b": 0.8852198246681048,
+        "decimal_odds_a": 2.21,
+        "decimal_odds_draw": 3.28,
+        "decimal_odds_b": 4.11,
+        "top_scores": [
+          {
+            "score": "1-1",
+            "probability": 0.13966892402197778
+          },
+          {
+            "score": "1-0",
+            "probability": 0.13574563771531103
+          },
+          {
+            "score": "0-0",
+            "probability": 0.1224720429008139
+          }
+        ],
+        "predicted_score": "1-0"
+      },
+      {
+        "group": "G",
+        "date": "2026-06-22",
+        "team_a": "New Zealand",
+        "team_b": "Egypt",
+        "status": "predicted",
+        "score": "1-2",
+        "score_probability": 0.08947332408727536,
+        "winner": "Egypt",
+        "win_prob_a": 0.31227688157105044,
+        "draw_prob": 0.2717213558617018,
+        "win_prob_b": 0.41600176256724763,
+        "expected_goals_a": 1.269983159237832,
+        "expected_goals_b": 1.4980450983654097,
+        "decimal_odds_a": 3.2,
+        "decimal_odds_draw": 3.68,
+        "decimal_odds_b": 2.4,
+        "top_scores": [
+          {
+            "score": "1-1",
+            "probability": 0.12900972089518056
+          },
+          {
+            "score": "1-2",
+            "probability": 0.08947332408727536
+          },
+          {
+            "score": "0-1",
+            "probability": 0.08450280256701734
+          }
+        ],
+        "predicted_score": "1-2"
+      },
+      {
+        "group": "I",
+        "date": "2026-06-22",
+        "team_a": "France",
+        "team_b": "Iraq",
+        "status": "predicted",
+        "score": "2-0",
+        "score_probability": 0.11288382404263073,
+        "winner": "France",
+        "win_prob_a": 0.608246472219484,
+        "draw_prob": 0.23380410301074697,
+        "win_prob_b": 0.15794942476976903,
+        "expected_goals_a": 1.9059688178939864,
+        "expected_goals_b": 0.8724286122214122,
+        "decimal_odds_a": 1.64,
+        "decimal_odds_draw": 4.28,
+        "decimal_odds_b": 6.33,
+        "top_scores": [
+          {
+            "score": "2-0",
+            "probability": 0.11288382404263073
+          },
+          {
+            "score": "1-1",
+            "probability": 0.11160909159618278
+          },
+          {
+            "score": "1-0",
+            "probability": 0.11018561984924415
+          }
+        ],
+        "predicted_score": "2-0"
+      },
+      {
+        "group": "J",
+        "date": "2026-06-22",
+        "team_a": "Argentina",
+        "team_b": "Austria",
+        "status": "predicted",
+        "score": "1-0",
+        "score_probability": 0.1062712333557136,
+        "winner": "Argentina",
+        "win_prob_a": 0.5762579808572317,
+        "draw_prob": 0.24340891821431843,
+        "win_prob_b": 0.18033310092844979,
+        "expected_goals_a": 1.8344554969710873,
+        "expected_goals_b": 0.9363202711950322,
+        "decimal_odds_a": 1.74,
+        "decimal_odds_draw": 4.11,
+        "decimal_odds_b": 5.55,
+        "top_scores": [
+          {
+            "score": "1-1",
+            "probability": 0.11616568574948141
+          },
+          {
+            "score": "1-0",
+            "probability": 0.1062712333557136
+          },
+          {
+            "score": "2-0",
+            "probability": 0.10536754561010789
+          }
+        ],
+        "predicted_score": "1-0"
+      },
+      {
+        "group": "I",
+        "date": "2026-06-23",
+        "team_a": "Norway",
+        "team_b": "Senegal",
+        "status": "predicted",
+        "score": "2-1",
+        "score_probability": 0.09390814911502388,
+        "winner": "Norway",
+        "win_prob_a": 0.4652623218725538,
+        "draw_prob": 0.2537274889362168,
+        "win_prob_b": 0.28101018919122933,
+        "expected_goals_a": 1.7221825749277193,
+        "expected_goals_b": 1.2988957276791955,
+        "decimal_odds_a": 2.15,
+        "decimal_odds_draw": 3.94,
+        "decimal_odds_b": 3.56,
+        "top_scores": [
+          {
+            "score": "1-1",
+            "probability": 0.117781706214839
+          },
+          {
+            "score": "2-1",
+            "probability": 0.09390814911502388
+          },
+          {
+            "score": "1-0",
+            "probability": 0.07523685352391761
+          }
+        ],
+        "predicted_score": "2-1"
+      },
+      {
+        "group": "J",
+        "date": "2026-06-23",
+        "team_a": "Jordan",
+        "team_b": "Algeria",
+        "status": "predicted",
+        "score": "1-2",
+        "score_probability": 0.08594611957826846,
+        "winner": "Algeria",
+        "win_prob_a": 0.3463686527838565,
+        "draw_prob": 0.2700844522490917,
+        "win_prob_b": 0.38354689496705197,
+        "expected_goals_a": 1.3723396307266411,
+        "expected_goals_b": 1.4546995371227145,
+        "decimal_odds_a": 2.89,
+        "decimal_odds_draw": 3.7,
+        "decimal_odds_b": 2.61,
+        "top_scores": [
+          {
+            "score": "1-1",
+            "probability": 0.12761646893505507
+          },
+          {
+            "score": "1-2",
+            "probability": 0.08594611957826846
+          },
+          {
+            "score": "2-1",
+            "probability": 0.08108015641341265
+          }
+        ],
+        "predicted_score": "1-2"
+      },
+      {
+        "group": "K",
+        "date": "2026-06-23",
+        "team_a": "Portugal",
+        "team_b": "Uzbekistan",
+        "status": "predicted",
+        "score": "1-0",
+        "score_probability": 0.10661473845885444,
+        "winner": "Portugal",
+        "win_prob_a": 0.5077973295380622,
+        "draw_prob": 0.2659920387712779,
+        "win_prob_b": 0.22621063169065986,
+        "expected_goals_a": 1.6282272168435445,
+        "expected_goals_b": 1.013311388666761,
+        "decimal_odds_a": 1.97,
+        "decimal_odds_draw": 3.76,
+        "decimal_odds_b": 4.42,
+        "top_scores": [
+          {
+            "score": "1-1",
+            "probability": 0.12696940663492676
+          },
+          {
+            "score": "1-0",
+            "probability": 0.10661473845885444
+          },
+          {
+            "score": "2-1",
+            "probability": 0.09571066832845508
+          }
+        ],
+        "predicted_score": "1-0"
+      },
+      {
+        "group": "L",
+        "date": "2026-06-23",
+        "team_a": "England",
+        "team_b": "Ghana",
+        "status": "predicted",
+        "score": "2-1",
+        "score_probability": 0.0995682428694927,
+        "winner": "England",
+        "win_prob_a": 0.5898477352141684,
+        "draw_prob": 0.23104044096262488,
+        "win_prob_b": 0.17911182382320673,
+        "expected_goals_a": 1.96753996683098,
+        "expected_goals_b": 1.0031496677132163,
+        "decimal_odds_a": 1.7,
+        "decimal_odds_draw": 4.33,
+        "decimal_odds_b": 5.58,
+        "top_scores": [
+          {
+            "score": "1-1",
+            "probability": 0.10930776920608264
+          },
+          {
+            "score": "2-1",
+            "probability": 0.0995682428694927
+          },
+          {
+            "score": "2-0",
+            "probability": 0.09925562064578941
+          }
+        ],
+        "predicted_score": "2-1"
+      },
+      {
+        "group": "L",
+        "date": "2026-06-23",
+        "team_a": "Panama",
+        "team_b": "Croatia",
+        "status": "predicted",
+        "score": "1-2",
+        "score_probability": 0.09470012053061996,
+        "winner": "Croatia",
+        "win_prob_a": 0.2651497961702376,
+        "draw_prob": 0.2410493399474795,
+        "win_prob_b": 0.493800863882283,
+        "expected_goals_a": 1.3369973473212682,
+        "expected_goals_b": 1.8795664546572899,
+        "decimal_odds_a": 3.77,
+        "decimal_odds_draw": 4.15,
+        "decimal_odds_b": 2.03,
+        "top_scores": [
+          {
+            "score": "1-1",
+            "probability": 0.10882949088567134
+          },
+          {
+            "score": "1-2",
+            "probability": 0.09470012053061996
+          },
+          {
+            "score": "0-2",
+            "probability": 0.07083044758492282
+          }
+        ],
+        "predicted_score": "1-2"
+      },
+      {
+        "group": "B",
+        "date": "2026-06-24",
+        "team_a": "Bosnia and Herzegovina",
+        "team_b": "Qatar",
+        "status": "predicted",
+        "score": "0-1",
+        "score_probability": 0.08912532755099005,
+        "winner": "Qatar",
+        "win_prob_a": 0.34036212235247004,
+        "draw_prob": 0.28350382852453093,
+        "win_prob_b": 0.37613404912299886,
+        "expected_goals_a": 1.2637674488429216,
+        "expected_goals_b": 1.340188205911724,
+        "decimal_odds_a": 2.94,
+        "decimal_odds_draw": 3.53,
+        "decimal_odds_b": 2.66,
+        "top_scores": [
+          {
+            "score": "1-1",
+            "probability": 0.1353260337691994
+          },
+          {
+            "score": "0-1",
+            "probability": 0.08912532755099005
+          },
+          {
+            "score": "0-0",
+            "probability": 0.08400590766190687
+          }
+        ],
+        "predicted_score": "0-1"
+      },
+      {
+        "group": "B",
+        "date": "2026-06-24",
+        "team_a": "Switzerland",
+        "team_b": "Canada",
+        "status": "predicted",
+        "score": "1-0",
+        "score_probability": 0.0993718606742926,
+        "winner": "Switzerland",
+        "win_prob_a": 0.4109171016713258,
+        "draw_prob": 0.2859353269163184,
+        "win_prob_b": 0.3031475714123559,
+        "expected_goals_a": 1.3817038789479785,
+        "expected_goals_b": 1.1536826913878675,
+        "decimal_odds_a": 2.43,
+        "decimal_odds_draw": 3.5,
+        "decimal_odds_b": 3.3,
+        "top_scores": [
+          {
+            "score": "1-1",
+            "probability": 0.1364044825701226
+          },
+          {
+            "score": "1-0",
+            "probability": 0.0993718606742926
+          },
+          {
+            "score": "0-0",
+            "probability": 0.08933656746871049
+          }
+        ],
+        "predicted_score": "1-0"
+      },
+      {
+        "group": "C",
+        "date": "2026-06-24",
+        "team_a": "Morocco",
+        "team_b": "Haiti",
+        "status": "predicted",
+        "score": "1-0",
+        "score_probability": 0.10955506421359738,
+        "winner": "Morocco",
+        "win_prob_a": 0.5008324762374428,
+        "draw_prob": 0.27011075308144383,
+        "win_prob_b": 0.2290567706811134,
+        "expected_goals_a": 1.5895512143283794,
+        "expected_goals_b": 1.0017398952088825,
+        "decimal_odds_a": 2.0,
+        "decimal_odds_draw": 3.7,
+        "decimal_odds_b": 4.37,
+        "top_scores": [
+          {
+            "score": "1-1",
+            "probability": 0.12885137810886993
+          },
+          {
+            "score": "1-0",
+            "probability": 0.10955506421359738
+          },
+          {
+            "score": "2-1",
+            "probability": 0.09482215950964783
+          }
+        ],
+        "predicted_score": "1-0"
+      },
+      {
+        "group": "C",
+        "date": "2026-06-24",
+        "team_a": "Scotland",
+        "team_b": "Brazil",
+        "status": "predicted",
+        "score": "0-1",
+        "score_probability": 0.11049804931073104,
+        "winner": "Brazil",
+        "win_prob_a": 0.19894728952588747,
+        "draw_prob": 0.256921014143385,
+        "win_prob_b": 0.5441316963307274,
+        "expected_goals_a": 0.9494394463849898,
+        "expected_goals_b": 1.7121488488403473,
+        "decimal_odds_a": 5.03,
+        "decimal_odds_draw": 3.89,
+        "decimal_odds_b": 1.84,
+        "top_scores": [
+          {
+            "score": "1-1",
+            "probability": 0.1226175374556571
+          },
+          {
+            "score": "0-1",
+            "probability": 0.11049804931073104
+          },
+          {
+            "score": "0-2",
+            "probability": 0.10237009009665611
+          }
+        ],
+        "predicted_score": "0-1"
+      },
+      {
+        "group": "K",
+        "date": "2026-06-24",
+        "team_a": "Colombia",
+        "team_b": "Congo DR",
+        "status": "predicted",
+        "score": "1-0",
+        "score_probability": 0.1109073737475769,
+        "winner": "Colombia",
+        "win_prob_a": 0.5497671023327524,
+        "draw_prob": 0.2552710580517204,
+        "win_prob_b": 0.19496183961552727,
+        "expected_goals_a": 1.7263711155749601,
+        "expected_goals_b": 0.9405648348849079,
+        "decimal_odds_a": 1.82,
+        "decimal_odds_draw": 3.92,
+        "decimal_odds_b": 5.13,
+        "top_scores": [
+          {
+            "score": "1-1",
+            "probability": 0.12182777545060895
+          },
+          {
+            "score": "1-0",
+            "probability": 0.1109073737475769
+          },
+          {
+            "score": "2-0",
+            "probability": 0.10352327114559057
+          }
+        ],
+        "predicted_score": "1-0"
+      },
+      {
+        "group": "A",
+        "date": "2026-06-25",
+        "team_a": "Czechia",
+        "team_b": "Mexico",
+        "status": "predicted",
+        "score": "0-1",
+        "score_probability": 0.09463440282363947,
+        "winner": "Mexico",
+        "win_prob_a": 0.2731562918217139,
+        "draw_prob": 0.2715788869428219,
+        "win_prob_b": 0.4552648212354641,
+        "expected_goals_a": 1.1502364501469635,
+        "expected_goals_b": 1.547911131076618,
+        "decimal_odds_a": 3.66,
+        "decimal_odds_draw": 3.68,
+        "decimal_odds_b": 2.2,
+        "top_scores": [
+          {
+            "score": "1-1",
+            "probability": 0.12947416725304195
+          },
+          {
+            "score": "0-1",
+            "probability": 0.09463440282363947
+          },
+          {
+            "score": "1-2",
+            "probability": 0.09278449290641638
+          }
+        ],
+        "predicted_score": "0-1"
+      },
+      {
+        "group": "A",
+        "date": "2026-06-25",
+        "team_a": "South Africa",
+        "team_b": "South Korea",
+        "status": "predicted",
+        "score": "0-1",
+        "score_probability": 0.09754008236986525,
+        "winner": "South Korea",
+        "win_prob_a": 0.24383685785342024,
+        "draw_prob": 0.2642474750870506,
+        "win_prob_b": 0.491915667059529,
+        "expected_goals_a": 1.0912760304752538,
+        "expected_goals_b": 1.639021960626847,
+        "decimal_odds_a": 4.1,
+        "decimal_odds_draw": 3.78,
+        "decimal_odds_b": 2.03,
+        "top_scores": [
+          {
+            "score": "1-1",
+            "probability": 0.12595471513725076
+          },
+          {
+            "score": "0-1",
+            "probability": 0.09754008236986525
+          },
+          {
+            "score": "1-2",
+            "probability": 0.09557525192335771
+          }
+        ],
+        "predicted_score": "0-1"
+      },
+      {
+        "group": "E",
+        "date": "2026-06-25",
+        "team_a": "Cura\u00e7ao",
+        "team_b": "C\u00f4te d'Ivoire",
+        "status": "predicted",
+        "score": "1-2",
+        "score_probability": 0.09930368916392227,
+        "winner": "C\u00f4te d'Ivoire",
+        "win_prob_a": 0.16858157997068704,
+        "draw_prob": 0.2181382718174715,
+        "win_prob_b": 0.6132801482118415,
+        "expected_goals_a": 1.027903938470409,
+        "expected_goals_b": 2.105382050692163,
+        "decimal_odds_a": 5.93,
+        "decimal_odds_draw": 4.58,
+        "decimal_odds_b": 1.63,
+        "top_scores": [
+          {
+            "score": "1-1",
+            "probability": 0.10187983151255359
+          },
+          {
+            "score": "1-2",
+            "probability": 0.09930368916392227
+          },
+          {
+            "score": "0-2",
+            "probability": 0.09660794695630111
+          }
+        ],
+        "predicted_score": "1-2"
+      },
+      {
+        "group": "E",
+        "date": "2026-06-25",
+        "team_a": "Ecuador",
+        "team_b": "Germany",
+        "status": "predicted",
+        "score": "0-2",
+        "score_probability": 0.10523173926599431,
+        "winner": "Germany",
+        "win_prob_a": 0.14661489299574365,
+        "draw_prob": 0.2108284677165149,
+        "win_prob_b": 0.6425566392877415,
+        "expected_goals_a": 0.9399446837191371,
+        "expected_goals_b": 2.1475534484196683,
+        "decimal_odds_a": 6.82,
+        "decimal_odds_draw": 4.74,
+        "decimal_odds_b": 1.56,
+        "top_scores": [
+          {
+            "score": "0-2",
+            "probability": 0.10523173926599431
+          },
+          {
+            "score": "1-1",
+            "probability": 0.09948527713778373
+          },
+          {
+            "score": "1-2",
+            "probability": 0.09891201388158974
+          }
+        ],
+        "predicted_score": "0-2"
+      },
+      {
+        "group": "F",
+        "date": "2026-06-25",
+        "team_a": "Japan",
+        "team_b": "Sweden",
+        "status": "predicted",
+        "score": "1-2",
+        "score_probability": 0.09216596629591699,
+        "winner": "Sweden",
+        "win_prob_a": 0.29880163626778233,
+        "draw_prob": 0.2523045349079615,
+        "win_prob_b": 0.44889382882425616,
+        "expected_goals_a": 1.3715866343374317,
+        "expected_goals_b": 1.719146759136199,
+        "decimal_odds_a": 3.35,
+        "decimal_odds_draw": 3.96,
+        "decimal_odds_b": 2.23,
+        "top_scores": [
+          {
+            "score": "1-1",
+            "probability": 0.11580075182133343
+          },
+          {
+            "score": "1-2",
+            "probability": 0.09216596629591699
+          },
+          {
+            "score": "2-1",
+            "probability": 0.07353276085387359
+          }
+        ],
+        "predicted_score": "1-2"
+      },
+      {
+        "group": "F",
+        "date": "2026-06-25",
+        "team_a": "Tunisia",
+        "team_b": "Netherlands",
+        "status": "predicted",
+        "score": "1-2",
+        "score_probability": 0.09844535512706745,
+        "winner": "Netherlands",
+        "win_prob_a": 0.19231835030338196,
+        "draw_prob": 0.22131651498359686,
+        "win_prob_b": 0.5863651347130212,
+        "expected_goals_a": 1.1418828347888605,
+        "expected_goals_b": 2.1024977629400996,
+        "decimal_odds_a": 5.2,
+        "decimal_odds_draw": 4.52,
+        "decimal_odds_b": 1.71,
+        "top_scores": [
+          {
+            "score": "1-1",
+            "probability": 0.10113778517277018
+          },
+          {
+            "score": "1-2",
+            "probability": 0.09844535512706745
+          },
+          {
+            "score": "0-2",
+            "probability": 0.08621318416199018
+          }
+        ],
+        "predicted_score": "1-2"
+      },
+      {
+        "group": "D",
+        "date": "2026-06-26",
+        "team_a": "Paraguay",
+        "team_b": "Australia",
+        "status": "predicted",
+        "score": "0-1",
+        "score_probability": 0.09675233493207058,
+        "winner": "Australia",
+        "win_prob_a": 0.24710895137450734,
+        "draw_prob": 0.2646955878756733,
+        "win_prob_b": 0.48819546074981934,
+        "expected_goals_a": 1.1008479167281426,
+        "expected_goals_b": 1.6330966499484145,
+        "decimal_odds_a": 4.05,
+        "decimal_odds_draw": 3.78,
+        "decimal_odds_b": 2.05,
+        "top_scores": [
+          {
+            "score": "1-1",
+            "probability": 0.12613917905486544
+          },
+          {
+            "score": "0-1",
+            "probability": 0.09675233493207058
+          },
+          {
+            "score": "1-2",
+            "probability": 0.09536919941747407
+          }
+        ],
+        "predicted_score": "0-1"
+      },
+      {
+        "group": "D",
+        "date": "2026-06-26",
+        "team_a": "Turkey",
+        "team_b": "USA",
+        "status": "predicted",
+        "score": "0-2",
+        "score_probability": 0.10472711955421005,
+        "winner": "USA",
+        "win_prob_a": 0.1756774788967123,
+        "draw_prob": 0.23741001046069,
+        "win_prob_b": 0.5869125106425978,
+        "expected_goals_a": 0.9467135675654161,
+        "expected_goals_b": 1.8926159130889948,
+        "decimal_odds_a": 5.69,
+        "decimal_odds_draw": 4.21,
+        "decimal_odds_b": 1.7,
+        "top_scores": [
+          {
+            "score": "1-1",
+            "probability": 0.11315376884596896
+          },
+          {
+            "score": "0-2",
+            "probability": 0.10472711955421005
+          },
+          {
+            "score": "0-1",
+            "probability": 0.10228741297890294
+          }
+        ],
+        "predicted_score": "0-2"
+      },
+      {
+        "group": "I",
+        "date": "2026-06-26",
+        "team_a": "Norway",
+        "team_b": "France",
+        "status": "predicted",
+        "score": "0-1",
+        "score_probability": 0.1002680120147523,
+        "winner": "France",
+        "win_prob_a": 0.2735175916230782,
+        "draw_prob": 0.27764495001693573,
+        "win_prob_b": 0.44883745835998595,
+        "expected_goals_a": 1.1147643576012427,
+        "expected_goals_b": 1.4916351777792811,
+        "decimal_odds_a": 3.66,
+        "decimal_odds_draw": 3.6,
+        "decimal_odds_b": 2.23,
+        "top_scores": [
+          {
+            "score": "1-1",
+            "probability": 0.13253702676138834
+          },
+          {
+            "score": "0-1",
+            "probability": 0.1002680120147523
+          },
+          {
+            "score": "1-2",
+            "probability": 0.09152633864609297
+          }
+        ],
+        "predicted_score": "0-1"
+      },
+      {
+        "group": "I",
+        "date": "2026-06-26",
+        "team_a": "Senegal",
+        "team_b": "Iraq",
+        "status": "predicted",
+        "score": "2-1",
+        "score_probability": 0.09550887194455074,
+        "winner": "Senegal",
+        "win_prob_a": 0.48756912731151286,
+        "draw_prob": 0.24993737018541543,
+        "win_prob_b": 0.26249350250307185,
+        "expected_goals_a": 1.7780990542523554,
+        "expected_goals_b": 1.2580489166267195,
+        "decimal_odds_a": 2.05,
+        "decimal_odds_draw": 4.0,
+        "decimal_odds_b": 3.81,
+        "top_scores": [
+          {
+            "score": "1-1",
+            "probability": 0.1160223120904662
+          },
+          {
+            "score": "2-1",
+            "probability": 0.09550887194455074
+          },
+          {
+            "score": "1-0",
+            "probability": 0.07679835373193547
+          }
+        ],
+        "predicted_score": "2-1"
+      },
+      {
+        "group": "G",
+        "date": "2026-06-27",
+        "team_a": "Egypt",
+        "team_b": "Iran",
+        "status": "predicted",
+        "score": "1-2",
+        "score_probability": 0.0852489003365037,
+        "winner": "Iran",
+        "win_prob_a": 0.34679072633704494,
+        "draw_prob": 0.27403896917257065,
+        "win_prob_b": 0.3791703044903844,
+        "expected_goals_a": 1.3442848403104308,
+        "expected_goals_b": 1.4152447380597668,
+        "decimal_odds_a": 2.88,
+        "decimal_odds_draw": 3.65,
+        "decimal_odds_b": 2.64,
+        "top_scores": [
+          {
+            "score": "1-1",
+            "probability": 0.1301100931696746
+          },
+          {
+            "score": "1-2",
+            "probability": 0.0852489003365037
+          },
+          {
+            "score": "2-1",
+            "probability": 0.08097454899044967
+          }
+        ],
+        "predicted_score": "1-2"
+      },
+      {
+        "group": "G",
+        "date": "2026-06-27",
+        "team_a": "New Zealand",
+        "team_b": "Belgium",
+        "status": "predicted",
+        "score": "1-2",
+        "score_probability": 0.09210754849233545,
+        "winner": "Belgium",
+        "win_prob_a": 0.283993863084138,
+        "draw_prob": 0.27099204839534896,
+        "win_prob_b": 0.44501408852051305,
+        "expected_goals_a": 1.1892118809541468,
+        "expected_goals_b": 1.5422374512579398,
+        "decimal_odds_a": 3.52,
+        "decimal_odds_draw": 3.69,
+        "decimal_odds_b": 2.25,
+        "top_scores": [
+          {
+            "score": "1-1",
+            "probability": 0.1290023819491398
+          },
+          {
+            "score": "1-2",
+            "probability": 0.09210754849233545
+          },
+          {
+            "score": "0-1",
+            "probability": 0.09088612522526689
+          }
+        ],
+        "predicted_score": "1-2"
+      },
+      {
+        "group": "H",
+        "date": "2026-06-27",
+        "team_a": "Cape Verde",
+        "team_b": "Saudi Arabia",
+        "status": "predicted",
+        "score": "0-1",
+        "score_probability": 0.0989832974863066,
+        "winner": "Saudi Arabia",
+        "win_prob_a": 0.33349526037165766,
+        "draw_prob": 0.2938043541066915,
+        "win_prob_b": 0.37270038552165086,
+        "expected_goals_a": 1.183431955340169,
+        "expected_goals_b": 1.2649773293781563,
+        "decimal_odds_a": 3.0,
+        "decimal_odds_draw": 3.4,
+        "decimal_odds_b": 2.68,
+        "top_scores": [
+          {
+            "score": "1-1",
+            "probability": 0.13974112621223952
+          },
+          {
+            "score": "0-1",
+            "probability": 0.0989832974863066
+          },
+          {
+            "score": "0-0",
+            "probability": 0.09678317199449513
+          }
+        ],
+        "predicted_score": "0-1"
+      },
+      {
+        "group": "H",
+        "date": "2026-06-27",
+        "team_a": "Uruguay",
+        "team_b": "Spain",
+        "status": "predicted",
+        "score": "0-1",
+        "score_probability": 0.12866668056688998,
+        "winner": "Spain",
+        "win_prob_a": 0.2303419247647136,
+        "draw_prob": 0.2902976913301769,
+        "win_prob_b": 0.4793603839051094,
+        "expected_goals_a": 0.9062965313680487,
+        "expected_goals_b": 1.4187900778600886,
+        "decimal_odds_a": 4.34,
+        "decimal_odds_draw": 3.44,
+        "decimal_odds_b": 2.09,
+        "top_scores": [
+          {
+            "score": "1-1",
+            "probability": 0.13578381138648662
+          },
+          {
+            "score": "0-1",
+            "probability": 0.12866668056688998
+          },
+          {
+            "score": "0-0",
+            "probability": 0.10783485092916972
+          }
+        ],
+        "predicted_score": "0-1"
+      },
+      {
+        "group": "K",
+        "date": "2026-06-27",
+        "team_a": "Colombia",
+        "team_b": "Portugal",
+        "status": "predicted",
+        "score": "1-0",
+        "score_probability": 0.10143804761912946,
+        "winner": "Colombia",
+        "win_prob_a": 0.3979886831196043,
+        "draw_prob": 0.29069666971923236,
+        "win_prob_b": 0.3113146471611634,
+        "expected_goals_a": 1.3288659137641643,
+        "expected_goals_b": 1.1474913594212037,
+        "decimal_odds_a": 2.51,
+        "decimal_odds_draw": 3.44,
+        "decimal_odds_b": 3.21,
+        "top_scores": [
+          {
+            "score": "1-1",
+            "probability": 0.1384178926793786
+          },
+          {
+            "score": "1-0",
+            "probability": 0.10143804761912946
+          },
+          {
+            "score": "0-0",
+            "probability": 0.09430321095054468
+          }
+        ],
+        "predicted_score": "1-0"
+      },
+      {
+        "group": "K",
+        "date": "2026-06-27",
+        "team_a": "Congo DR",
+        "team_b": "Uzbekistan",
+        "status": "predicted",
+        "score": "1-0",
+        "score_probability": 0.08626692301996969,
+        "winner": "Congo DR",
+        "win_prob_a": 0.37742241596950277,
+        "draw_prob": 0.2804850914039803,
+        "win_prob_b": 0.342092492626517,
+        "expected_goals_a": 1.3640738760984812,
+        "expected_goals_b": 1.2879895966263148,
+        "decimal_odds_a": 2.65,
+        "decimal_odds_draw": 3.57,
+        "decimal_odds_b": 2.92,
+        "top_scores": [
+          {
+            "score": "1-1",
+            "probability": 0.13378485103928264
+          },
+          {
+            "score": "1-0",
+            "probability": 0.08626692301996969
+          },
+          {
+            "score": "2-1",
+            "probability": 0.08448723162982048
+          }
+        ],
+        "predicted_score": "1-0"
+      },
+      {
+        "group": "L",
+        "date": "2026-06-27",
+        "team_a": "Croatia",
+        "team_b": "Ghana",
+        "status": "predicted",
+        "score": "2-1",
+        "score_probability": 0.0893102702828664,
+        "winner": "Croatia",
+        "win_prob_a": 0.4161430143289526,
+        "draw_prob": 0.2578681070144456,
+        "win_prob_b": 0.3259888786566016,
+        "expected_goals_a": 1.6187687691825714,
+        "expected_goals_b": 1.412440823835159,
+        "decimal_odds_a": 2.4,
+        "decimal_odds_draw": 3.88,
+        "decimal_odds_b": 3.07,
+        "top_scores": [
+          {
+            "score": "1-1",
+            "probability": 0.11917093255289646
+          },
+          {
+            "score": "2-1",
+            "probability": 0.0893102702828664
+          },
+          {
+            "score": "1-2",
+            "probability": 0.07792680099639687
+          }
+        ],
+        "predicted_score": "2-1"
+      },
+      {
+        "group": "L",
+        "date": "2026-06-27",
+        "team_a": "Panama",
+        "team_b": "England",
+        "status": "predicted",
+        "score": "0-2",
+        "score_probability": 0.10238039496749582,
+        "winner": "England",
+        "win_prob_a": 0.13806759687425785,
+        "draw_prob": 0.1996573037836693,
+        "win_prob_b": 0.6622750993420728,
+        "expected_goals_a": 0.9562176495021452,
+        "expected_goals_b": 2.268640566712433,
+        "decimal_odds_a": 7.24,
+        "decimal_odds_draw": 5.01,
+        "decimal_odds_b": 1.51,
+        "top_scores": [
+          {
+            "score": "0-2",
+            "probability": 0.10238039496749582
+          },
+          {
+            "score": "1-2",
+            "probability": 0.09789794063092011
+          },
+          {
+            "score": "1-1",
+            "probability": 0.09320980805223851
+          }
+        ],
+        "predicted_score": "0-2"
+      },
+      {
+        "group": "J",
+        "date": "2026-06-28",
+        "team_a": "Algeria",
+        "team_b": "Austria",
+        "status": "predicted",
+        "score": "1-2",
+        "score_probability": 0.09819180229658053,
+        "winner": "Austria",
+        "win_prob_a": 0.22178769848244664,
+        "draw_prob": 0.24665450098731737,
+        "win_prob_b": 0.531557800530236,
+        "expected_goals_a": 1.111501896094492,
+        "expected_goals_b": 1.8231453473537802,
+        "decimal_odds_a": 4.51,
+        "decimal_odds_draw": 4.05,
+        "decimal_odds_b": 1.88,
+        "top_scores": [
+          {
+            "score": "1-1",
+            "probability": 0.11633427541499093
+          },
+          {
+            "score": "1-2",
+            "probability": 0.09819180229658053
+          },
+          {
+            "score": "0-2",
+            "probability": 0.08834155177026613
+          }
+        ],
+        "predicted_score": "1-2"
+      },
+      {
+        "group": "J",
+        "date": "2026-06-28",
+        "team_a": "Jordan",
+        "team_b": "Argentina",
+        "status": "predicted",
+        "score": "0-2",
+        "score_probability": 0.12404470458961044,
+        "winner": "Argentina",
+        "win_prob_a": 0.11092912491784163,
+        "draw_prob": 0.1977419676623749,
+        "win_prob_b": 0.6913289074197836,
+        "expected_goals_a": 0.7720827741594051,
+        "expected_goals_b": 2.1916497371322636,
+        "decimal_odds_a": 9.01,
+        "decimal_odds_draw": 5.06,
+        "decimal_odds_b": 1.45,
+        "top_scores": [
+          {
+            "score": "0-2",
+            "probability": 0.12404470458961044
+          },
+          {
+            "score": "0-1",
+            "probability": 0.10620573191658722
+          },
+          {
+            "score": "1-2",
+            "probability": 0.09577277963933031
+          }
+        ],
+        "predicted_score": "0-2"
       }
-    ],
-    "message": null
+    ]
   },
   "round_of_32": [
     {
@@ -721,7 +2705,7 @@
   "knockout_champion_projection": "Argentina",
   "images": {
     "tournament": "docs/screenshots/2026-06-18/tournament-simulation-50000-runs.png",
-    "match_day": "docs/screenshots/2026-06-18/match-day-2026-06-18.png",
+    "all_matches": "docs/screenshots/2026-06-18/all-matches-predictions-2026-06-18.png",
     "round_of_32": "docs/screenshots/2026-06-18/round-of-32-predictions-2026-06-18.png"
   }
 }
