@@ -1,39 +1,36 @@
 # GitHub Pages demo
 
-This folder contains a **static demo** of the FIFA 2026 Prediction Engine dashboard.
+Static preview of the FIFA 2026 Prediction Engine dashboard (sample data only).
 
-## Live URLs
+## Live URL
 
-| Setup | URL |
-|-------|-----|
-| **Organization root** (`letmefind.github.io` repo) | `https://letmefind.github.io/` |
-| **This project** (Pages from `/docs`) | `https://letmefind.github.io/Fifa2026-Prediction-Skill/` |
+After setup (below):
 
-## Deploy to `https://letmefind.github.io/` (root)
+**https://letmefind.github.io/Fifa2026-Prediction-Skill/**
 
-1. Create or open the repository **`letmefind/letmefind.github.io`** on GitHub.
-2. Copy everything from this `docs/` folder into the **root** of that repository:
-   - `index.html`
-   - `demo.css`
-   - `demo.js`
-   - (optional) `README_10_LANGUAGES.md`, `BETTING_GUIDE.md`
-3. In that repo: **Settings → Pages → Build and deployment → Deploy from branch `main` / root**.
-4. Wait 1–2 minutes. The demo will be at `https://letmefind.github.io/`.
+## One-time setup (fix for deploy errors)
 
-## Deploy from this repository (project Pages)
+If the GitHub Action failed or the site shows **404**, do this once:
 
-1. Open **Settings → Pages** on `Fifa2026-Prediction-Skill`.
-2. Source: **Deploy from a branch** → `main` → **`/docs`** folder.
-3. Or use the included GitHub Actions workflow (`.github/workflows/pages.yml`).
-4. Demo URL: `https://letmefind.github.io/Fifa2026-Prediction-Skill/`
+1. Open **Settings → Pages** on the repository:  
+   https://github.com/letmefind/Fifa2026-Prediction-Skill/settings/pages
+
+2. Under **Build and deployment**:
+   - **Source:** Deploy from a branch
+   - **Branch:** `gh-pages`
+   - **Folder:** `/ (root)`
+
+3. Save, then run the workflow manually:  
+   **Actions → Deploy GitHub Pages demo → Run workflow**
+
+4. Wait 1–2 minutes and open the live URL above.
+
+The workflow pushes the `docs/` folder to the `gh-pages` branch. You do **not** need “GitHub Actions” as the Pages source.
+
+## Root URL `https://letmefind.github.io/`
+
+To host at the organization root, copy `docs/index.html`, `demo.css`, `demo.js`, and `.nojekyll` into the **`letmefind/letmefind.github.io`** repository root and enable Pages from `main`.
 
 ## Why the demo is not functional
 
-GitHub Pages serves static HTML/CSS/JS only. The real app needs:
-
-- Python 3.11+
-- FastAPI + uvicorn
-- ELO / Poisson / Monte Carlo models
-- API-Football or CSV for latest scores
-
-The demo shows the **UI layout** and **sample numbers** so visitors understand the product before cloning the repo.
+GitHub Pages serves static HTML/CSS/JS only. Live predictions need Python, FastAPI, and the full engine — [install from GitHub](https://github.com/letmefind/Fifa2026-Prediction-Skill).
