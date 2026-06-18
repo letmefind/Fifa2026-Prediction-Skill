@@ -2,8 +2,6 @@
 
 Production-ready Python prediction engine for FIFA World Cup 2026 match forecasts, tournament simulation, LLM reasoning prompts, and betting expected value analysis.
 
-Multilingual quick help is available in 10 languages, including Persian: [`docs/README_10_LANGUAGES.md`](docs/README_10_LANGUAGES.md).
-
 ## Features
 
 - CSV-first data ingestion with real-ready FiveThirtyEight SPI and StatsBomb adapters.
@@ -70,6 +68,33 @@ http://127.0.0.1:8000/
 ![Dashboard full view](docs/screenshots/dashboard-full.png)
 
 ![Match prediction result](docs/screenshots/dashboard-match-result.png)
+
+## Multilingual Help
+
+Quick help is available in 10 languages:
+
+- Persian / فارسی
+- Arabic / العربية
+- Spanish / Español
+- French / Français
+- German / Deutsch
+- Portuguese / Português
+- Italian / Italiano
+- Turkish / Türkçe
+- Hindi / हिन्दी
+- Chinese / 中文
+
+Open the multilingual README:
+
+```text
+docs/README_10_LANGUAGES.md
+```
+
+When the dashboard is running, open it in the browser:
+
+```text
+http://127.0.0.1:8000/project-docs/README_10_LANGUAGES.md
+```
 
 Endpoints:
 
@@ -138,8 +163,6 @@ The dashboard also has a **Fresh Data Status** card and a **Refresh Latest Data*
 API-Football free plans are rate-limited and may only allow a small recent date window. The app queries recent dates, filters to known national teams, and caches successful results in `.cache/fifa2026/api_football_latest.csv`.
 
 If a requested match already appears in latest results, the API/CLI/dashboard shows the known score first and labels the prediction as a future rematch forecast.
-
-The dashboard also links to the 10-language quick help document.
 
 To refresh adapter output:
 
