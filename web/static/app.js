@@ -141,6 +141,7 @@ function renderGroupMatches(matches) {
     <table class="data-table">
       <thead>
         <tr>
+          <th>Group</th>
           <th>Date</th>
           <th>Match</th>
           <th>Status</th>
@@ -153,6 +154,7 @@ function renderGroupMatches(matches) {
           .map(
             (match) => `
               <tr>
+                <td>${match.group || "-"}</td>
                 <td>${match.date}</td>
                 <td><strong>${match.team_a}</strong> vs <strong>${match.team_b}</strong></td>
                 <td><span class="pill ${match.status === "played" ? "played-pill" : ""}">${match.status}</span></td>
@@ -213,6 +215,25 @@ function renderOneGroup(group) {
       <p class="muted">Winner: <strong>${group.winner}</strong> | Runner-up: <strong>${group.runner_up}</strong> | Third: <strong>${group.third_place}</strong></p>
       ${renderGroupMatches(group.matches)}
       ${renderGroupTable(group.table)}
+    </div>
+  `;
+}
+
+function renderDatePredictions(result) {
+  if (!result.matches || !result.matches.length) {
+    return `<p class="muted">${result.message || `No matches found for ${result.date}.`}</p>`;
+  }
+  return `
+    <p class="muted"><strong>${result.date}</strong> · ${result.match_count} match${result.match_count === 1 ? "" : "es"}</p>
+    ${renderGroupMatches(result.matches)}
+    <div class="score-cloud">
+      ${result.matches
+        .filter((match) => match.status === "predicted")
+        .map(
+          (match) =>
+            `<span class="pill">Group ${match.group}: ${match.team_a} ${percent(match.win_prob_a)} | Draw ${percent(match.draw_prob)} | ${match.team_b} ${percent(match.win_prob_b)}</span>`,
+        )
+        .join("")}
     </div>
   `;
 }
@@ -283,7 +304,25 @@ function renderLatestStatus(status) {
   ]
     .filter(Boolean)
     .join(", ");
+  const fetchDetails =
+    status.model_rebuilt && status.api_fetch_attempted
+      ? `
+    <div class="score-cloud">
+      <span class="pill">CSV: ${status.csv_matches ?? 0}</span>
+      <span class="pill">Football-Data: ${status.football_data_matches ?? 0}</span>
+      <span class="pill">API-Football: ${status.api_football_matches ?? 0}</span>
+    </div>
+  `
+      : "";
+  const fetchErrors =
+    status.api_errors && status.api_errors.length
+      ? `<p class="muted">API notes: ${status.api_errors.join(" | ")}</p>`
+      : "";
+  const rebuiltNote = status.model_rebuilt
+    ? `<p class="result-alert"><strong>Model rebuilt.</strong> Predict Match and Predict Groups now use the latest scores.</p>`
+    : "";
   return `
+    ${rebuiltNote}
     <div class="status-grid">
       <div class="status-item">
         <span>Latest matches merged</span>
@@ -302,7 +341,9 @@ function renderLatestStatus(status) {
         <strong>${apiText || "Local CSV only"}</strong>
       </div>
     </div>
-    <p class="muted">Latest results improve future-match predictions by updating ELO and attack/defense strengths before the model runs.</p>
+    ${fetchDetails}
+    ${fetchErrors}
+    <p class="muted">After refresh: use <strong>Predict Match</strong> for one game, <strong>Predict Groups</strong> for the full group. Use <strong>Run Simulation</strong> only for tournament winner / knockout odds.</p>
   `;
 }
 
@@ -334,7 +375,7 @@ document.querySelector("#swapTeams").addEventListener("click", () => {
 
 document.querySelector("#refreshLatest").addEventListener("click", async () => {
   const element = document.querySelector("#latestStatus");
-  setLoading(element, "Refreshing latest score/result data and rebuilding the model...");
+  setLoading(element, "Fetching latest scores from CSV and API feeds, then rebuilding the model...");
   try {
     const status = await requestJson("/data/refresh_latest", { method: "POST" });
     element.className = "result-block";
@@ -384,6 +425,20 @@ document.querySelector("#simulateForm").addEventListener("submit", async (event)
     });
     element.className = "result-block";
     element.innerHTML = renderSimulation(result);
+  } catch (error) {
+    renderError(element, error);
+  }
+});
+
+document.querySelector("#dateForm").addEventListener("submit", async (event) => {
+  event.preventDefault();
+  const element = document.querySelector("#dateResult");
+  const dateValue = encodeURIComponent(document.querySelector("#matchDate").value.trim());
+  setLoading(element, "Refreshing latest results and predicting matches for that date...");
+  try {
+    const result = await requestJson(`/predictions/date?date=${dateValue}&refresh=true`);
+    element.className = "result-block";
+    element.innerHTML = renderDatePredictions(result);
   } catch (error) {
     renderError(element, error);
   }

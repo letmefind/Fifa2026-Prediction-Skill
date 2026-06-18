@@ -1,5 +1,23 @@
 date,home_team,away_team,home_score,away_score,home_xg,away_xg,neutral,competition
-2026-06-16 01:00:00+00:00,Iran,New Zealand,2,2,,,true,World Cup
-2026-06-16 19:00:00+00:00,France,Senegal,3,1,,,true,World Cup
-2026-06-17 01:00:00+00:00,Argentina,Algeria,3,0,,,true,World Cup
-2026-06-17 20:00:00+00:00,England,Croatia,4,2,,,true,World Cup
+2026-06-11 19:00:00+00:00,Mexico,South Africa,2,0,,,true,World Cup 2026
+2026-06-12 02:00:00+00:00,South Korea,Czechia,2,1,,,true,World Cup 2026
+2026-06-12 19:00:00+00:00,Canada,Bosnia and Herzegovina,1,1,,,true,World Cup 2026
+2026-06-13 01:00:00+00:00,USA,Paraguay,4,1,,,true,World Cup 2026
+2026-06-13 19:00:00+00:00,Qatar,Switzerland,1,1,,,true,World Cup 2026
+2026-06-13 22:00:00+00:00,Brazil,Morocco,1,1,,,true,World Cup 2026
+2026-06-14 01:00:00+00:00,Haiti,Scotland,0,1,,,true,World Cup 2026
+2026-06-14 04:00:00+00:00,Australia,Turkey,2,0,,,true,World Cup 2026
+2026-06-14 17:00:00+00:00,Germany,Curaçao,7,1,,,true,World Cup 2026
+2026-06-14 23:00:00+00:00,Côte d'Ivoire,Ecuador,1,0,,,true,World Cup 2026
+2026-06-14 20:00:00+00:00,Netherlands,Japan,2,2,,,true,World Cup 2026
+2026-06-15 02:00:00+00:00,Sweden,Tunisia,5,1,,,true,World Cup 2026
+2026-06-15 19:00:00+00:00,Belgium,Egypt,1,1,,,true,World Cup 2026
+2026-06-16 01:00:00+00:00,Iran,New Zealand,2,2,,,true,World Cup 2026
+2026-06-15 16:00:00+00:00,Spain,Cape Verde,0,0,,,true,World Cup 2026
+2026-06-15 22:00:00+00:00,Saudi Arabia,Uruguay,1,1,,,true,World Cup 2026
+2026-06-16 19:00:00+00:00,France,Senegal,3,1,,,true,World Cup 2026
+2026-06-16 22:00:00+00:00,Iraq,Norway,1,4,,,true,World Cup 2026
+2026-06-17 01:00:00+00:00,Argentina,Algeria,3,0,,,true,World Cup 2026
+2026-06-17 04:00:00+00:00,Austria,Jordan,3,1,,,true,World Cup 2026
+2026-06-17 17:00:00+00:00,Portugal,Congo DR,1,1,,,true,World Cup 2026
+2026-06-17 20:00:00+00:00,England,Croatia,4,2,,,true,World Cup 2026

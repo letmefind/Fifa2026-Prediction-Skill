@@ -41,6 +41,45 @@ def test_merge_latest_matches_dedupes() -> None:
     assert merged.iloc[0]["competition"] == "Latest"
 
 
+def test_merge_preserves_utc_latest_results() -> None:
+    base = pd.DataFrame(
+        [
+            {
+                "date": "2024-03-21",
+                "home_team": "Brazil",
+                "away_team": "France",
+                "home_score": 1,
+                "away_score": 0,
+                "home_xg": None,
+                "away_xg": None,
+                "neutral": True,
+                "competition": "Friendly",
+            }
+        ]
+    )
+    latest = pd.DataFrame(
+        [
+            {
+                "date": "2026-06-16 01:00:00+00:00",
+                "home_team": "Iran",
+                "away_team": "New Zealand",
+                "home_score": 2,
+                "away_score": 2,
+                "home_xg": None,
+                "away_xg": None,
+                "neutral": True,
+                "competition": "World Cup 2026",
+            }
+        ]
+    )
+    merged = merge_match_frames(base, latest)
+
+    assert len(merged) == 2
+    iran = merged[merged["home_team"] == "Iran"]
+    assert len(iran) == 1
+    assert int(iran.iloc[0]["away_score"]) == 2
+
+
 def test_latest_data_status_shape() -> None:
     status = latest_data_status(load_config())
     assert "latest_matches_loaded" in status

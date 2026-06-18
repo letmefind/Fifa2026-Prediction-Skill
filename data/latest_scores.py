@@ -10,6 +10,7 @@ import requests
 
 from config import Config, load_config
 from data.adapters import MATCH_COLUMNS
+from data.team_aliases import fixture_pair_key, normalize_team_name
 
 
 FOOTBALL_DATA_URL = "https://api.football-data.org/v4/matches"
@@ -39,7 +40,17 @@ def _standardize(frame: pd.DataFrame) -> pd.DataFrame:
     if missing:
         raise ValueError(f"latest results missing columns: {missing}")
     standardized = frame[MATCH_COLUMNS].copy()
-    standardized["date"] = pd.to_datetime(standardized["date"], errors="coerce")
+    if pd.api.types.is_datetime64_any_dtype(standardized["date"]):
+        standardized["date"] = pd.to_datetime(standardized["date"], errors="coerce", utc=True).dt.tz_convert(None)
+    else:
+        standardized["date"] = pd.to_datetime(
+            standardized["date"],
+            errors="coerce",
+            format="mixed",
+            utc=True,
+        ).dt.tz_convert(None)
+    standardized["home_team"] = standardized["home_team"].astype(str).map(normalize_team_name)
+    standardized["away_team"] = standardized["away_team"].astype(str).map(normalize_team_name)
     standardized["home_score"] = pd.to_numeric(standardized["home_score"], errors="coerce")
     standardized["away_score"] = pd.to_numeric(standardized["away_score"], errors="coerce")
     standardized = standardized.dropna(subset=["date", "home_team", "away_team", "home_score", "away_score"])
@@ -98,7 +109,7 @@ def _known_teams(config: Config) -> set[str]:
     frame = pd.read_csv(config.data.ratings_csv)
     if "team" not in frame.columns:
         return set()
-    return {str(team).lower().strip() for team in frame["team"].dropna()}
+    return {normalize_team_name(str(team)).lower() for team in frame["team"].dropna()}
 
 
 def _filter_known_team_matches(frame: pd.DataFrame, config: Config) -> pd.DataFrame:
@@ -177,23 +188,55 @@ def _api_football_matches(config: Config) -> pd.DataFrame:
     return frame
 
 
-def load_latest_matches(config: Config | None = None, include_api: bool = True) -> pd.DataFrame:
+def load_latest_matches(
+    config: Config | None = None,
+    include_api: bool = True,
+) -> pd.DataFrame:
+    matches, _ = load_latest_matches_detailed(config, include_api=include_api)
+    return matches
+
+
+def load_latest_matches_detailed(
+    config: Config | None = None,
+    include_api: bool = True,
+) -> tuple[pd.DataFrame, dict[str, object]]:
     load_local_env()
     cfg = config or load_config()
-    frames = [load_latest_results_csv(cfg.data.latest_results_csv)]
+    csv_matches = load_latest_results_csv(cfg.data.latest_results_csv)
+    frames = [csv_matches]
+    sources: dict[str, object] = {
+        "csv_matches": int(len(csv_matches)),
+        "football_data_matches": 0,
+        "api_football_matches": 0,
+        "api_fetch_attempted": include_api,
+        "api_errors": [],
+    }
 
     if include_api:
-        for loader in (_football_data_matches, _api_football_matches):
+        for loader_name, loader in (
+            ("football_data", _football_data_matches),
+            ("api_football", _api_football_matches),
+        ):
             try:
                 frame = loader(cfg)
                 if not frame.empty:
                     frames.append(frame)
-            except Exception:
-                # Prediction must remain available even when a third-party feed is down.
+                if loader_name == "football_data":
+                    sources["football_data_matches"] = int(len(frame))
+                else:
+                    sources["api_football_matches"] = int(len(frame))
+            except Exception as exc:
+                sources["api_errors"].append(f"{loader_name}: {exc}")
                 continue
 
     combined = pd.concat(frames, ignore_index=True) if frames else _empty_matches()
-    return _dedupe_matches(_standardize(combined))
+    matches = _dedupe_matches(_standardize(combined))
+    sources["latest_matches_loaded"] = int(len(matches))
+    if not matches.empty:
+        sources["latest_match_date"] = pd.to_datetime(matches["date"]).max().date().isoformat()
+    else:
+        sources["latest_match_date"] = None
+    return matches, sources
 
 
 def _dedupe_matches(frame: pd.DataFrame) -> pd.DataFrame:
@@ -201,8 +244,8 @@ def _dedupe_matches(frame: pd.DataFrame) -> pd.DataFrame:
         return frame
     dedupe = frame.copy()
     dedupe["date_key"] = pd.to_datetime(dedupe["date"]).dt.date.astype(str)
-    dedupe["home_key"] = dedupe["home_team"].astype(str).str.lower().str.strip()
-    dedupe["away_key"] = dedupe["away_team"].astype(str).str.lower().str.strip()
+    dedupe["home_key"] = dedupe["home_team"].astype(str).map(lambda team: normalize_team_name(team).lower())
+    dedupe["away_key"] = dedupe["away_team"].astype(str).map(lambda team: normalize_team_name(team).lower())
     dedupe = dedupe.drop_duplicates(["date_key", "home_key", "away_key"], keep="last")
     return dedupe.drop(columns=["date_key", "home_key", "away_key"]).sort_values("date").reset_index(drop=True)
 
@@ -214,14 +257,18 @@ def merge_match_frames(base_matches: pd.DataFrame, latest_matches: pd.DataFrame)
     return _dedupe_matches(_standardize(merged))
 
 
-def latest_data_status(config: Config | None = None, latest_matches: pd.DataFrame | None = None) -> dict[str, object]:
+def latest_data_status(
+    config: Config | None = None,
+    latest_matches: pd.DataFrame | None = None,
+    sources: dict[str, object] | None = None,
+) -> dict[str, object]:
     load_local_env()
     cfg = config or load_config()
     latest = latest_matches if latest_matches is not None else load_latest_matches(cfg, include_api=False)
     latest_date = None
     if not latest.empty:
         latest_date = pd.to_datetime(latest["date"]).max().date().isoformat()
-    return {
+    status = {
         "latest_results_csv": str(cfg.data.latest_results_csv),
         "latest_results_csv_exists": cfg.data.latest_results_csv.exists(),
         "latest_matches_loaded": int(len(latest)),
@@ -231,3 +278,6 @@ def latest_data_status(config: Config | None = None, latest_matches: pd.DataFram
         "lookback_days": cfg.data.latest_lookback_days,
         "checked_at_utc": datetime.now(UTC).replace(microsecond=0).isoformat(),
     }
+    if sources:
+        status.update(sources)
+    return status

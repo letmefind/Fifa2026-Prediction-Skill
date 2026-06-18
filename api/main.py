@@ -62,6 +62,18 @@ def simulate(request: SimulateRequest) -> dict[str, object]:
     return get_service().simulate_tournament(n=request.runs)
 
 
+@app.get("/predictions/date")
+def predictions_by_date(
+    date: str = Query(..., description="Match date, e.g. 2026-06-18 or 18 jun"),
+    refresh: bool = Query(default=True),
+) -> dict[str, object]:
+    service = refresh_service() if refresh else get_service()
+    try:
+        return service.predictions_by_date(date)
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+
+
 @app.get("/groups/predictions")
 def group_predictions(refresh: bool = Query(default=True)) -> dict[str, object]:
     service = refresh_service() if refresh else get_service()

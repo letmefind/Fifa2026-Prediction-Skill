@@ -1,20 +1,30 @@
 from __future__ import annotations
 
-from functools import lru_cache
-
 import pandas as pd
 
 from config import Config, load_config
-from data import latest_data_status, load_latest_matches, load_matches, load_team_ratings, merge_match_frames
+from data import latest_data_status, load_latest_matches, load_latest_matches_detailed, load_matches, load_team_ratings, merge_match_frames
+from data.team_aliases import fixture_pair_key, normalize_team_name
 from models import AttackDefenseStrengthModel, DixonColesPoissonModel, EloModel
-from simulation import TournamentSimulator, load_group_fixtures, predict_group_stage
+from simulation import TournamentSimulator, groups_from_fixtures, load_group_fixtures, predict_group_stage
+from simulation.group_predictions import parse_match_date, predict_matches_by_date
+
+
+_service_instance: PredictionService | None = None
 
 
 class PredictionService:
-    def __init__(self, config: Config | None = None) -> None:
+    def __init__(self, config: Config | None = None, fetch_latest: bool = False) -> None:
         self.config = config or load_config()
+        self.latest_sources: dict[str, object] = {}
         self.base_matches = load_matches(self.config, include_latest=False)
-        self.latest_matches = load_latest_matches(self.config)
+        if fetch_latest:
+            self.latest_matches, self.latest_sources = load_latest_matches_detailed(
+                self.config,
+                include_api=True,
+            )
+        else:
+            self.latest_matches = load_latest_matches(self.config, include_api=True)
         self.matches = merge_match_frames(self.base_matches, self.latest_matches)
         self.initial_ratings = load_team_ratings(self.config)
         self.elo = EloModel().fit(self.matches, self.initial_ratings)
@@ -36,27 +46,29 @@ class PredictionService:
 
     @staticmethod
     def _norm_team(team: str) -> str:
-        return team.lower().strip()
+        return normalize_team_name(team).lower()
 
     def known_latest_result(self, team_a: str, team_b: str) -> dict[str, object]:
         if self.latest_matches.empty:
             return {"found": False}
 
-        a = self._norm_team(team_a)
-        b = self._norm_team(team_b)
-        latest = self.latest_matches.copy()
-        home = latest["home_team"].astype(str).str.lower().str.strip()
-        away = latest["away_team"].astype(str).str.lower().str.strip()
-        matches = latest[((home == a) & (away == b)) | ((home == b) & (away == a))]
+        target = fixture_pair_key(team_a, team_b)
+        pair_keys = self.latest_matches.apply(
+            lambda row: fixture_pair_key(str(row["home_team"]), str(row["away_team"])),
+            axis=1,
+        )
+        matches = self.latest_matches[pair_keys == target]
         if matches.empty:
             return {"found": False}
 
         row = matches.sort_values("date").iloc[-1]
+        home_team = normalize_team_name(str(row["home_team"]))
+        away_team = normalize_team_name(str(row["away_team"]))
         return {
             "found": True,
             "date": pd.to_datetime(row["date"]).date().isoformat(),
-            "home_team": str(row["home_team"]),
-            "away_team": str(row["away_team"]),
+            "home_team": home_team,
+            "away_team": away_team,
             "home_score": int(row["home_score"]),
             "away_score": int(row["away_score"]),
             "competition": str(row["competition"]),
@@ -91,11 +103,14 @@ class PredictionService:
 
     def simulate_tournament(self, n: int | None = None) -> dict[str, object]:
         runs = int(n or self.config.simulation.default_runs)
+        fixtures = load_group_fixtures(self.config)
+        official_groups = groups_from_fixtures(fixtures)
         simulator = TournamentSimulator(
             goal_model=self.goal_model,
-            teams=self.teams[:48],
+            teams=sorted({team for group in official_groups.values() for team in group}),
             ratings=self.ratings_map(),
             seed=self.config.simulation.random_seed,
+            groups=official_groups,
         )
         return simulator.simulate_tournament(runs)
 
@@ -121,18 +136,32 @@ class PredictionService:
             raise ValueError(f"Unknown group: {group}")
         return groups[group_key]
 
+    def predictions_by_date(self, date_value: str) -> dict[str, object]:
+        fixtures = load_group_fixtures(self.config)
+        return predict_matches_by_date(
+            goal_model=self.goal_model,
+            latest_matches=self.latest_matches,
+            date_value=date_value,
+            fixtures=fixtures,
+            config=self.config,
+        )
+
     def latest_status(self) -> dict[str, object]:
-        status = latest_data_status(self.config, self.latest_matches)
+        status = latest_data_status(self.config, self.latest_matches, self.latest_sources or None)
         status["base_matches_loaded"] = int(len(self.base_matches))
         status["total_matches_in_model"] = int(len(self.matches))
+        status["model_rebuilt"] = bool(self.latest_sources)
         return status
 
 
-@lru_cache(maxsize=1)
 def get_service() -> PredictionService:
-    return PredictionService()
+    global _service_instance
+    if _service_instance is None:
+        _service_instance = PredictionService()
+    return _service_instance
 
 
 def refresh_service() -> PredictionService:
-    get_service.cache_clear()
-    return get_service()
+    global _service_instance
+    _service_instance = PredictionService(fetch_latest=True)
+    return _service_instance

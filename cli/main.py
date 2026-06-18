@@ -150,6 +150,52 @@ def _render_group(group: dict[str, object]) -> None:
     console.print(table)
 
 
+def _render_date_matches(result: dict[str, object]) -> None:
+    console.print(Panel(f"Predictions for {result['date']}", border_style="blue"))
+    if not result["matches"]:
+        console.print(str(result.get("message") or "No matches found for this date."))
+        return
+
+    matches_table = Table(title="Matches", box=box.ROUNDED)
+    matches_table.add_column("Group")
+    matches_table.add_column("Match")
+    matches_table.add_column("Status")
+    matches_table.add_column("Score")
+    matches_table.add_column("Winner")
+    matches_table.add_column("Win A", justify="right")
+    matches_table.add_column("Draw", justify="right")
+    matches_table.add_column("Win B", justify="right")
+    for match in result["matches"]:
+        matches_table.add_row(
+            str(match["group"]),
+            f"{match['team_a']} vs {match['team_b']}",
+            str(match["status"]),
+            str(match["score"]),
+            str(match["winner"]),
+            _pct(float(match["win_prob_a"])) if match.get("win_prob_a") is not None else "-",
+            _pct(float(match["draw_prob"])) if match.get("draw_prob") is not None else "-",
+            _pct(float(match["win_prob_b"])) if match.get("win_prob_b") is not None else "-",
+        )
+    console.print(matches_table)
+
+
+@app.command("predict-by-date")
+def predict_by_date(
+    date: str = typer.Argument(..., help="Match date, e.g. '18 jun', '2026-06-18', or 'June 18'."),
+    refresh: bool = typer.Option(True, help="Refresh latest data before predicting."),
+    json_output: bool = typer.Option(False, "--json-output", help="Print the raw JSON response."),
+) -> None:
+    service = refresh_service() if refresh else get_service()
+    try:
+        result = service.predictions_by_date(date)
+    except ValueError as exc:
+        raise typer.BadParameter(str(exc)) from exc
+    if json_output:
+        console.print_json(json.dumps(result, default=str))
+        return
+    _render_date_matches(result)
+
+
 @app.command("group-predictions")
 def group_predictions(
     group: Optional[str] = typer.Option(None, "--group", "-g", help="Group letter, e.g. A or B."),

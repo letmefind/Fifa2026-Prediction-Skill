@@ -12,8 +12,8 @@ def test_dashboard_loads() -> None:
     response = client.get("/")
     assert response.status_code == 200
     assert "Prediction Engine Dashboard" in response.text
-    assert "10-Language Quick Guide" in response.text
-    assert "فارسی" in response.text
+    assert "Predictions By Date" in response.text
+    assert "Multilingual Help" not in response.text
     assert "How To Find Model Probability" in response.text
     assert "35.6% = 0.356" in response.text
     assert "What Are Decimal Odds?" in response.text
@@ -28,7 +28,22 @@ def test_teams_endpoint_returns_teams() -> None:
     assert "France" in teams
 
 
-def test_latest_data_status_endpoint() -> None:
+def test_predictions_by_date_endpoint() -> None:
+    response = client.get("/predictions/date?date=18%20jun&refresh=false")
+    assert response.status_code == 200
+    body = response.json()
+    assert body["date"] == "2026-06-18"
+    assert body["match_count"] == 4
+    assert len(body["matches"]) == 4
+
+
+def test_refresh_latest_rebuilds_model() -> None:
+    response = client.post("/data/refresh_latest")
+    assert response.status_code == 200
+    body = response.json()
+    assert body["model_rebuilt"] is True
+    assert body["api_fetch_attempted"] is True
+    assert "total_matches_in_model" in body
     response = client.get("/data/latest_status")
     assert response.status_code == 200
     body = response.json()
@@ -64,14 +79,14 @@ def test_group_predictions_endpoint() -> None:
     body = response.json()
     assert "groups" in body
     assert "A" in body["groups"]
-    assert body["fixture_status"]["official"] is False
-    assert "provisional" in body["fixture_status"]["warning"]
+    assert body["fixture_status"]["official"] is True
+    assert body["fixture_status"]["warning"] is None
     assert len(body["groups"]["A"]["matches"]) == 6
     assert "knockout_projection" in body
 
 
-def test_group_d_includes_played_iran_new_zealand() -> None:
-    response = client.get("/groups/D?refresh=false")
+def test_group_g_includes_played_iran_new_zealand() -> None:
+    response = client.get("/groups/G?refresh=false")
     assert response.status_code == 200
     group = response.json()
     played = [

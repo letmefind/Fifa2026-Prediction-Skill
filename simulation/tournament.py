@@ -51,6 +51,14 @@ class TournamentRun:
     group_standings: dict[str, list[Standing]] = field(default_factory=dict)
 
 
+def groups_from_fixtures(fixtures: pd.DataFrame) -> dict[str, list[str]]:
+    groups: dict[str, list[str]] = {}
+    for group_name, group_frame in fixtures.groupby("group", sort=True):
+        teams = sorted(set(group_frame["team_a"]).union(set(group_frame["team_b"])))
+        groups[str(group_name)] = teams
+    return groups
+
+
 class TournamentSimulator:
     def __init__(
         self,
@@ -58,6 +66,7 @@ class TournamentSimulator:
         teams: Iterable[str],
         ratings: dict[str, float] | None = None,
         seed: int | None = None,
+        groups: dict[str, list[str]] | None = None,
     ) -> None:
         self.goal_model = goal_model
         self.teams = list(dict.fromkeys(teams))
@@ -65,10 +74,13 @@ class TournamentSimulator:
             raise ValueError("Tournament simulation requires at least 48 unique teams")
         self.teams = self.teams[:48]
         self.ratings = ratings or {}
+        self.groups = groups
         cfg = load_config().simulation
         self.rng = np.random.default_rng(seed if seed is not None else cfg.random_seed)
 
     def make_groups(self) -> dict[str, list[str]]:
+        if self.groups:
+            return self.groups
         sorted_teams = sorted(self.teams, key=lambda team: self.ratings.get(team, 1500), reverse=True)
         groups = {chr(ord("A") + idx): [] for idx in range(12)}
         for idx, team in enumerate(sorted_teams):

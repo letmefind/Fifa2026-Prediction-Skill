@@ -34,29 +34,6 @@
         <div id="latestStatus" class="result-block muted">Checking latest score/result data...</div>
       </section>
 
-      <section class="card guide-card">
-        <p class="eyebrow">Multilingual Help</p>
-        <h2>10-Language Quick Guide</h2>
-        <p class="muted">
-          Help is available in Persian, Arabic, Spanish, French, German, Portuguese, Italian, Turkish, Hindi, and Chinese.
-        </p>
-        <div class="language-list" aria-label="Available help languages">
-          <span>فارسی</span>
-          <span>العربية</span>
-          <span>Español</span>
-          <span>Français</span>
-          <span>Deutsch</span>
-          <span>Português</span>
-          <span>Italiano</span>
-          <span>Türkçe</span>
-          <span>हिन्दी</span>
-          <span>中文</span>
-        </div>
-        <a class="doc-link" href="/project-docs/README_10_LANGUAGES.md" target="_blank" rel="noreferrer">
-          Open multilingual README help
-        </a>
-      </section>
-
       <section class="grid two">
         <article class="card">
           <div class="card-header">
@@ -100,6 +77,24 @@
           </form>
           <div id="simulationResult" class="result-block muted">Run a simulation to see title contenders.</div>
         </article>
+      </section>
+
+      <section class="card">
+        <div class="card-header">
+          <div>
+            <p class="eyebrow">Match Day</p>
+            <h2>Predictions By Date</h2>
+          </div>
+        </div>
+        <form id="dateForm" class="form-grid compact">
+          <label>
+            Date
+            <input id="matchDate" type="text" value="18 jun" placeholder="e.g. 18 jun or 2026-06-18" required />
+            <span class="field-help">Shows all group-stage matches on that day with played scores or model predictions.</span>
+          </label>
+          <button type="submit">Predict By Date</button>
+        </form>
+        <div id="dateResult" class="result-block muted">Enter a date like <strong>18 jun</strong> to see that day's World Cup matches.</div>
       </section>
 
       <section class="card">
@@ -158,9 +153,11 @@
           <p class="eyebrow">How To Read</p>
           <h2>Model Notes</h2>
           <ul class="notes">
+            <li><strong>Step 1:</strong> Click <strong>Refresh Latest Data</strong> to fetch new scores and rebuild the model.</li>
+            <li><strong>One match:</strong> Use <strong>Predict Match</strong> — no simulation needed.</li>
+            <li><strong>Full group:</strong> Use <strong>Predict Groups</strong> — shows played scores + future games + table.</li>
+            <li><strong>Tournament winner:</strong> Use <strong>Run Simulation</strong> only when you need World Cup or knockout odds.</li>
             <li><strong>Expected goals</strong> estimate scoring volume, not an exact final score.</li>
-            <li><strong>Draw probability</strong> is improved with Dixon-Coles low-score adjustment.</li>
-            <li><strong>Tournament odds</strong> stabilize as simulation runs increase.</li>
             <li><strong>Betting EV</strong> is not a guarantee. Always check injuries, lineups, and market liquidity.</li>
           </ul>
         </article>
