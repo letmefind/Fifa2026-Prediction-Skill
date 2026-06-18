@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Static demo of the FIFA World Cup 2026 Prediction Engine dashboard. Live predictions require the Python app." />
+    <title>FIFA 2026 Prediction Engine</title>
+    <link rel="stylesheet" href="demo.css" />
+  </head>
+  <body>
+    <header class="demo-banner" role="alert">
+      <div class="demo-banner-inner">
+        <strong>Demo only — predictions are sample data</strong>
+        <p>
+          This is the same dashboard layout as <code>http://127.0.0.1:8000/</code>, hosted on
+          <a href="https://pages.github.com/">GitHub Pages</a>. Buttons show <strong>illustration numbers</strong>, not live model output.
+          <a href="https://github.com/letmefind/Fifa2026-Prediction-Skill">Install the full app</a> for real forecasts, latest scores, and API refresh.
+        </p>
+      </div>
+    </header>
+
+    <main class="shell">
+      <section class="hero">
+        <div>
+          <p class="eyebrow">FIFA World Cup 2026</p>
+          <h1>Prediction Engine Dashboard</h1>
+          <p class="hero-copy">
+            Match probabilities, expected goals, scorelines, tournament simulations, and betting EV in one clean interface.
+          </p>
+        </div>
+        <div class="hero-card">
+          <span class="metric-label">Model Stack</span>
+          <strong>ELO + xG Strength + Dixon-Coles</strong>
+          <span>48 teams, 12 groups, knockout simulation</span>
+        </div>
+      </section>
+
+      <section class="card latest-card">
+        <div class="card-header">
+          <div>
+            <p class="eyebrow">Latest Scores</p>
+            <h2>Fresh Data Status</h2>
+          </div>
+          <button id="refreshLatest" class="ghost-button" type="button">Refresh Latest Data</button>
+        </div>
+        <div id="latestStatus" class="result-block muted">Checking latest score/result data...</div>
+      </section>
+
+      <section class="grid two">
+        <article class="card">
+          <div class="card-header">
+            <div>
+              <p class="eyebrow">Match Forecast</p>
+              <h2>Predict a Match</h2>
+            </div>
+            <button id="swapTeams" class="ghost-button" type="button">Swap</button>
+          </div>
+          <form id="matchForm" class="form-grid">
+            <label>
+              Team A
+              <select id="teamA" required></select>
+            </label>
+            <label>
+              Team B
+              <select id="teamB" required></select>
+            </label>
+            <label class="check-row">
+              <input id="neutral" type="checkbox" checked />
+              Neutral venue
+            </label>
+            <button type="submit">Predict Match</button>
+          </form>
+          <div id="matchResult" class="result-block muted">Choose two teams and run a prediction.</div>
+        </article>
+
+        <article class="card">
+          <div class="card-header">
+            <div>
+              <p class="eyebrow">Monte Carlo</p>
+              <h2>Tournament Odds</h2>
+            </div>
+          </div>
+          <form id="simulateForm" class="form-grid compact">
+            <label>
+              Runs
+              <input id="runs" type="number" min="1" max="250000" value="5000" />
+            </label>
+            <button type="submit">Run Simulation</button>
+          </form>
+          <div id="simulationResult" class="result-block muted">Run a simulation to see title contenders.</div>
+        </article>
+      </section>
+
+      <section class="card">
+        <div class="card-header">
+          <div>
+            <p class="eyebrow">Match Day</p>
+            <h2>Predictions By Date</h2>
+          </div>
+        </div>
+        <form id="dateForm" class="form-grid compact">
+          <label>
+            Date
+            <input id="matchDate" type="text" value="18 jun" placeholder="e.g. 18 jun or 2026-06-18" required />
+            <span class="field-help">Shows all group-stage matches on that day with played scores or model predictions.</span>
+          </label>
+          <button type="submit">Predict By Date</button>
+        </form>
+        <div id="dateResult" class="result-block muted">Enter a date like <strong>18 jun</strong> to see that day's World Cup matches.</div>
+      </section>
+
+      <section class="card">
+        <div class="card-header">
+          <div>
+            <p class="eyebrow">Group Stage</p>
+            <h2>Predictions By Group</h2>
+          </div>
+        </div>
+        <form id="groupForm" class="form-grid compact">
+          <label>
+            Group
+            <select id="groupSelect">
+              <option value="ALL">All groups</option>
+              <option value="A">Group A</option>
+              <option value="B">Group B</option>
+              <option value="C">Group C</option>
+              <option value="D">Group D</option>
+              <option value="E">Group E</option>
+              <option value="F">Group F</option>
+              <option value="G" selected>Group G</option>
+              <option value="H">Group H</option>
+              <option value="I">Group I</option>
+              <option value="J">Group J</option>
+              <option value="K">Group K</option>
+              <option value="L">Group L</option>
+            </select>
+            <span class="field-help">Played games show exact latest scores; future games show model score predictions.</span>
+          </label>
+          <button type="submit">Predict Groups</button>
+        </form>
+        <div id="groupResult" class="result-block muted">Choose a group to see match scores, table, qualifiers, and projected stages.</div>
+      </section>
+
+      <section class="grid two">
+        <article class="card">
+          <p class="eyebrow">Betting Value</p>
+          <h2>Expected Value Calculator</h2>
+          <form id="evForm" class="form-grid compact">
+            <label>
+              Model Probability
+              <input id="modelProb" type="number" min="0" max="1" step="0.001" value="0.55" />
+              <span class="field-help">Use decimal form: 35.6% becomes 0.356.</span>
+            </label>
+            <label>
+              Decimal Odds
+              <input id="marketOdds" type="number" min="1.01" step="0.01" value="2.20" />
+              <span class="field-help">Total payout multiplier. Odds 2.20 means $1 returns $2.20 if it wins.</span>
+            </label>
+            <button type="submit">Calculate EV</button>
+          </form>
+          <div id="evResult" class="result-block muted">Enter a model probability and market odds.</div>
+        </article>
+
+        <article class="card">
+          <p class="eyebrow">How To Read</p>
+          <h2>Model Notes</h2>
+          <ul class="notes">
+            <li><strong>Step 1:</strong> Click <strong>Refresh Latest Data</strong> to fetch new scores and rebuild the model.</li>
+            <li><strong>One match:</strong> Use <strong>Predict Match</strong> — no simulation needed.</li>
+            <li><strong>Full group:</strong> Use <strong>Predict Groups</strong> — shows played scores + future games + table.</li>
+            <li><strong>Tournament winner:</strong> Use <strong>Run Simulation</strong> only when you need World Cup or knockout odds.</li>
+            <li><strong>Expected goals</strong> estimate scoring volume, not an exact final score.</li>
+            <li><strong>Betting EV</strong> is not a guarantee. Always check injuries, lineups, and market liquidity.</li>
+          </ul>
+        </article>
+      </section>
+
+      <section class="card guide-card">
+        <p class="eyebrow">Betting Help</p>
+        <h2>How To Find Model Probability</h2>
+        <div class="guide-grid">
+          <div>
+            <strong>1. Predict the match</strong>
+            <p>Choose two teams and click <span class="inline-chip">Predict Match</span>. The three result cards are the model probabilities.</p>
+          </div>
+          <div>
+            <strong>2. Pick your market</strong>
+            <p>For Brazil win, use Brazil win probability. For draw, use draw probability. For France win, use France win probability.</p>
+          </div>
+          <div>
+            <strong>3. Convert to decimal</strong>
+            <p>Use decimal form in EV: <span class="inline-chip">35.6% = 0.356</span>. The match cards include <span class="inline-chip">Use for EV</span> buttons.</p>
+          </div>
+          <div>
+            <strong>4. Add market odds</strong>
+            <p>For Polymarket, approximate decimal odds as <span class="inline-chip">1 / Yes price</span>. A 0.42 price becomes 2.38 odds.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="card guide-card">
+        <p class="eyebrow">Odds Help</p>
+        <h2>What Are Decimal Odds?</h2>
+        <div class="guide-grid odds-grid">
+          <div>
+            <strong>Decimal odds = payout multiplier</strong>
+            <p>Odds <span class="inline-chip">2.20</span> means a winning $1 stake returns $2.20 total: $1.20 profit plus your $1 stake.</p>
+          </div>
+          <div>
+            <strong>Implied probability</strong>
+            <p>Market probability is <span class="inline-chip">1 / decimal odds</span>. Odds 2.20 implies 45.5%.</p>
+          </div>
+          <div>
+            <strong>Polymarket conversion</strong>
+            <p>A Yes price of 0.42 is roughly 42%. Decimal odds are <span class="inline-chip">1 / 0.42 = 2.38</span>.</p>
+          </div>
+          <div>
+            <strong>American odds conversion</strong>
+            <p>+150 becomes 2.50. -150 becomes 1.67. Use the converted decimal odds in the EV calculator.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+    <script src="demo.js"></script>
+  </body>
+</html>
