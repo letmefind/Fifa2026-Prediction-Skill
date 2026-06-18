@@ -4,11 +4,14 @@ on:
   push:
     branches: [main]
     paths:
-      - "docs/**"
+      - "docs/index.html"
+      - "docs/demo.css"
+      - "docs/demo.js"
+      - "docs/.nojekyll"
+      - "index.html"
       - ".github/workflows/pages.yml"
   workflow_dispatch:
 
-# Push static files to the gh-pages branch (works without the GitHub Actions Pages source).
 permissions:
   contents: write
 
@@ -23,11 +26,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Deploy docs to gh-pages branch
+      - name: Prepare static site (dashboard only)
+        run: |
+          mkdir -p _site
+          cp docs/index.html docs/demo.css docs/demo.js docs/.nojekyll _site/
+
+      - name: Deploy to gh-pages branch
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./docs
+          publish_dir: ./_site
           publish_branch: gh-pages
           force_orphan: true
-          commit_message: "Deploy static demo from main"
+          commit_message: "Deploy dashboard demo"

@@ -43,11 +43,11 @@ function renderMatch(result) {
   return `
     ${sampleNotice()}
     <div class="prob-grid">
-      <div class="prob-card"><span>${result.team_a} win</span><strong>${percent(result.win_prob_a)}</strong></div>
-      <div class="prob-card"><span>Draw</span><strong>${percent(result.draw_prob)}</strong></div>
-      <div class="prob-card"><span>${result.team_b} win</span><strong>${percent(result.win_prob_b)}</strong></div>
+      <div class="prob-card"><span>${result.team_a} win</span><strong>${percent(result.win_prob_a)}</strong><button type="button" class="mini-button ev-pick" data-prob="${result.win_prob_a}">Use for EV</button></div>
+      <div class="prob-card"><span>Draw</span><strong>${percent(result.draw_prob)}</strong><button type="button" class="mini-button ev-pick" data-prob="${result.draw_prob}">Use for EV</button></div>
+      <div class="prob-card"><span>${result.team_b} win</span><strong>${percent(result.win_prob_b)}</strong><button type="button" class="mini-button ev-pick" data-prob="${result.win_prob_b}">Use for EV</button></div>
     </div>
-    <div class="score-cloud" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;">
+    <div class="score-cloud">
       <span class="pill">xG ${result.team_a}: ${number(result.expected_goals_a)}</span>
       <span class="pill">xG ${result.team_b}: ${number(result.expected_goals_b)}</span>
       ${scores}
@@ -94,8 +94,25 @@ function fillTeams() {
   document.querySelector("#teamB").value = "France";
 }
 
+function wireEvPickButtons() {
+  document.querySelectorAll(".ev-pick").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      document.querySelector("#modelProb").value = btn.dataset.prob;
+      document.querySelector("#evResult").innerHTML = `<p class="muted">Model probability set from match card. Add decimal odds and click Calculate EV.</p>`;
+    });
+  });
+}
+
 function wireDemo() {
   fillTeams();
+
+  document.querySelector("#swapTeams").addEventListener("click", () => {
+    const a = document.querySelector("#teamA");
+    const b = document.querySelector("#teamB");
+    const tmp = a.value;
+    a.value = b.value;
+    b.value = tmp;
+  });
 
   document.querySelector("#refreshLatest").addEventListener("click", () => {
     document.querySelector("#latestStatus").innerHTML = `
@@ -103,17 +120,20 @@ function wireDemo() {
       <div class="result-alert">
         <strong>Refresh is disabled in this demo.</strong>
         <p>On GitHub Pages there is no Python server to fetch API-Football results or rebuild the ELO / Poisson model.</p>
+        <p>Run locally: <code>uvicorn api.main:app --reload</code></p>
       </div>
     `;
   });
 
   document.querySelector("#matchForm").addEventListener("submit", (e) => {
     e.preventDefault();
-    document.querySelector("#matchResult").innerHTML = renderMatch({
+    const el = document.querySelector("#matchResult");
+    el.innerHTML = renderMatch({
       ...SAMPLE_MATCH,
       team_a: document.querySelector("#teamA").value,
       team_b: document.querySelector("#teamB").value,
     });
+    wireEvPickButtons();
   });
 
   document.querySelector("#dateForm").addEventListener("submit", (e) => {
@@ -123,9 +143,10 @@ function wireDemo() {
 
   document.querySelector("#groupForm").addEventListener("submit", (e) => {
     e.preventDefault();
+    const group = document.querySelector("#groupSelect").value;
     document.querySelector("#groupResult").innerHTML = `
       ${sampleNotice()}
-      <p class="muted">Group ${document.querySelector("#groupSelect").value} preview — install the full app for live group tables and qualifiers.</p>
+      <p class="muted">Group ${group} preview — install the full app for live group tables and qualifiers.</p>
       ${renderDate({ ...SAMPLE_DATE, match_count: 2, matches: SAMPLE_DATE.matches.slice(0, 2) })}
     `;
   });
@@ -143,6 +164,25 @@ function wireDemo() {
           <tr><td><strong>Brazil</strong></td><td>11.1%</td><td>19.2%</td></tr>
         </tbody>
       </table>
+    `;
+  });
+
+  document.querySelector("#evForm").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const p = Number(document.querySelector("#modelProb").value);
+    const odds = Number(document.querySelector("#marketOdds").value);
+    const ev = p * odds - 1;
+    const implied = 1 / odds;
+    const edge = p - implied;
+    const cls = ev >= 0 ? "positive" : "negative";
+    document.querySelector("#evResult").innerHTML = `
+      ${sampleNotice()}
+      <div class="prob-grid">
+        <div class="prob-card"><span>Expected value</span><strong class="${cls}">${number(ev * 100, 1)}%</strong></div>
+        <div class="prob-card"><span>Model probability</span><strong>${percent(p)}</strong></div>
+        <div class="prob-card"><span>Market implied</span><strong>${percent(implied)}</strong></div>
+      </div>
+      <p class="muted" style="margin-top:16px;">Edge vs market: <strong class="${cls}">${number(edge * 100, 1)}%</strong> (illustration only)</p>
     `;
   });
 
